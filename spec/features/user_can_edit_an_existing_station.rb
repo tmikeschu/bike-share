@@ -1,8 +1,8 @@
 require_relative '../spec_helper'
 
-describe "when a user visits '/stations/:id/new'" do
+describe "when a user visits '/stations/1/new'" do
   it "they can edit station information" do
-    visit 'stations/:id/new'
+    visit 'stations/1/new'
 
     fill_in 'station[name]', with: "TestStationOne"
     fill_in 'station[dock_count]', with: 15
