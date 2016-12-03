@@ -20,8 +20,8 @@ class BikeShareApp < Sinatra::Base
   end
 
   post '/stations' do
-    Station.create(params[:station])
-    redirect '/stations'
+    station = Station.create(params[:station])
+    redirect "/stations/#{station.id}"
   end
 
   get '/stations/:id' do
@@ -35,9 +35,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   put '/stations/:id' do
-    # require 'pry'; binding.pry
     Station.update(params[:id], params[:station])
-    # binding.pry
     redirect "/stations/#{params[:id]}"
   end
 

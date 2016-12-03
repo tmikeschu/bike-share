@@ -4,11 +4,13 @@
   <div class="form_field">Name: <input type="text" name="station[name]"></div>
 
   <select class="form_dropdown" name="station[city_id]">
-    <option selected="selected" value="1">-Select City-</option>
+    <option selected="selected" value="nil">-Select City-</option>
 
-    <% @cities.sort_by(&:name).each do |city| %>
-      <option value="<% city.id %>"><%= city.name.upcase %></option>
-    <% end %>
+    
+      <option value="">DENVER</option>
+    
+      <option value="">AURORA</option>
+    
 
   </select>
 
