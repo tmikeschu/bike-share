@@ -8,7 +8,7 @@ RSpec.describe "When a user visits '/stations'" do
     end
   end
 
-  it "shows a station's name" do
+  it "shows a station's information" do
     City.create(name: "Denver")
     City.create(name: "Fort Collins")
     Station.create(name: "Denver Union Station", dock_count: 7, city_id: 1, installation_date: "12/2/2013")
@@ -16,20 +16,24 @@ RSpec.describe "When a user visits '/stations'" do
     visit('/stations')
     # save_and_open_page
 
-    within 'ul:nth-of-type(1) > li:nth-of-type(1)' do
-      expect(page).to have_text "Denver Union Station"
+    within 'div.sation-summary > ul > li:nth-of-type(1)' do
+      expect(page).to have_content "Denver Union Station"
     end
 
-    within 'ul:nth-of-type(1) > li:nth-of-type(2)' do
-      expect(page).to have_text "7"
+    within 'div.sation-summary > ul > i:nth-of-type(2)' do
+      expect(page).to have_content 7
     end
 
-    within 'ul:nth-of-type(1) > li:nth-of-type(3)' do
-      expect(page).to have_text "Denver"
+    within 'div.sation-summary > ul > i:nth-of-type(3)' do
+      expect(page).to have_content "Denver"
     end
 
-    within 'ul:nth-of-type(1) > li:nth-of-type(4)' do
-      expect(page).to have_text "2013-02-12"
+    within 'div.sation-summary > ul > i:nth-of-type(4)' do
+      expect(page).to have_content "2013-02-12"
+    end
+    
+    within 'div.sation-summary > form:nth-of-type(1)' do
+      expect(page).to have_button "Edit"
     end
     
   end
