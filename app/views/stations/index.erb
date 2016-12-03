@@ -1,0 +1,10 @@
+<h1>All Stations</h1>
+<% @stations.each %>
+  <ul>
+    <li><%= @station.name %></li>
+    <li><%= @station.dock_count %></li>
+    <li><%= @station.city %></li>
+    <li><%= @station.installation_date %></li>
+  </ul>
+<% end %>
+
