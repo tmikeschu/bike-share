@@ -26,7 +26,6 @@ class BikeShareApp < Sinatra::Base
 
   get '/stations/:id' do
     @station = Station.find(params[:id])
-    #change city.id call (access it through station association)
     erb :"stations/show"
   end
 
@@ -36,7 +35,9 @@ class BikeShareApp < Sinatra::Base
   end
 
   put '/stations/:id' do
+    # require 'pry'; binding.pry
     Station.update(params[:id], params[:station])
+    # binding.pry
     redirect "/stations/#{params[:id]}"
   end
 
