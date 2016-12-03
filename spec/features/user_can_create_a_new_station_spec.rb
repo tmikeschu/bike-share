@@ -6,7 +6,6 @@ describe "When a user visits the new station path" do
     City.create(name: "Aurora")
     
     visit '/stations/new'
-
     fill_in 'station[name]', with: "Station Name1"
     find("option[value='1']").click
     fill_in 'station[dock_count]', with: "27"
