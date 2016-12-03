@@ -6,16 +6,16 @@ class BikeShareApp < Sinatra::Base
   set :method_override, true
 
   get '/' do
-    erb :dashboard
+    erb :"dashboard"
   end
   
   get '/stations' do
     @stations = Station.all
-    erb :stations_index
+    erb :"stations/index"
   end
 
   get '/stations/new' do
-    erb :new_station
+    erb :"stations/new"
   end
 
   post '/stations' do
@@ -25,12 +25,12 @@ class BikeShareApp < Sinatra::Base
 
   get '/stations/:id' do
     @station = Station.find(params[:id])
-    erb :show_station
+    erb :"stations/show"
   end
 
   get '/stations/:id/edit' do
     @station = Station.find(params[:id])
-    erb :edit_station
+    erb :"stations/edit"
   end
 
   put '/stations/:id' do
