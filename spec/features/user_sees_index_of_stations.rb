@@ -9,7 +9,7 @@ RSpec.describe "When a user visits '/stations'" do
   end
 
   it "shows a station's name" do
-    Station.create(name: "Denver", @dock_count)
+    Station.create(name: "Denver", dock_count: 7, )
     visit('/stations')
     within 'h1 nth-of-type(1)' do
       expect(page).to have_text  
