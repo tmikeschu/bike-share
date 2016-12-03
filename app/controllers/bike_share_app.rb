@@ -1,36 +1,37 @@
 require_relative '../models/station'
 
 class BikeShareApp < Sinatra::Base
-  
+
   set :root, File.expand_path("..", __dir__)
   set :method_override, true
 
   get '/' do
-    erb :dashboard
+    erb :"dashboard"
   end
-  
+
   get '/stations' do
     @stations = Station.all
-    erb :stations_index
+    erb :"stations/index"
   end
 
   get '/stations/new' do
-    erb :new_station
+    @cities = City.all
+    erb :"stations/new"
   end
 
   post '/stations' do
-    Station.create(params[:station])
-    redirect '/stations'
+    station = Station.create(params[:station])
+    redirect "/stations/#{station.id}"
   end
 
   get '/stations/:id' do
     @station = Station.find(params[:id])
-    erb :show_station
+    erb :"stations/show"
   end
 
   get '/stations/:id/edit' do
     @station = Station.find(params[:id])
-    erb :edit_station
+    erb :"stations/edit"
   end
 
   put '/stations/:id' do
