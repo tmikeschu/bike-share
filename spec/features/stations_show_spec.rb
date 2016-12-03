@@ -17,6 +17,10 @@ describe "When a user wants to display data from a single station," do
     expect(page).to have_content("Denver")
   end
 
+  it "they see the proper dock count," do
+    expect(page).to have_content(27)
+  end
+
   it "and when it was established." do
     expect(page).to have_content("2015")
   end
