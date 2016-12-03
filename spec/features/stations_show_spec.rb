@@ -1,23 +1,24 @@
 require_relative "../spec_helper"
+require 'pry'
 
 describe "When a user wants to display data from a single station," do
     
   before do  
-    @station = Station.create(name: "I Like Bike", city_id: 45, installation_date: 1501)
-    @id = Station.find_by(name: "I Like Bike").id
-    visit "/stations/#{@id}"
+    City.create(name: "Denver")
+    City.first.stations.create(name: "I Like Bike", dock_count: 27, installation_date: "10/6/2015")
+    visit "/stations/#{Station.first.id}"
   end
 
   it "they see the station they expected," do
     expect(page).to have_content("I Like Bike")
   end
 
-  it "the station's name," do
-    expect(page).to have_content("I Like Bike")
+  it "they see the station's city," do
+    expect(page).to have_content("Denver")
   end
 
   it "and when it was established." do
-    expect(page).to have_content(1501)
+    expect(page).to have_content("2015")
   end
 end
 
