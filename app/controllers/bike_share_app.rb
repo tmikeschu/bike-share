@@ -25,6 +25,7 @@ class BikeShareApp < Sinatra::Base
 
   get '/stations/:id' do
     @station = Station.find(params[:id])
+    #change city.id call (access it through station association)
     erb :"stations/show"
   end
 
