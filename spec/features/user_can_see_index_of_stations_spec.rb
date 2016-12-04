@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 RSpec.describe "When a user visits '/stations'" do
   it "shows them an all stations heading" do
     visit('/stations')
-    within 'h1' do
+    within '.all-stations' do
       expect(page).to have_text "All Stations"
     end
   end

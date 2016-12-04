@@ -2,9 +2,9 @@
 
 <div class="form">
   <h1>Edit Station Information</h1>
-  <form method="POST" action="/stations/<%= @station.id %>">
+  <form id="edit-form" method="POST" action="/stations/<%= @station.id %>">
     <input type="hidden" name="_method" value="PUT">
-    <input type="text" name="station[name]" value="<%= @station.name %>" onclick='this.value = "";'>
+    <input type="text" name="station[name]" value="<%= @station.name %>" >
     <select class="form_dropdown" name="station[city_id]">
       <option selected="selected" value=<% @station.city.id %>><%= @station.city.name.upcase %></option>
       <% @cities.sort_by(&:name).each do |city| %>
