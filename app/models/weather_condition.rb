@@ -12,4 +12,5 @@ class WeatherCondition < ActiveRecord::Base
 
   has_many :trips
 
+  #need to set_primary_key = date
 end
