@@ -4,7 +4,7 @@
     <ul>
       <li><%= station.name %></li>
       <li><%= station.dock_count %></li>
-
+      <li><%= station.city.name %></li>
       <li><%= station.installation_date %></li>
     </ul>
     <form action="/stations/<%= station.id %>/edit" method="GET">
@@ -19,54 +19,10 @@
 
 <div id="map" style="height:100%";></div>
 
-<script type="text/javascript">
-
-  var map;
-  var markers = [];
-
-  function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 37.329732, lng: -121.90178200000001},
-      zoom: 13
-    });
-
-    var largeInfoWindow = new google.maps.InfoWindow();
-    var bounds = new google.maps.LatLngBounds();
-
-    function addMarker(lat, lng) {
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(lat, lng),
-        map: map,
-        name: name,
-        animation: google.maps.Animation.DROP
-      });
-    }
-
-    <% @stations.each do |station| %>
-      addMarker(<%= station.lat %>, <%= station.long %>);
-    <% end %>
-
-    markers.push(marker);
-    bounds.extend(marker.position);
-
-    marker.addListener('click', function() {
-      populateInfoWindow(this, largeInfoWindow);
-    });
-    map.fitBounds(bounds);
-
-    function populateInfoWindow(marker, infowindow) {
-      if (infowindow.marker != marker) {
-        infowindow.marker = marker;
-        infowindow.setContent('<div>' + marker.name + '</div>');
-        infowindow.open(map, marker);
-        infowindow.addListener('closeclick', function() {
-          infowindow.setMarker(null);
-        });
-      }
-    }
-  }
-</script>
+<% @stations.each do |station| %>
+  addMarker(<%= station.lat %>, <%= station.long %>);
+<% end %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- <script src="station_map.js"</script> -->
+<script type="text/javascript" src="station_map.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY5e6y9BV-anVv_aKGrlgMd_uxwi71PSQ&v=3&callback=initMap"></script>
