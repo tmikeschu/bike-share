@@ -12,6 +12,10 @@
     </select>
     <input type="integer" name="station[dock_count]" value=<%= @station.dock_count %> onclick='this.value = "";'>
     <input type="date" name="station[installation_date]" value=<%= @station.installation_date %> onclick='this.value = "";'>
-    <input type="submit" value="Create Station"></div>
+    <input type="submit" value="Submit">
+  </form>
+  <form action="/stations/<%= @station.id %>" method="POST">
+    <input type="hidden" name="_method" value="DELETE ">
+    <input type="submit" value="Delete">
   </form>
 </div>
