@@ -31,7 +31,7 @@ class BikeShareApp < Sinatra::Base
 
   get '/stations/:id/edit' do
     @station = Station.find(params[:id])
-    @cities  = City.all    
+    @cities  = City.all
     erb :"stations/edit"
   end
 
