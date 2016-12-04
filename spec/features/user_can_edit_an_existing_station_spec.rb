@@ -10,7 +10,6 @@ describe "when a user visits '/stations/1/edit'" do
     fill_in 'station[installation_date]', with: "22/9/2016"
 
     click_on 'Edit'
-    save_and_open_page
 
     station = Station.find_by(id: 1)
     expect(current_path).to eq("/stations/#{station.id}")

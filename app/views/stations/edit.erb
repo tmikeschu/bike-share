@@ -6,7 +6,12 @@
     <input type="hidden" name="_method" value="PUT" />
     <input type="text" name="station[name]" value="<%= @station.name %>" /><br/>
     <input type="integer" name="station[dock_count]" value="<%= @station.dock_count %>" /><br/>
-    <input type="integer" name="station[city_id]" value="<%= @station.city_id %>" /><br/>
+    <select class="form_dropdown" name="station[city_id]">
+      <option selected="selected" value="<%= @station.city_id %>"><%= @station.city.name.upcase %></option>
+      <% @cities.sort_by(&:name).each do |city| %>
+        <option value="<%= city.id %>"><%= city.name.upcase %></option>
+      <% end %>
+    </select>
     <input type="text" name="station[installation_date]" value="<%= @station.installation_date %>" /><br/>
     <input type="submit" value="Edit "/>
   </form>
