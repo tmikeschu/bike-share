@@ -5,6 +5,7 @@ describe "when a user visits '/stations/1/edit'" do
     City.create(name: "Denver")
     City.first.stations.create(name: "I Like Bike", dock_count: 27, installation_date: "10/6/2015")
     visit '/stations/1/edit'
+    save_and_open_page
 
     fill_in 'station[name]', with: "TestStationOne"
     fill_in 'station[dock_count]', with: 15
