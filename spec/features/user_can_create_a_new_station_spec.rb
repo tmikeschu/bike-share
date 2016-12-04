@@ -1,10 +1,23 @@
 require_relative '../spec_helper'
 
 describe "When a user visits the new station path" do
-  it "they can create a new station" do
+  before do
     City.create(name: "Denver")
     City.create(name: "Aurora")
-    
+  end
+
+  it "they see a create form" do
+    visit '/stations/new'
+    expect(page).to have_content("Create a New Station")
+    expect(page).to have_field("station[name]")
+    expect(page).to have_field("station[city_id]")
+    expect(page).to have_field("station[dock_count]")
+    expect(page).to have_field("station[installation_date]")
+    expect(page).to have_field("station[installation_date]")
+    expect(page).to have_button("Create Station")
+  end
+
+  it "they can create a new station" do
     visit '/stations/new'
     fill_in 'station[name]', with: "Station Name1"
     find("option[value='1']").click
