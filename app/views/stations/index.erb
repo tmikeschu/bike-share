@@ -6,9 +6,9 @@
     <div class="station-summary">
       <ul>
         <li><%= station.name %></li>
-        <li><%= station.dock_count %></li>
-        <li><%= station.city.name %></li>
-        <li><%= station.installation_date %></li>
+        <li>Number of bike docks: <%= station.dock_count %></li>
+        <li>City: <%= station.city.name %></li>
+        <li>Established: <%= station.installation_date %></li>
       </ul>
       <form action="/stations/<%= station.id %>/edit" method="GET">
         <input type="submit" value="Edit">

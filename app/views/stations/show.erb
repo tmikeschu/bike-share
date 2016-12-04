@@ -1,4 +1,10 @@
-<h3><%= @station.name %></h3>
-<p>Number of bike docks:<%= @station.dock_count %></p>
-<p>City: <%= @station.city.name %></p>
-<p>Established: <%= @station.installation_date %>
+<% @title = "#{@station.name}" %>
+
+<div class="show-station">
+  <h1><%= @station.name %></h1>
+  <ul>
+    <li>Number of bike docks: <%= @station.dock_count %></li>
+    <li>City: <%= @station.city.name %></li>
+    <li>Established: <%= @station.installation_date %></li>
+  </ul>
+</div>

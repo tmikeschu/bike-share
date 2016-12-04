@@ -6,6 +6,7 @@ describe "When a user wants to display data from a single station," do
     City.create(name: "Denver")
     City.first.stations.create(name: "I Like Bike", dock_count: 27, installation_date: "10/6/2015")
     visit "/stations/#{Station.first.id}"
+    save_and_open_page
   end
 
   it "they see the station they expected," do

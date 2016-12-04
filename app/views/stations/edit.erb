@@ -1,17 +1,17 @@
 <% @title = "Edit Station Info" %>
 
-<div class="edit-station">
+<div class="form">
   <h1>Edit Station Information</h1>
   <form method="POST" action="/stations">
-    <input type="text" name="station[name]" value=<%= @station.name %>>
+    <input type="text" name="station[name]" value=<%= @station.name %> onclick='this.value = "";'>
     <select class="form_dropdown" name="station[city_id]">
       <option selected="selected" value=<% @station.city.id %>><%= @station.city.name.upcase %></option>
       <% @cities.sort_by(&:name).each do |city| %>
         <option value=<% city.id %>><%= city.name.upcase if city != @station.city %></option>
       <% end %>
     </select>
-    <input type="integer" name="station[dock_count]" value=<%= @station.dock_count %>>
-    <input type="date" name="station[installation_date]" value=<%= @station.installation_date %>>
+    <input type="integer" name="station[dock_count]" value=<%= @station.dock_count %> onclick='this.value = "";'>
+    <input type="date" name="station[installation_date]" value=<%= @station.installation_date %> onclick='this.value = "";'>
     <input type="submit" value="Create Station"></div>
   </form>
 </div>
