@@ -1,6 +1,6 @@
 class Station < ActiveRecord::Base
 
-  validates :name, :dock_count, :city_id, :installation_date, presence: true
+  validates :name, :dock_count, :city_id, :installation_date, :lat, :long, presence: true
 
   belongs_to :city
 
