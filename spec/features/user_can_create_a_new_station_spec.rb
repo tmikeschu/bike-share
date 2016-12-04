@@ -24,7 +24,6 @@ describe "When a user visits the new station path" do
     fill_in 'station[dock_count]', with: "27"
     fill_in 'station[installation_date]', with: "8/7/2013"
     click_on 'Create Station'
-
     new_station = Station.find_by(name: "Station Name1")
     expect(current_path).to eq("/stations/#{new_station.id}")
     expect(page).to have_content("Station Name1")
