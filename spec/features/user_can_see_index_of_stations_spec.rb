@@ -58,7 +58,7 @@ describe 'Stations New Page' do
     it 'they are taken to the index page' do
       within 'div.station-summary:nth-of-type(2)' do
         click_on "Delete"
-        save_and_open_page
+        # save_and_open_page
         expect(current_path).to eq("/stations")
         it 'and the deleted station is gone' do 
           expect(page).to_not have_content "Fort Collins"
