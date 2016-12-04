@@ -20,8 +20,17 @@ class BikeShareApp < Sinatra::Base
   end
 
   post '/stations' do
+    date = format_date(params[:station][:installation_date])
+    params[:station][:installation_date] = date
     station = Station.create(params[:station])
     redirect "/stations/#{station.id}"
+  end
+
+  def format_date(date)
+    date = date.split("/").reverse
+    date[1], date[2] = date[2], date[1]
+    date = date.join("/")
+    date
   end
 
   get '/stations/:id' do
@@ -31,6 +40,7 @@ class BikeShareApp < Sinatra::Base
 
   get '/stations/:id/edit' do
     @station = Station.find(params[:id])
+    @cities  = City.all
     erb :"stations/edit"
   end
 
