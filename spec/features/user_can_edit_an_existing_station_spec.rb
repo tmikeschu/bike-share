@@ -4,11 +4,14 @@ describe "when a user visits '/stations/1/edit'" do
   before do
     City.create(name: "Denver")
     City.create(name: "Aurora")
+    City.first.stations.create(name: "I Like Bike", dock_count: 27, installation_date: "10/6/2015", lat: 37.330698, long: -121.888979)
+    # require 'pry'; binding.pry    
   end
 
   it "they see a create form" do
-    visit '/stations/new'
-    expect(page).to have_content("Create a New Station")
+    visit '/stations/1/edit'
+    save_and_open_page
+    expect(page).to have_content("Edit Station Information")
     expect(page).to have_field("station[name]")
     expect(page).to have_field("station[dock_count]")
     expect(page).to have_field("station[city_id]")
@@ -18,8 +21,11 @@ describe "when a user visits '/stations/1/edit'" do
     expect(page).to have_button("Create Station")
   end
 
+  # it 'they can see the existing station information in the form' do
+
+  # end
+
   it "they can edit station information" do
-    City.first.stations.create(name: "I Like Bike", dock_count: 27, installation_date: "10/6/2015", lat: 37.330698, long: -121.888979)
     station = Station.find_by(id: 1)
     
     visit '/stations/1/edit'
