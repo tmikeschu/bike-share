@@ -119,7 +119,7 @@ class BikeShareApp < Sinatra::Base
 
   post '/conditions' do
     conditions = WeatherCondition.create(params[:conditions])
-    redirect "/conditions/#{condition.id}"
+    redirect "/conditions/#{conditions.id}"
   end
 
   get '/conditions/:id' do

@@ -1,0 +1,22 @@
+<% @title = "Edit Weather Info" %>
+
+<div class="form">
+  <h1>Edit Weather Information</h1>
+  <form action="/conditions/<%= @conditions.id %>" method="POST">
+    <input type="hidden" name="_method" value="PUT" />
+    <input type="text" name="conditions[name]" value="<%= @conditions.name %>" onclick='this.value = "";'/><br/>
+    <input type="integer" name="conditions[dock_count]" value="<%= @conditions.dock_count %>" onclick='this.value = "";'/><br/>
+    <input type="integer" step="any" name="conditions[lat]" value="<%= @conditions.lat %>" onclick='this.value = "";'><br/>
+    <input type="integer" step="any" name="conditions[long]" value="<%= @conditions.long %>" onclick='this.value = "";'><br/>
+    <select class="form_dropdown" name="conditions[city_id]">
+      <option selected="selected" value="<%= @conditions.city_id %>"><%= @conditions.city.name.upcase %></option>
+      <% @cities.sort_by(&:name).each do |city| %>
+        <option value="<%= city.id %>"><%= city.name.upcase %></option>
+      <% end %>
+    </select><br/>
+    <input type="text" name="conditions[installation_date]" value="<%= @conditions.installation_date %>" /><br/>
+    <input type="submit" value="Edit"/>
+  </form>
+</div>
+
+    
