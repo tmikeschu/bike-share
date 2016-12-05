@@ -9,6 +9,7 @@ class BikeShareApp < Sinatra::Base
     erb :"dashboard"
   end
 
+  ### Start Stations Routes ###
   get '/station-dashboard' do
     erb :"stations/dashboard"
   end
@@ -57,5 +58,88 @@ class BikeShareApp < Sinatra::Base
     Station.destroy(params[:id])
     redirect '/stations'
   end
+
+  ### Start Trips Routes ###
+  get '/trip-dashboard' do
+    erb :"trips/dashboard"
+  end
+
+  get '/trips' do
+    @trips = Trip.all
+    erb :"trips/index"
+  end
+
+  get '/trips/new' do
+    @trips = Trip.all
+    erb :"trips/new"
+  end
+
+  post '/trips' do
+    trip = Trip.create(params[:trip])
+    redirect "/trips/#{trip.id}"
+  end
+
+  get '/trips/:id' do
+    @trip = Trip.find(params[:id])
+    erb :"trips/show"
+  end
+
+  get '/trips/:id/edit' do
+    @trip = Trip.find(params[:id])
+    @trips  = Trip.all
+    erb :"trips/edit"
+  end
+
+  put '/trips/:id' do
+    Trip.update(params[:id], params[:trip])
+    redirect "/trips/#{params[:id]}"
+  end
+
+  delete '/trips/:id' do
+    Trip.destroy(params[:id])
+    redirect '/trips'
+  end
+
+  ### Start Weather Conditions Routes ###
+  get '/weather-dashboard' do
+    erb :"conditions/dashboard"
+  end
+
+  get '/conditions' do
+    @conditions = WeatherConditions.all
+    erb :"conditions/index"
+  end
+
+  get '/conditions/new' do
+    @conditions = WeatherConditions.all
+    erb :"conditions/new"
+  end
+
+  post '/conditions' do
+    conditions = WeatherConditions.create(params[:conditions])
+    redirect "/conditions/#{condition.id}"
+  end
+
+  get '/conditions/:id' do
+    @conditions = WeatherConditions.find(params[:id])
+    erb :"conditions/show"
+  end
+
+  get '/conditions/:id/edit' do
+    @condition = WeatherConditions.find(params[:id])
+    @conditions  = WeatherConditions.all
+    erb :"conditions/edit"
+  end
+
+  put '/conditions/:id' do
+    WeatherConditions.update(params[:id], params[:trip])
+    redirect "/conditions/#{params[:id]}"
+  end
+
+  delete '/conditions/:id' do
+    WeatherConditions.destroy(params[:id])
+    redirect '/conditions'
+  end
+
 
 end
