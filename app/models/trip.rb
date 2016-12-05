@@ -12,6 +12,6 @@ class Trip < ActiveRecord::Base
 
   belongs_to :station, :foreign_key => :id
   belongs_to :subscription_type
-  belongs_to :weather_condition, :foreign_key => :date
+  belongs_to :weather_condition, :foreign_key => :start_date
 
 end
