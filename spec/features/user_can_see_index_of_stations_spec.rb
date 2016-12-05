@@ -57,6 +57,7 @@ describe 'Stations New Page' do
   describe 'when they click delete' do
     it 'they are taken to the index page' do
       within 'div.station-summary:nth-of-type(2)' do
+        expect(page.body).to include("Fort Collins")
         click_on "Delete"
         expect(current_path).to eq("/stations")
         expect(page.body).not_to include("Fort Collins")
