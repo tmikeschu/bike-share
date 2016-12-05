@@ -2,6 +2,9 @@
 
 <div class="all-stations">
   <h1>All Stations</h1>
+  <form action="/stations/new" method="GET">
+    <input type="submit" value="Create New">
+  </form>
   <% @stations.each do |station| %>
     <div class="station-summary">
       <ul>
@@ -12,9 +15,6 @@
         <li>Longitude: <%= station.long %></li>
         <li>Established: <%= station.installation_date %></li>
       </ul>
-      <form action="/stations/new" method="GET">
-        <input type="submit" value="Create New">
-      </form>
       <form action="/stations/<%= station.id %>/edit" method="GET">
         <input type="submit" value="Edit">
       </form>
