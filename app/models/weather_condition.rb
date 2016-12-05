@@ -1,4 +1,5 @@
 class WeatherCondition < ActiveRecord::Base
+  self.primary_key = "date"
 
   validates :date,
             :max_temp,
@@ -10,7 +11,5 @@ class WeatherCondition < ActiveRecord::Base
             :precipitation_inches,
             presence: true
 
-  has_many :trips
-
-  #need to set_primary_key = date
+  has_many :trips, :foreign_key => :start_date
 end

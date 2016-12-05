@@ -10,12 +10,8 @@ class Trip < ActiveRecord::Base
             :user_zip_code,
             presence: true
 
-  #need to specify that foreign_key is start_station_id
-  belongs_to :station
+  belongs_to :station, :foreign_key => :id
   belongs_to :subscription_type
-
-  #need to set_primary_key = date
-  #need to set_foreign_key = start_date
-  belongs_to :weather_condition
+  belongs_to :weather_condition, :foreign_key => :date
 
 end

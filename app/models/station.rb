@@ -7,6 +7,6 @@ class Station < ActiveRecord::Base
             presence: true
 
   belongs_to :city
-  has_many :trips
+  has_many :trips, :foreign_key => :start_station_id
 
 end
