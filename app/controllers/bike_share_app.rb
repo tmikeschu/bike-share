@@ -26,7 +26,9 @@ class BikeShareApp < Sinatra::Base
   post '/stations' do
     date = format_date(params[:station][:installation_date])
     params[:station][:installation_date] = date
+    # require 'pry'; binding.pry
     station = Station.create(params[:station])
+    # binding.pry
     redirect "/stations/#{station.id}"
   end
 
