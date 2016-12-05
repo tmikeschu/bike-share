@@ -10,7 +10,6 @@ describe "when a user visits '/stations/1/edit'" do
 
   it "they see a create form" do
     visit '/stations/1/edit'
-    save_and_open_page
     expect(page).to have_content("Edit Station Information")
     expect(page).to have_field("station[name]")
     expect(page).to have_field("station[dock_count]")
@@ -18,7 +17,7 @@ describe "when a user visits '/stations/1/edit'" do
     expect(page).to have_field("station[lat]")
     expect(page).to have_field("station[long]")
     expect(page).to have_field("station[installation_date]")
-    expect(page).to have_button("Create Station")
+    expect(page).to have_button("Edit")
   end
 
   # it 'they can see the existing station information in the form' do

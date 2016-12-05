@@ -31,7 +31,7 @@ describe "When a user visits the new station path" do
     expect(current_path).to eq("/stations/#{new_station.id}")
     expect(page).to have_content("Station Name1")
     expect(page).to have_content("Denver")
-    expect(page).to have_content("2013/8/7")
+    expect(page).to have_content("2013-08-07")
   end
 
 end

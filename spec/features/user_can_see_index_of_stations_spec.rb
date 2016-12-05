@@ -35,10 +35,14 @@ describe 'Stations New Page' do
       end
 
       within 'div.station-summary:nth-of-type(1) > form:nth-of-type(1)' do
+        expect(page).to have_button "New"
+      end
+      
+      within 'div.station-summary:nth-of-type(1) > form:nth-of-type(2)' do
         expect(page).to have_button "Edit"
       end
 
-      within 'div.station-summary:nth-of-type(1) > form:nth-of-type(2)' do
+      within 'div.station-summary:nth-of-type(1) > form:nth-of-type(3)' do
         expect(page).to have_button "Delete"
       end
 
