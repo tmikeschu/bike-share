@@ -4,7 +4,7 @@ describe "When a user wants to display data from a single station," do
     
   before do  
     City.create(name: "Denver")
-    @station1 = City.first.stations.create(name: "I Like Bike", dock_count: 27, installation_date: "10/6/2015", lat: 37.330698, long: -121.888979)
+    @station1 = City.first.stations.create(name: "I Like Bike", dock_count: 27, installation_date: "2015/10/16", lat: 37.330698, long: -121.888979)
     visit "/stations/#{Station.first.id}"
   end
 
@@ -14,7 +14,8 @@ describe "When a user wants to display data from a single station," do
     expect(page).to have_content(27)
     expect(page).to have_content(37.330698)
     expect(page).to have_content(-121.888979)
-    expect(page).to have_content("Estabished: 2015-10-06")
+    # save_and_open_page
+    expect(page).to have_content("Established: 2015-10-16")
   end
 
   describe 'when they click edit' do
