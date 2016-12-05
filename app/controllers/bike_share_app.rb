@@ -106,38 +106,38 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/conditions' do
-    @conditions = WeatherConditions.all
+    @conditions = WeatherCondition.all
     erb :"conditions/index"
   end
 
   get '/conditions/new' do
-    @conditions = WeatherConditions.all
+    @conditions = WeatherCondition.all
     erb :"conditions/new"
   end
 
   post '/conditions' do
-    conditions = WeatherConditions.create(params[:conditions])
+    conditions = WeatherCondition.create(params[:conditions])
     redirect "/conditions/#{condition.id}"
   end
 
   get '/conditions/:id' do
-    @conditions = WeatherConditions.find(params[:id])
+    @conditions = WeatherCondition.find(params[:id])
     erb :"conditions/show"
   end
 
   get '/conditions/:id/edit' do
-    @condition = WeatherConditions.find(params[:id])
-    @conditions  = WeatherConditions.all
+    @condition = WeatherCondition.find(params[:id])
+    @conditions  = WeatherCondition.all
     erb :"conditions/edit"
   end
 
   put '/conditions/:id' do
-    WeatherConditions.update(params[:id], params[:trip])
+    WeatherCondition.update(params[:id], params[:trip])
     redirect "/conditions/#{params[:id]}"
   end
 
   delete '/conditions/:id' do
-    WeatherConditions.destroy(params[:id])
+    WeatherCondition.destroy(params[:id])
     redirect '/conditions'
   end
 
