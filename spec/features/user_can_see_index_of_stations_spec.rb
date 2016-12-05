@@ -23,6 +23,7 @@ describe 'When a user visists /stations' do
     end
 
     it "a station's information" do
+      expect(page).to have_button "New"
       within 'div.station-summary:nth-of-type(1)' do
         expect(page).to have_content "Denver Union Station"
         expect(page).to have_content 7
@@ -30,10 +31,15 @@ describe 'When a user visists /stations' do
         expect(page).to have_content 37.330698
         expect(page).to have_content -121.888979
         expect(page).to have_content "2013-12-02"
-        expect(page).to have_button "New"
-        expect(page).to have_button "Edit"
-        expect(page).to have_button "Delete"        
       end
+    end
+
+    it "new, edit, and delete buttons" do 
+      expect(page).to have_button "New"
+      within 'div.station-summary:nth-of-type(1)' do
+        expect(page).to have_button "Edit"
+        expect(page).to have_button "Delete"
+      end        
     end
 
     it "and a different station's information" do
@@ -44,19 +50,14 @@ describe 'When a user visists /stations' do
         expect(page).to have_content 39.330698
         expect(page).to have_content -120.888979
         expect(page).to have_content "2013-08-10"
-        expect(page).to have_button "New"
-        expect(page).to have_button "Edit"
-        expect(page).to have_button "Delete"        
       end
     end
   end
 
   describe 'and when they click new' do
-    it 'they are taken to the edit page' do
-      within 'div.station-summary:nth-of-type(1)' do
-        click_on "New"
-        expect(current_path).to eq("/stations/new")
-      end
+    it 'they are taken to the new page' do
+      click_on "New"
+      expect(current_path).to eq("/stations/new")
     end
   end
 

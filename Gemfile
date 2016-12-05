@@ -15,6 +15,7 @@ group :development, :test do
   gem 'rack-test'
   gem 'pry'
   gem 'smarter_csv'
+  gem 'rb-readline'
 end
 
 group :test do
