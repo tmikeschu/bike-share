@@ -4,6 +4,8 @@ class Station < ActiveRecord::Base
             :dock_count,
             :city_id,
             :installation_date,
+            :lat,
+            :long,
             presence: true
 
   belongs_to :city
