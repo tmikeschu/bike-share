@@ -45,7 +45,7 @@ def create_stations
   SmarterCSV.process('db/csv/station.csv').each do |row|
     row[:installation_date] = format_date(row[:installation_date])
     p row[:city]
-    
+
   end
 
   puts "Imported Stations to Table."
