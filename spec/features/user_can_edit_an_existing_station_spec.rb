@@ -4,7 +4,7 @@ describe "when a user visits '/stations/1/edit'" do
   before do
     City.create(name: "Denver")
     City.create(name: "Aurora")
-    City.first.stations.create(name: "I Like Bike", dock_count: 27, installation_date: "10/6/2015", lat: 37.330698, long: -121.888979)
+    City.first.stations.create(name: "I Like Bike", dock_count: 27, installation_date: "2015/10/6", lat: 37.330698, long: -121.888979)
     # require 'pry'; binding.pry    
   end
 
@@ -20,9 +20,14 @@ describe "when a user visits '/stations/1/edit'" do
     expect(page).to have_button("Edit")
   end
 
-  # it 'they can see the existing station information in the form' do
-
-  # end
+  it 'and they can see the existing station information in the form' do
+    expect(find_field('station[name]').value).to eq("I Like Bike")
+    expect(find_field('station[dock_count]').value).to eq("27")
+    expect(find_field('station[city_id]').value).to eq("1")
+    expect(find_field('station[lat]').value).to eq("37.330698")
+    expect(find_field('station[long]').value).to eq("-121.888979")
+    expect(find_field('station[installation_date]').value).to eq("2015-10-06 00:00:00 UTC")
+  end
 
   it "they can edit station information" do
     station = Station.find_by(id: 1)
