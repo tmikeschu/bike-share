@@ -14,6 +14,7 @@ group :development, :test do
   gem 'launchy'
   gem 'rack-test'
   gem 'pry'
+  gem 'smarter_csv'
 end
 
 group :test do
