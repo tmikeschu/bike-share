@@ -10,7 +10,7 @@ class CreateTrips < ActiveRecord::Migration[5.0]
       t.integer :subscription_type_id
       t.integer :user_zip_code
 
-      t.timestamp null: false
+      t.timestamps null: false
     end
   end
 end
