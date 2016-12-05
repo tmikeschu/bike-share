@@ -8,25 +8,13 @@ describe "When a user wants to display data from a single station," do
     visit "/stations/#{Station.first.id}"
   end
 
-  it "they see the station they expected," do
+  it "they see the station's information," do
     expect(page).to have_content("I Like Bike")
-  end
-
-  it "they see the station's city," do
     expect(page).to have_content("Denver")
-  end
-
-  it "they see the proper dock count," do
     expect(page).to have_content(27)
-  end
-
-  it "they see the latitude and longitude," do
     expect(page).to have_content(37.330698)
     expect(page).to have_content(-121.888979)
-  end
-
-  it "and when it was established." do
-    expect(page).to have_content("2015")
+    expect(page).to have_content("Estabished: 2015-10-06")
   end
 
   describe 'when they click edit' do
