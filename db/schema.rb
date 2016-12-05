@@ -30,4 +30,8 @@ ActiveRecord::Schema.define(version: 20161204064658) do
     t.float    "long"
   end
 
+  create_table "subscription_types", force: :cascade do |t|
+    t.string "subscription_type"
+  end
+
 end
