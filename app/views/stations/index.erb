@@ -5,7 +5,7 @@
   <% @stations.each do |station| %>
     <div class="station-summary">
       <ul>
-        <li><%= station.name %></li>
+        <li><a href="/stations/<%= station.id %>"><%= station.name %></a></li>
         <li>Number of bike docks: <%= station.dock_count %></li>
         <li>City: <%= station.city.name %></li>
         <li>Established: <%= station.installation_date %></li>
