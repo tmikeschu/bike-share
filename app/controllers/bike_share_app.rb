@@ -111,7 +111,10 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/conditions' do
-    @conditions = WeatherCondition.all
+    @page  = params[:page].to_i
+    start  = @page * 30 + 1
+    finish = start + 29
+    @conditions = WeatherCondition.order()
     erb :"conditions/index"
   end
 
