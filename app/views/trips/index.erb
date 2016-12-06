@@ -31,12 +31,23 @@
   <% end %>
 </div>
 
-:duration,
-          :start_date,
-          :start_station_id,
-          :end_date,
-          :end_station_id,
-          :bike_id,
-          :subscription_type_id,
-          :user_zip_code,
-          presence: true
+<% @trips.each do |trip| %>
+  <div class="trip-summary">
+    <ul>
+      <li><a href="/trips/<%= trip.id %>"><%= trip.start_station_id %></a></li>
+      <li>Start: <%= trip.start_date %></li>
+      <li>ID: <%= trip.id %></li>
+    </ul>
+    <form action="/trips/<%= trip.id %>/edit" method="GET">
+      <input type="submit" value="Edit">
+    </form>
+    <form action="/trips/<%= trip.id %>" method="POST">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Delete">
+    </form>
+  </div>
+<% end %>
+<% if @page >= 1%>
+  <a href="/trips?page=<%= @page - 1 %>">Back</a>
+<% end %>
+<a href="/trips?page=<%= @page + 1 %>">Forward</a>

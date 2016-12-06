@@ -26,4 +26,8 @@
       </form>
     </div>
   <% end %>
+  <% unless @page < 1 %>
+    <a href="/conditions?page=<%= @page - 1 %>">Back</a>
+  <% end %>
+  <a href="/conditions?page=<%= @page + 1 %>">Forward</a>
 </div>
