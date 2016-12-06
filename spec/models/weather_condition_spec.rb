@@ -2,8 +2,8 @@ require_relative '../spec_helper'
 
 #test presence of all data fields
 #test zip_code = 90210 is invalid
-#test that WeatherCondition.first returns a WC
-#test that WeatherCondition.first returns the WC we expect
+#test that WeatherCondition.first returns a WeatherCondition
+#test that WeatherCondition.first returns the WeatherCondition we expect
 #test that WeatherCondition.first.trips returns some trips
 #test that WeatherCondition.first.trips returns the trips we expect
 
