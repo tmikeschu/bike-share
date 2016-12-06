@@ -92,7 +92,8 @@ def create_weather_conditions
                                   mean_humidity: :mean_humidity,
                                   mean_visibility_miles: :mean_visibility_miles,
                                   mean_wind_speed_mph: :mean_wind_speed_mph,
-                                  precipitation_inches: :precipitation_inches},
+                                  precipitation_inches: :precipitation_inches,
+                                  zip_code: :zip_code},
                     remove_unmapped_keys: true).each do |row|
     row[:date] = format_date(row[:date])
     row[:precipitation_inches] = row[:precipitation_inches].to_f

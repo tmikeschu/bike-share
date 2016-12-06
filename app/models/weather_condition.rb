@@ -9,7 +9,10 @@ class WeatherCondition < ActiveRecord::Base
             :mean_visibility_miles,
             :mean_wind_speed_mph,
             :precipitation_inches,
+            :zip_code,
             presence: true
+
+  validates :zip_code, inclusion: { in: [94107]}
 
   has_many :trips, :foreign_key => :start_date
 end
