@@ -67,7 +67,10 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips' do
-    @trips = Trip.all
+    @page = params[:page].to_i
+    start = @page * 30 + 1
+    finish = start + 29
+    @trips = Trip.order(:id).reorder("start_date").where(id: [start..finish])
     erb :"trips/index"
   end
 
@@ -108,7 +111,10 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/conditions' do
-    @conditions = WeatherCondition.all
+    @page  = params[:page].to_i
+    start  = "2013-08-29".to_date + @page * 30
+    finish = start + 29
+    @conditions = WeatherCondition.where(date: [start..finish])
     erb :"conditions/index"
   end
 
