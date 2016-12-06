@@ -1,5 +1,17 @@
 require_relative '../spec_helper'
 
+#test that Station.first returns a Station
+#test that Station.first returns the Station we expect
+
+#test that Station.first.city returns a City
+#test that Station.first.city returns the City we expect
+
+#test that Station.first.departure_trips returns some Trips
+#test that Station.first.departure_trips returns the Trips we expect
+
+#test that Station.first.arrival_trips returns some Trips
+#test that Station.first.arrival_trips returns the Trips we expect
+
 describe 'Station' do
 
   before do
