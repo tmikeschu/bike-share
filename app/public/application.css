@@ -1,24 +1,61 @@
 body {
   background: url("./images/main_page_background.jpg") no-repeat center center fixed; 
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -background-size: cover;
+  background-size: cover;
 }
 
 .jumbotron {
-  background: rgba(51, 26, 0, 0.45);
-  position: relative
+  background: rgba(51, 26, 0, 0.55);
+  position: relative;
 }
 
 li {
-  color: white;
+  color: #C67637;
+  -webkit-text-stroke: 0.1px white;
+  font-family: "Source Sans Pro";
 }
 
 #create {
   position: absolute;
   right: 80px;
+  top: 115px;
+  color: #852B1F;
+}
 
+h1.page-header {
+  color: #E09D44;
+  font-family: "Quicksand";
+}
 
+.station-name {
+  font-family: "Quicksand";
+}
 
+a {
+  color: #E95100;
+  -webkit-text-stroke: 0.1px white;
+}
+
+.navbar-brand {
+  margin-top: -20px;
+}
+
+.navbar {
+  background: rgba(51, 26, 0, 0);
+  border: 0 !important;
+}
+
+.navbar-inner {
+  background: none !important; 
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+#edit {
+  display: inline-block;
+  font-family: "Quicksand";
+  color: #852B1F;
 }
