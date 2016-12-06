@@ -1,5 +1,12 @@
-#test presence of all data fields
-#test that SubscriptionType.first returns a SubscriptionType
-#test that SubscriptionType.first returns the SubscriptionType we expect
-#test that SubscriptionType.first.trips returns some Trips
-#test that SubscriptionType.first.trips returns the Trips we expect
+require_relative '../spec_helper'
+
+describe 'SubscriptionType' do
+
+  describe 'validates' do
+    it 'presence of subscription_type' do
+      invalid_subscription_type = SubscriptionType.create(name: "")
+      expect(invalid_subscription_type).to be_invalid
+    end
+  end
+
+end
