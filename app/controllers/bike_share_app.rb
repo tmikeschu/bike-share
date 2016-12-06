@@ -112,9 +112,9 @@ class BikeShareApp < Sinatra::Base
 
   get '/conditions' do
     @page  = params[:page].to_i
-    start  = @page * 30 + 1
+    start  = "2013-08-29".to_date + @page * 30
     finish = start + 29
-    @conditions = WeatherCondition.order()
+    @conditions = WeatherCondition.where(date: [start..finish])
     erb :"conditions/index"
   end
 
