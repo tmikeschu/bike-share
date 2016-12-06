@@ -29,7 +29,11 @@ class WeatherCondition < ActiveRecord::Base
   end
 
   def self.days_with_wind_speed(speed)
-    WeatherCondition.where(mean_wind_speed: [speed..speed + 4])
+    WeatherCondition.where(mean_wind_speed_mph: [speed..speed + 3])
+  end
+
+  def self.days_with_visibility(miles)
+    WeatherCondition.where(mean_visibility_miles: [speed..speed + 3])
   end
 
   def self.average_rides(rides)
@@ -42,6 +46,22 @@ class WeatherCondition < ActiveRecord::Base
 
   def self.lowest_rides(rides)
     rides.sort[0]
+  end
+
+  def self.temp_range_with_increments_of(incrementer)
+    lower = WeatherCondition.minimum(:max_temperature_f)
+    upper = WeatherCondition.maximum(:max_temperature_f)
+    lower = lower / 10 * 10
+    upper = upper / 10 * 10
+    (lower..upper).to_a.find_all{ |num| num % incrementer == 0 }
+  end
+
+  def self.weather_on_day_with_highest_rides
+    WeatherCondition.joins(:trips).group(:date).order("count_id DESC").count("id").max_by{|key, value| value}
+  end
+
+  def self.weather_on_day_with_lowest_rides
+    WeatherCondition.joins(:trips).group(:date).order("count_id DESC").count("id").min_by{|key, value| value}
   end
 
 end
