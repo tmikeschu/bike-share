@@ -4,7 +4,9 @@
 <div class="jumbotron">
   <div class="container">
   <h1 class="page-header">All Stations
-  <button href="/stations/new" id="create" type="button" class="btn btn-warning btn-small">Create New Station</button></h1>
+  <form action="/stations/new" method="GET">
+    <input id="create" class="btn btn-warning btn-small" type="submit" value="Create New"/>
+  </form></h1>
   <% @stations.each do |station| %>
     <div class="station-summary">
       <ul>
@@ -17,13 +19,17 @@
         <li>Established: <%= station.installation_date %></li>
         </br>
       </ul>
-      <button href="/stations/<%= station.id %>/edit" id="edit" type="button" class="btn btn-warning btn-xs">Edit</button>
-      <button href="/stations/<%= station.id %>" method="POST" id="edit" type="button" class="btn btn-warning btn-xs">Delete</button>
+      <form class="format-button" action="/stations/<%= station.id %>/edit" method="GET">
+        <input id="edit" class="btn btn-warning btn-xs" type="submit" value="Edit">
+      </form>
+      <form class="format-button" action="/stations/<%= station.id %>" method="POST">
         <input type="hidden" name="_method" value="DELETE">
+        <input id="edit" class="btn btn-warning btn-xs" type="submit" value="Delete">
+</form>
     </div>
-            </br>
-        </br>
-                </br>
+      </br>
+      </br>
+      </br>
   <% end %>
 </div>
 </div>
