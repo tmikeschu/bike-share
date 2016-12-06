@@ -1,3 +1,24 @@
 body {
-  background-image: url("./images/main_page_background.jpg");
+  background: url("./images/main_page_background.jpg") no-repeat center center fixed; 
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+
+.jumbotron {
+  background: rgba(51, 26, 0, 0.45);
+  position: relative
+}
+
+li {
+  color: white;
+}
+
+#create {
+  position: absolute;
+  right: 80px;
+
+
+
 }

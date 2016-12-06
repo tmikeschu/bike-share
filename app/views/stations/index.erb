@@ -1,10 +1,10 @@
 <% @title = "All Stations" %>
 
 <div class="all-stations">
-  <h1>All Stations</h1>
-  <form action="/stations/new" method="GET">
-    <input type="submit" value="Create New">
-  </form>
+<div class="jumbotron">
+  <div class="container">
+  <h1 class="page-header">All Stations
+  <button href="/stations/new" id="create" type="button" class="btn btn-warning btn-small">Create New Station</button></h1>
   <% @stations.each do |station| %>
     <div class="station-summary">
       <ul>
@@ -25,6 +25,9 @@
     </div>
   <% end %>
 </div>
+</div>
+</div>
+
 
 
 <div id="map" style="height:100%";></div>
