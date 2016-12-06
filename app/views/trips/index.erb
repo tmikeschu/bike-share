@@ -1,0 +1,42 @@
+<% @title = "All Trips" %>
+
+<div class="all-trips">
+  <h1>All Trips</h1>
+  <% @trips.each do |trip| %>
+    <div class="trips-summary">
+      <ul>
+        <li><a href="/trips/<%= trip.id %>"><%= trip.id %></a></li>
+        <li>Trip Duration: <%= trip.duration %></li>
+        <li>Start Date: <%= trip.start_date %></li>
+        <li>Start Station name: <%= trip.start_station_name %></li>
+        <li>Start Station ID: <%= trip.start_station_id %></li>
+        <li>End Date: <%= trip.end_date %></li>
+        <li>End Station Name: <%= trip.end_station_name %></li>
+        <li>End Station ID: <%= trip.end_station_id %></li>
+        <li>Bike ID: <%= trip.bike_id %></li>
+        <li>Subscription Type ID: <%= trip.subscription_type_id%></li>
+        <li>User Zip Code: <%= trip.user_zip_code%></li>
+      </ul>
+      <form action="/trips/new" method="GET">
+        <input type="submit" value="Create New">
+      </form>
+      <form action="/trips/<%= trip.id %>/edit" method="GET">
+        <input type="submit" value="Edit">
+      </form>
+      <form action="/trips/<%= trip.id %>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete">
+      </form>
+    </div>
+  <% end %>
+</div>
+
+:duration,
+          :start_date,
+          :start_station_id,
+          :end_date,
+          :end_station_id,
+          :bike_id,
+          :subscription_type_id,
+          :user_zip_code,
+          presence: true

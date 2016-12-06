@@ -3,13 +3,9 @@
 <p>Total count of stations: <%= Station.count %></p>
 <p>Average bikes available per station: <%= Station.average(:dock_count).to_i %></p>
 <p>Most bikes available at a station: <%= Station.maximum(:dock_count)%></p>
-<p>Station(s) where the most bikes are available:
-
-</p>
+<p>Station(s) where the most bikes are available: <%= Station.where(dock_count:(Station.maximum(:dock_count))).pluck(:name) %></p>
 <p>Fewest bikes available at a station: <%= Station.minimum(:dock_count) %></p>
-<p>Station(s) where the fewest bikes are available:
-
-</p>
+<p>Station(s) where the fewest bikes are available: <%= Station.where(dock_count:(Station.minimum(:dock_count))).pluck(:name) %></p>
 <p>Most recently installed station: <%= Station.order(:installation_date).first.name %></p>
 <p>Oldest station: <%= Station.order(:installation_date).last.name %></p>
 
