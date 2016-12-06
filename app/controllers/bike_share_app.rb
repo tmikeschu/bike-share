@@ -67,11 +67,10 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips' do
-    # @number = params[:number].to_i
-    # start = @number * 30
-    # finish = start + 30
-    # @trips = Trip.order(:start_where(id: [start..finish])
-    @trips = Trip.take(30)
+    @page = params[:page].to_i
+    start = @page * 30 + 1
+    finish = start + 29
+    @trips = Trip.order(:id).reorder("start_date").where(id: [start..finish])
     erb :"trips/index"
   end
 
