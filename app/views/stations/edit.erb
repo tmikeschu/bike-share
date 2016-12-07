@@ -1,22 +1,64 @@
 <% @title = "Edit Station Info" %>
 
-<div class="form">
-  <h1>Edit Station Information</h1>
-  <form action="/stations/<%= @station.id %>" method="POST">
+<div class="edit-stations">
+<div class="jumbotron">
+  <div class="container">
+  <h1 class="page-header">Edit Station Information</h1>
+
+
+  <div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Name:</label></div>
+  <div class="col-xs-10">
+  <form class="edit" action="/stations/<%= @station.id %>" method="POST">
     <input type="hidden" name="_method" value="PUT" />
-    <input type="text" name="station[name]" value="<%= @station.name %>" onclick='this.value = "";'/><br/>
-    <input type="integer" name="station[dock_count]" value="<%= @station.dock_count %>" onclick='this.value = "";'/><br/>
-    <input type="integer" step="any" name="station[lat]" value="<%= @station.lat %>" onclick='this.value = "";'><br/>
-    <input type="integer" step="any" name="station[long]" value="<%= @station.long %>" onclick='this.value = "";'><br/>
+    <input class="form-control" type="text" name="station[name]" value="<%= @station.name %>" onclick='this.value = "";'/><br/>
+  </div>
+  </div>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Dock Count:</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="integer" name="station[dock_count]" value="<%= @station.dock_count %>" onclick='this.value = "";'/><br/>
+  </div>
+  </div>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Latitude:</label></div>
+  <div class="col-xs-10">
+  <input class="form-control" type="integer" step="any" name="station[lat]" value="<%= @station.lat %>" onclick='this.value = "";'><br/>
+  </div>
+  </div>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Longitude:</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="integer" step="any" name="station[long]" value="<%= @station.long %>" onclick='this.value = "";'><br/>
+    </div>
+    </div>
+
     <select class="form_dropdown" name="station[city_id]">
       <option selected="selected" value="<%= @station.city_id %>"><%= @station.city.name.upcase %></option>
       <% @cities.sort_by(&:name).each do |city| %>
         <option value="<%= city.id %>"><%= city.name.upcase %></option>
       <% end %>
     </select><br/>
-    <input type="text" name="station[installation_date]" value="<%= @station.installation_date %>" /><br/>
-    <input type="submit" value="Edit"/>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Established:</label></div>
+  <div class="col-xs-10">
+  <input type="text" class="form-control" name="station[installation_date]" value="<%= @station.installation_date %>" /><br/>
+  </div>
+  </div>
+
+    <input id="edit-large" class="btn btn-warning btn-lg" type="submit" value="Edit">
   </form>
 </div>
+</div>
+
 
     

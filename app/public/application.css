@@ -17,6 +17,12 @@ li {
   font-family: "Source Sans Pro";
 }
 
+.form-id {
+  color: #C67637;
+  font-family: "Quicksand";
+  /*font-size: 1.25em;*/
+}
+
 #create {
   position: absolute;
   right: 80px;
@@ -68,6 +74,13 @@ a:hover {
   color: #852B1F;
 }
 
+#edit-large {
+  font-family: "Quicksand";
+  color: #852B1F;
+  position: absolute;
+  margin-bottom: -50px;
+}
+
 .menu-icon {
   margin-top: -30px;
   margin-right: 40px;
@@ -91,4 +104,8 @@ a:hover {
   color: #E09D44;
   margin-top: -30px;
   margin-right: 60px;
+}
+
+.edit {
+  align-self: center;
 }
