@@ -8,8 +8,6 @@
     <input id="edit-large" class="btn btn-warning btn-small" type="submit" value="Edit"></h1>
     <input type="hidden" name="_method" value="PUT" />
 
-<!--<div class="form group-row">-->
-
 <div class="form group-row">
   <div class="form-id">
   <label for="input" class="col-xs-2 col-form-label">Duration:</label></div>
@@ -26,14 +24,6 @@
   </div>
 </div>
 
-<!--<div class="form group-row">
-  <div class="form-id">
-  <label for="input" class="col-xs-2 col-form-label">Departure Station:</label></div>
-  <div class="col-xs-10">
-    <input class="form-control" type="text" name="trip[start_station_name]" value="<%= @trip.start_station.name %>" onclick='this.value = "";'/><br/>
-  </div>
-</div>-->
-
 <div class="form group-row">
   <div class="form-id">
   <label for="input" class="col-xs-2 col-form-label">Departure Station (ID):</label></div>
@@ -49,14 +39,6 @@
     <input class="form-control" type="integer" name="trip[end_date]" value="<%= @trip.end_date %>" onclick='this.value = "";'/><br/>
   </div>
 </div>
-
-<!--<div class="form group-row">
-  <div class="form-id">
-  <label for="input" class="col-xs-2 col-form-label">Arrival Station:</label></div>
-  <div class="col-xs-10">
-    <input class="form-control" type="text" name="trip[end_station_name]" value="<%= @trip.end_station.name %>" onclick='this.value = "";'/><br/>
-  </div>
-</div>-->
 
 <div class="form group-row">
   <div class="form-id">
