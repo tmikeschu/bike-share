@@ -5,7 +5,6 @@ describe "when a user visits '/stations/1/edit'" do
     City.create(name: "Denver")
     City.create(name: "Aurora")
     City.first.stations.create(name: "I Like Bike", dock_count: 27, installation_date: "2015/10/6", lat: 37.330698, long: -121.888979)
-    # require 'pry'; binding.pry    
   end
 
   it "they see a create form" do

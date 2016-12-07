@@ -4,6 +4,5 @@ class City < ActiveRecord::Base
             presence: true
 
   has_many :stations
-  has_many :trips, through: :stations
 
 end

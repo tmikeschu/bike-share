@@ -43,6 +43,5 @@ class Station < ActiveRecord::Base
   def self.oldest_station
     Station.order(:installation_date).last.name
   end
-
-
+  
 end

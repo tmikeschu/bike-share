@@ -7,11 +7,12 @@
       <input id="edit-large" class="btn btn-warning btn-small" type="submit" value="Edit"></h1>
 
 <div class="form group-row">
+<form class="edit" action="/stations/<%= @station.id %>" method="POST">
+  
+  <div class="form group-row">
   <div class="form-id">
   <label for="input" class="col-xs-2 col-form-label">Name:</label></div>
   <div class="col-xs-10">
-  <form class="edit" action="/stations/<%= @station.id %>" method="POST">
-    <input type="hidden" name="_method" value="PUT" />
     <input class="form-control" type="text" name="station[name]" value="<%= @station.name %>" onclick='this.value = "";'/><br/>
   </div>
   </div>
@@ -51,7 +52,6 @@
 </div>
 </div>
 
-
 <div class="form-id">
   <label for="input" class="col-xs-2 col-form-label">City:</label></div>
   <div class="col-xs-10">
@@ -67,5 +67,3 @@
   </div>
 </div>
 </div>
-
-
