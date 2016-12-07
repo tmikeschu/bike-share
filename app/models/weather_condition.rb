@@ -93,7 +93,7 @@ class WeatherCondition < ActiveRecord::Base
   end
 
   def self.highest_rides(rides)
-    rides.max.to_i.round
+    rides.max.to_i
   end
 
   def self.lowest_rides(rides)

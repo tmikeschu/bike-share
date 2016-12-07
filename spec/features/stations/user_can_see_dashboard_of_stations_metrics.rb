@@ -1,6 +1,6 @@
 require_relative '../../spec_helper'
 
-describe 'When a user visists /stations' do
+describe 'When a user visists /stations-dashboard' do
 
   before do
     City.create(name: "Denver")

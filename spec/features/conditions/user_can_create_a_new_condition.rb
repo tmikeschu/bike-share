@@ -1,6 +1,6 @@
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
-describe "When a user visits the new station path" do
+describe "When a user visits the new condition path" do
   before do
     City.create(name: "Denver")
     City.create(name: "Aurora")
