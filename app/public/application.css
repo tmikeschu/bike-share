@@ -77,11 +77,18 @@ a:hover {
   font-family: "Quicksand";
   color: #852B1F;
   float: right;
-  margin-top: 15px;
+  margin-top: 22px;
+}
+
+#new-city {
+  font-family: "Quicksand";
+  color: #852B1F;
+  margin-left: 320px;
+
 }
 
 .menu-icon {
-  margin-top: -30px;
+  margin-top: -20px;
   margin-right: 40px;
 }
 
