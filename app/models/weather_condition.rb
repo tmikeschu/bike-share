@@ -89,11 +89,11 @@ class WeatherCondition < ActiveRecord::Base
 
   def self.average_rides(rides)
     return 0 if rides.count.zero?
-    rides.reduce(:+).to_i / rides.count.to_f
+    rides.reduce(:+).to_i / rides.count
   end
 
   def self.highest_rides(rides)
-    rides.max.to_i
+    rides.max.to_i.round
   end
 
   def self.lowest_rides(rides)
