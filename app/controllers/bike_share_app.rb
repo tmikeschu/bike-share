@@ -66,7 +66,9 @@ class BikeShareApp < Sinatra::Base
 
   get '/trips' do
     @page = params[:page].to_i
+    @end = false    
     @trips = Trip.order(:start_date).offset(@page * 30).limit(30)
+    @end = true if Trip.order(:start_date).offset((@page + 1) * 30).empty?
     erb :"trips/index"
   end
 
