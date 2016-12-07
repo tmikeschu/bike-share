@@ -3,6 +3,7 @@
 <div class="add-new-station">
 <div class="jumbotron">
   <div class="container">
+  <form class="edit" action="/stations" method="POST">
   <h1 class="page-header">Add a Station
     <a id="new-city" class="btn btn-warning btn-small" href="../../cities/new.erb">Add a New City</a>
     <input type="submit" id="edit-large" class="btn btn-warning btn-small" value="Create"></h1>
@@ -11,8 +12,6 @@
   <div class="form-id">
   <label for="input" class="col-xs-2 col-form-label">Name:</label></div>
   <div class="col-xs-10">
-  <form class="edit" action="/stations" method="POST">
-    <input type="hidden" name="_method" value="PUT" />
     <input class="form-control" type="text" name="station[name]" value="Name" onclick='this.value = "";'/><br/>
   </div>
   </div>
@@ -48,7 +47,6 @@
   <input type="text" class="form-control" name="station[installation_date]" value="Installation Date" /><br/>
   </div>
   </div>
-  </form>
 </div>
 </div>
 
@@ -67,3 +65,4 @@
   </div>
 </div>
 </div>
+  </form>
