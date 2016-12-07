@@ -1,3 +1,5 @@
+require 'pry'
+
 class Trip < ActiveRecord::Base
 
   validates :duration,
@@ -63,18 +65,71 @@ class Trip < ActiveRecord::Base
     Trip.minimum(:duration).to_i/60
   end
 
-    # starts = Trip.where(start_station_id: station)
-    # stations = starts.pluck(:end_station_id)
-    # end_stations_hash = stations.each_with_object(Hash.new(0)) { |station,counts| counts[station] += 1 }
-    # most_frequent_destination_station_id = end_stations_hash.key(end_stations_hash.values.max)
-    # Station.where(id: most_frequent_destination_station_id).pluck(:name)
-
   def self.station_with_most_rides_as_start_point
     starts = Trip.joins(:start_station)
-    ids = start_trips.pluck(:start_station_id)
+    ids = starts.pluck(:start_station_id)
     ids_hash = ids.each_with_object(Hash.new(0)) { |id,counts| counts[id] += 1 }
     most_common_start_station_id = ids_hash.key(ids_hash.values.max)
     Station.where(id: most_common_start_station_id).pluck(:name)
   end
+
+  def self.station_with_most_rides_as_end_point
+    ends = Trip.joins(:end_station)
+    ids = ends.pluck(:end_station_id)
+    ids_hash = ids.each_with_object(Hash.new(0)) { |id,counts| counts[id] += 1 }
+    most_common_end_station_id = ids_hash.key(ids_hash.values.min)
+    Station.where(id: most_common_end_station_id).pluck(:name)
+  end
+
+  def self.most_ridden_bike_and_ride_count
+    Trip.group(:bike_id).count("id").max_by{|bike, count| count }
+  end
+
+  def self.least_ridden_bike_and_ride_count
+    Trip.group(:bike_id).count("id").min_by{|bike, count| count }
+  end
+
+  def self.subscription_breakdown
+    Trip.group(:subscription_type_id).count("id").values
+  end
+
+  def self.subscriber_breakdown
+    Trip.subscription_breakdown[0]
+  end
+
+  def self.subscriber_percentage
+    (Trip.subscriber_breakdown / Trip.all.count) * 100
+  end
+
+  def self.customer_breakdown
+    Trip.subscription_breakdown[1]
+  end
+
+  def self.customer_percentage
+    (Trip.customer_breakdown / Trip.all.count) * 100
+  end
+
+  def self.date_with_highest_number_trips_total
+    Trip.group(:start_date).count("id").max_by{|date, count| count }
+  end
+
+  def self.date_with_lowest_number_trips_total
+    Trip.group(:start_date).count("id").min_by{|date, count| count }
+  end
+
+  def self.monthly_ride_breakdown(year_array, month_array)
+    year_array.each do |year|
+      trips_by_year[year] = Trip.where("extract(year from start_date) = ?", year)
+      trips_by_year
+    end
+
+    trips_by_year.each_pair do |year,trips_for_each_year|
+      monthly_rides[year] = trips_for_each_year.group("extract(month from start_date)").count("id")
+      monthly_rides
+    end
+  end
+
+
+
 
 end

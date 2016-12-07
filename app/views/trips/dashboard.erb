@@ -15,22 +15,75 @@
 <p>Station with the most rides as an ending place:
   <%= Trip.station_with_most_rides_as_end_point.first %>
 </p>
+</br>
 
-<p>Month-by-month breakdown of number of rides with subtotals for each year: <%= %></p>
-  <li>January: <%= %></li>
-  <li>Feburary: <%= %></li>
-  <li>March: <%= %></li>
-  <li>April: <%= %></li>
-  <li>May: <%= %></li>
-  <li>June: <%= %></li>
-  <li>July: <%= %></li>
+<table>
+  <caption>Trip Summary: Monthly Breakdown</caption>
+  <tr>
+    <th>Year<br /> </th>
+  	<th>Jan<br /> </th>
+  	<th>Feb<br /> </th>
+  	<th>Mar<br /> </th>
+  	<th>Apr<br /> </th>
+    <th>May<br /> </th>
+    <th>Jun<br /> </th>
+    <th>Jul<br /> </th>
+    <th>Aug<br /> </th>
+    <th>Sep<br /> </th>
+    <th>Oct<br /> </th>
+    <th>Nov<br /> </th>
+    <th>Dec<br /> </th>
+    <th>Total<br /> </th>
+  </tr>
 
-<p>Most ridden bike with total number of rides for that bike: <%= %></p>
-<p>Least ridden bike with total number of rides for that bike: <%= %></p>
-<p>User subscription type breakout with both count and percentage:
-  <%= %></p>
-<p>Single date with the highest number of trips with a count of those trips: <%= %></p>
-<p>Single date with the lowest number of trips with a count of those trips: <%= %></p>
+  <% @monthly_rides.each_pair do |year,month_hash| %>
+    <tr>
+      <td><%= year %></td>
+      <% month_hash.each_pair do |month,rides| %>
+      <td><%= rides %></td>
+      <% end %>
+      <td>TBD</td>
+    </tr>
+  <% end %>
+</table>
+
+</br>
+
+<p>Most ridden bike with total number of rides for that bike:
+  <%= Trip.most_ridden_bike_and_ride_count %>
+</p>
+<p>Least ridden bike with total number of rides for that bike:
+  <%= Trip.least_ridden_bike_and_ride_count %>
+</p>
+</br>
+
+<table>
+  <caption>User Subscription Summary</caption>
+  <tr>
+    <th>Subscription Type<br /> </th>
+    <th>Count<br /> </th>
+  	<th>Percentage<br /> </th>
+  </tr>
+  <tr>
+    <td>Subscriber (annual or 30-day member)</td>
+    <td> <%= Trip.subscriber_breakdown %></td>
+    <td> <%= Trip.subscriber_percentage %>% </td>
+  </tr>
+  <tr>
+    <td>Customer (24-hour or 3-day member)</td>
+    <td> <%= Trip.customer_breakdown %></td>
+    <td> <%= Trip.customer_percentage %>% </td>
+  </tr>
+</table>
+</br>
+
+<p>Single date with the highest number of trips with a count of those trips:
+  <%= Trip.date_with_highest_number_trips_total %>
+</p>
+<p>Single date with the lowest number of trips with a count of those trips:
+  <%= Trip.date_with_lowest_number_trips_total %>
+</p>
+</br>
 
 <h2>Trip-Weather Data</h2>
 <p>Weather on the day with the highest number of rides: <%= WeatherCondition.weather_on_day_with_highest_rides %></p>
