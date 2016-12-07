@@ -26,14 +26,6 @@
     <li class="list-group-item">Bike ID most frequently starting a trip at this station: <%= %></li>
   </ul>
 
-  <!--<form action="/stations/<%= @station.id %>/edit" method="GET">
-    <input type="submit" value="Edit">
-  </form>
-  <form action="/stations/<%= @station.id %>" method="POST">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="Delete">
-  </form>-->
-
   <form class="format-button" action="/stations/<%= @station.id %>/edit" method="GET">
         <input id="edit" class="btn btn-warning btn-xs" type="submit" value="Edit">
       </form>
