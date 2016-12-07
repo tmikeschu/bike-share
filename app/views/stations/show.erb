@@ -9,17 +9,31 @@
     <li>City: <%= @station.city.name %></li>
     <li>Established: <%= @station.installation_date %></li>
   </ul>
+
   <h4>Trip Stats for this station</h4>
-    <li>Number of rides started at this station: <%= Trip.number_rides_started_at_station(@station) %></li>
-    <li>Number of rides ended at this station: <%= Trip.number_rides_ended_at_station(@station) %></li>
+  <ul>
+    <li>Number of rides started at this station:
+      <%= Trip.number_rides_started_at_station(@station) %>
+    </li>
+    <li>Number of rides ended at this station:
+      <%= Trip.number_rides_ended_at_station(@station) %>
+    </li>
     <li>Most frequent destination station for rides beginning at this station):
-      <%= Trip.station_with_maximum_rides_as_start_location(@station)%>
+      <%= Trip.station_with_maximum_rides_as_start_location(@station) %>
     </li>
     <li>Most frequent origination station for rides ending at this station):
-      <%= Trip.station_with_maximum_rides_as_end_location(@station)%></li>
-    <li>Date with the highest number of trips started at this station: <%= %></li>
-    <li>Most frequent zip code for users starting trips at this station: <%= %></li>
-    <li>Bike ID most frequently starting a trip at this station: <%= %></li>
+      <%= Trip.station_with_maximum_rides_as_end_location(@station)%>
+    </li>
+    <li>Date with the highest number of trips started at this station:
+      <%= Trip.date_with_highest_number_trips(@station) %>
+    </li>
+    <li>Most frequent zip code for users starting trips at this station:
+      <%= Trip.most_frequent_user_zip_code(@station) %>
+    </li>
+    <li>Bike ID most frequently starting a trip at this station:
+      <%= Trip.most_frequent_bike_id(@station) %>
+    </li>
+  </ul>
 
   <form action="/stations/<%= @station.id %>/edit" method="GET">
     <input type="submit" value="Edit">
