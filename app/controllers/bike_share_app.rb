@@ -50,7 +50,6 @@ class BikeShareApp < Sinatra::Base
   end
 
   put '/stations/:id' do
-    # require 'pry'; binding.pry
     Station.update(params[:id], params[:station])
     redirect "/stations/#{params[:id]}"
   end
@@ -69,7 +68,7 @@ class BikeShareApp < Sinatra::Base
     @page = params[:page].to_i
     start = @page * 30 + 1
     finish = start + 29
-    @trips = Trip.order(:id).reorder("start_date").where(id: [start..finish])
+    @trips = Trip.order(:start_date).offset(@page * 30).limit(30)
     erb :"trips/index"
   end
 
