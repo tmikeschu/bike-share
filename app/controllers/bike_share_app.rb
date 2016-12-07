@@ -118,6 +118,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   post '/conditions' do
+    params[:zip_code] = 94107
     condition = WeatherCondition.create(params[:conditions])
     redirect "/conditions"
   end
