@@ -8,7 +8,6 @@ describe "When a user wants to display data from a single condition," do
   end
 
   it "they see the condition's information," do
-    save_and_open_page
     expect(page).to have_content("2013-07-30")
     expect(page).to have_content(84)
     expect(page).to have_content(68)

@@ -14,7 +14,6 @@ describe "When a user wants to display data from a single station," do
     expect(page).to have_content(27)
     expect(page).to have_content(37.330698)
     expect(page).to have_content(-121.888979)
-    # save_and_open_page
     expect(page).to have_content("Established: 2015-10-16")
   end
 
