@@ -2,9 +2,18 @@ require_relative '../spec_helper'
 
 describe 'Trip' do
   before do
-    station1 = Station.create !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    station2 = Station.create !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    subscription = SubscriptionType.create !!!!!!!!!!!!!!!!!
+    city = City.create(name: "Denver")
+    station1 = City.first.stations.create(  name: "Union",
+                                            dock_count: 27,
+                                            installation_date: "10/6/2015",
+                                            lat: 37.329732,
+                                            long: -121.90178200000001)
+    station2 = City.first.stations.create(  name: "Denver",
+                                            dock_count: 27,
+                                            installation_date: "10/6/2015",
+                                            lat: 27.329732,
+                                            long: -111.90178200000001)
+    subscription = SubscriptionType.create(name: "Subscriber")
   end
 
   describe 'validates' do

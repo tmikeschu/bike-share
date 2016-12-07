@@ -1,27 +1,150 @@
 require_relative '../spec_helper'
 
-#test presence of all data fields
-#test zip_code = 90210 is invalid
 
 describe 'WeatherCondition' do
 
-  before do
-    WeatherCondition.create(date: "2016/12/6",
-                            max_temperature_f: "70",
-                            mean_temperature_f: "50",
-                            min_temperature_f: "40",
-                            mean_humidity: "60",
-                            mean_visibility_miles: "5",
-                            mean_wind_speed_mph: "5",
-                            precipitation_inches: "0.23",
-                            zip_code: "94107")
+  describe 'validates' do
+
+    it 'presence of date' do
+      invalid_wc = WeatherCondition.create( date: "",
+                                            max_temperature_f: "70",
+                                            mean_temperature_f: "50",
+                                            min_temperature_f: "40",
+                                            mean_humidity: "60",
+                                            mean_visibility_miles: "5",
+                                            mean_wind_speed_mph: "5",
+                                            precipitation_inches: "0.23",
+                                            zip_code: "94107")
+
+      expect(invalid_wc).to be_invalid
+    end
+
+    it 'presence of max_temperature_f' do
+      invalid_wc = WeatherCondition.create( date: "2016/12/6",
+                                            max_temperature_f: "",
+                                            mean_temperature_f: "50",
+                                            min_temperature_f: "40",
+                                            mean_humidity: "60",
+                                            mean_visibility_miles: "5",
+                                            mean_wind_speed_mph: "5",
+                                            precipitation_inches: "0.23",
+                                            zip_code: "94107")
+
+      expect(invalid_wc).to be_invalid
+    end
+
+    it 'presence of mean_temperature_f' do
+      invalid_wc = WeatherCondition.create( date: "2016/12/6",
+                                            max_temperature_f: "70",
+                                            mean_temperature_f: "",
+                                            min_temperature_f: "40",
+                                            mean_humidity: "60",
+                                            mean_visibility_miles: "5",
+                                            mean_wind_speed_mph: "5",
+                                            precipitation_inches: "0.23",
+                                            zip_code: "94107")
+
+      expect(invalid_wc).to be_invalid
+    end
+
+    it 'presence of min_temperature_f' do
+      invalid_wc = WeatherCondition.create( date: "2016/12/6",
+                                            max_temperature_f: "70",
+                                            mean_temperature_f: "50",
+                                            min_temperature_f: "",
+                                            mean_humidity: "60",
+                                            mean_visibility_miles: "5",
+                                            mean_wind_speed_mph: "5",
+                                            precipitation_inches: "0.23",
+                                            zip_code: "94107")
+
+      expect(invalid_wc).to be_invalid
+    end
+
+    it 'presence of mean_humidity' do
+      invalid_wc = WeatherCondition.create( date: "2016/12/6",
+                                            max_temperature_f: "70",
+                                            mean_temperature_f: "50",
+                                            min_temperature_f: "40",
+                                            mean_humidity: "",
+                                            mean_visibility_miles: "5",
+                                            mean_wind_speed_mph: "5",
+                                            precipitation_inches: "0.23",
+                                            zip_code: "94107")
+
+      expect(invalid_wc).to be_invalid
+    end
+
+    it 'presence of mean_visibility_miles' do
+      invalid_wc = WeatherCondition.create( date: "2016/12/6",
+                                            max_temperature_f: "70",
+                                            mean_temperature_f: "50",
+                                            min_temperature_f: "40",
+                                            mean_humidity: "60",
+                                            mean_visibility_miles: "",
+                                            mean_wind_speed_mph: "5",
+                                            precipitation_inches: "0.23",
+                                            zip_code: "94107")
+
+      expect(invalid_wc).to be_invalid
+    end
+
+    it 'presence of mean_wind_speed_mph' do
+      invalid_wc = WeatherCondition.create( date: "2016/12/6",
+                                            max_temperature_f: "70",
+                                            mean_temperature_f: "50",
+                                            min_temperature_f: "40",
+                                            mean_humidity: "60",
+                                            mean_visibility_miles: "5",
+                                            mean_wind_speed_mph: "",
+                                            precipitation_inches: "0.23",
+                                            zip_code: "94107")
+
+      expect(invalid_wc).to be_invalid
+    end
+
+    it 'presence of precipitation_inches' do
+      invalid_wc = WeatherCondition.create( date: "2016/12/6",
+                                            max_temperature_f: "70",
+                                            mean_temperature_f: "50",
+                                            min_temperature_f: "40",
+                                            mean_humidity: "60",
+                                            mean_visibility_miles: "5",
+                                            mean_wind_speed_mph: "5",
+                                            precipitation_inches: "",
+                                            zip_code: "94107")
+
+      expect(invalid_wc).to be_invalid
+    end
+
+    it 'presence of zip_code' do
+      invalid_wc = WeatherCondition.create( date: "2016/12/6",
+                                            max_temperature_f: "70",
+                                            mean_temperature_f: "50",
+                                            min_temperature_f: "40",
+                                            mean_humidity: "60",
+                                            mean_visibility_miles: "5",
+                                            mean_wind_speed_mph: "5",
+                                            precipitation_inches: "0.23",
+                                            zip_code: "")
+
+      expect(invalid_wc).to be_invalid
+    end
+
+    it 'zip_code is 94107' do
+      invalid_wc = WeatherCondition.create( date: "2016/12/6",
+                                            max_temperature_f: "70",
+                                            mean_temperature_f: "50",
+                                            min_temperature_f: "40",
+                                            mean_humidity: "60",
+                                            mean_visibility_miles: "5",
+                                            mean_wind_speed_mph: "5",
+                                            precipitation_inches: "0.23",
+                                            zip_code: "90210")
+
+      expect(invalid_wc).to be_invalid
+    end
+
   end
 
-  describe 'validates' do
-    it 'presence of station name' do
-      invalid_station = City.first.stations.create(dock_count: 27, installation_date: "10/6/2015", lat: 37.329732, long: -121.90178200000001)
-      expect(invalid_station).to be_invalid
-    end
-  end
-  
 end
