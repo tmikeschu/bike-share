@@ -1,21 +1,69 @@
 <% @title = "Create New Station" %>
 
-<div class="form">
-  <h1>Create a New Station</h1>
-  <form method="POST" action="/stations">
-    <input type="text" name="station[name]" value="Name" onclick='this.value = "";'><br/>
-    <input type="integer" name="station[dock_count]" value="Dock Count" onclick='this.value = "";'><br/>
-    <input type="integer" step="any" name="station[lat]" value="Latitude" onclick='this.value = "";'><br/>
-    <input type="integer" step="any" name="station[long]" value="Longitude" onclick='this.value = "";'><br/>
-    <select class="form_dropdown" name="station[city_id]">
-      <option selected="selected" value="">-Select City-</option>
-      <% @cities.sort_by(&:name).each do |city| %>
-        <option value="<%= city.id %>"><%= city.name.upcase %></option>
-      <% end %>
-    </select><br/>
-    <input type="date" name="station[installation_date]" value="Installation Date" onclick='this.value = "";'><br/>
-    <input type="submit" value="Create Station">
+<div class="add-new-station">
+<div class="jumbotron">
+  <div class="container">
+  <h1 class="page-header">Add a Station
+    <a id="new-city" class="btn btn-warning btn-small" href="../../cities/new.erb">Add a New City</a>
+    <input type="submit" id="edit-large" class="btn btn-warning btn-small" value="Create"></h1>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Name:</label></div>
+  <div class="col-xs-10">
+  <form class="edit" action="/stations" method="POST">
+    <input type="hidden" name="_method" value="PUT" />
+    <input class="form-control" type="text" name="station[name]" value="Name" onclick='this.value = "";'/><br/>
+  </div>
+  </div>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Dock Count:</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="integer" name="station[dock_count]" value="Dock Count" onclick='this.value = "";'/><br/>
+  </div>
+  </div>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Latitude:</label></div>
+  <div class="col-xs-10">
+  <input class="form-control" type="integer" step="any" name="station[lat]" value="Latitude" onclick='this.value = "";'><br/>
+  </div>
+
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Longitude:</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="integer" step="any" name="station[long]" value="Longitude" onclick='this.value = "";'><br/>
+    </div>
+
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Established:</label></div>
+  <div class="col-xs-10">
+  <input type="text" class="form-control" name="station[installation_date]" value="Installation Date" /><br/>
+  </div>
+  </div>
   </form>
 </div>
+</div>
 
-<a href="../../cities/new.erb">Add a New City</a>
+
+<div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">City:</label></div>
+  <div class="col-xs-10">
+  <div class="dropdown">
+    <select id="drop-down-font" class="form_dropdown" name="station[city_id]">
+      <ul>
+      <% @cities.sort_by(&:name).each do |city| %>
+        <li><option value="<%= city.id %>"><%= city.name.upcase %></option></li>
+      </ul>
+      <% end %>
+    </select><br/>
+  </div>
+</div>
+</div>
