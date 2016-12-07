@@ -10,8 +10,8 @@
         <li><a href="/trips/<%= trip.id %>"><%= trip.id %></a></li>
         <li>Trip Duration: <%= trip.duration %></li>
         <li>Start Date: <%= trip.start_date %></li>
-        <li>Start Station name: <%= trip.start_station.name %></li>
-        <li>Start Station ID: <%= trip.start_station.id %></li>
+        <li>Start Station name: <%= trip.start_station.name if trip.start_station  %></li>
+        <li>Start Station ID: <%= trip.start_station.id if trip.start_station  %></li>
         <li>End Date: <%= trip.end_date %></li>
         <li>End Station Name: <%= trip.end_station.name if trip.end_station %></li>
         <li>End Station ID: <%= trip.end_station.id if trip.end_station  %></li>
@@ -36,4 +36,6 @@
 <% if @page >= 1%>
   <a href="/trips?page=<%= @page - 1 %>">Back</a>
 <% end %>
-<a href="/trips?page=<%= @page + 1 %>">Forward</a>
+<% unless @end %>
+  <a href="/trips?page=<%= @page + 1 %>">Forward</a>
+<% end %>
