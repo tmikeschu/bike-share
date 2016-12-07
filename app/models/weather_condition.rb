@@ -1,18 +1,18 @@
 class WeatherCondition < ActiveRecord::Base
   self.primary_key = "date"
 
-  validates :date,
-            :max_temperature_f,
-            :mean_temperature_f,
-            :min_temperature_f,
-            :mean_humidity,
-            :mean_visibility_miles,
-            :mean_wind_speed_mph,
-            :precipitation_inches,
-            :zip_code,
-            presence: true
+  # validates :date,
+  #           :max_temperature_f,
+  #           :mean_temperature_f,
+  #           :min_temperature_f,
+  #           :mean_humidity,
+  #           :mean_visibility_miles,
+  #           :mean_wind_speed_mph,
+  #           :precipitation_inches,
+  #           :zip_code,
+  #           presence: true
 
-  validates :zip_code, inclusion: { in: [94107]}
+  # validates :zip_code, inclusion: { in: [94107]}
 
   validates :date, uniqueness: true
 
@@ -89,11 +89,11 @@ class WeatherCondition < ActiveRecord::Base
 
   def self.average_rides(rides)
     return 0 if rides.count.zero?
-    rides.reduce(:+).to_i / rides.count.to_f
+    rides.reduce(:+).to_i / rides.count
   end
 
   def self.highest_rides(rides)
-    rides.max.to_i
+    rides.max.to_i.round
   end
 
   def self.lowest_rides(rides)
