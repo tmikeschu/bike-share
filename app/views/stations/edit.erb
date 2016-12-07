@@ -3,11 +3,12 @@
 <div class="edit-stations">
 <div class="jumbotron">
   <div class="container">
+<form class="edit" action="/stations/<%= @station.id %>" method="POST">
   <h1 class="page-header">Edit Station Information
       <input id="edit-large" class="btn btn-warning btn-small" type="submit" value="Edit"></h1>
+      <input type="hidden" name="_method" value="PUT" />
 
 <div class="form group-row">
-<form class="edit" action="/stations/<%= @station.id %>" method="POST">
   
   <div class="form group-row">
   <div class="form-id">
