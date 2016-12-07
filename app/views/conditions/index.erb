@@ -4,14 +4,16 @@
 <div class="jumbotron">
   <div class="container">
   <h1 class="page-header">All Weather Conditions
-    <div class="container">
+    <div class="btn-group-vertical" role="group" aria-label="...">
+      <button type="button" class="btn btn-default"><a href="/weather-dashboard">Dashboard</a></button>
+      <button type="button" class="btn btn-default"><a href="/conditions/new">Create New</a></button>
+    </div>
       <form action="/conditions/new" method="GET">
         <input id="create" class="btn btn-warning btn-small" type="submit" value="Create New">
       </form>
       <form action="/weather-dashboard" method="GET">
         <input id="create" class="btn btn-warning btn-small" type="submit" value="Dashboard">
       </form>
-    </div>
   </h1>
   <% @conditions.each do |condition| %>
     <div class="condition-summary">

@@ -139,3 +139,12 @@ a:hover {
   font-family: "Quicksand";
   color: #E09D44;
 }
+
+.btn-default {
+  background-color: #E09D44;
+  color: #852B1F;
+}
+
+.btn-default a {
+  color: #852B1F;
+}
