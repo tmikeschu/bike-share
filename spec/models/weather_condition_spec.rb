@@ -330,8 +330,8 @@ describe 'Weather Conditions Methods' do
     it ".average_rides returns average of rides from day range" do
       rides = WeatherCondition.trips_on_days(WeatherCondition.all).values
       average = WeatherCondition.average_rides(rides)
-      expect(average).to be_instance_of(Float)
-      expect(average).to eq(1.2)
+      expect(average).to be_instance_of(Fixnum)
+      expect(average).to eq(1)
     end
 
     it ".highest_rides returns ride count from day with highest rides" do
@@ -342,6 +342,7 @@ describe 'Weather Conditions Methods' do
     end
 
     it ".lowest_rides returns ride count from day with lowest rides" do
+      require 'pry'; binding.pry
       rides = WeatherCondition.trips_on_days(WeatherCondition.all).values
       lowest = WeatherCondition.lowest_rides(rides)
       expect(lowest).to be_instance_of(Fixnum)
