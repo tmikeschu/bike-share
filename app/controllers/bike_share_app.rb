@@ -103,6 +103,7 @@ class BikeShareApp < Sinatra::Base
 
   ### Start Weather Conditions Routes ###
   get '/weather-dashboard' do
+    @metrics = WeatherCondition.master_metrics
     erb :"conditions/dashboard"
   end
 
