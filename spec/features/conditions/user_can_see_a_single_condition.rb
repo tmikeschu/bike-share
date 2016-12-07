@@ -1,36 +1,36 @@
 require_relative "../../spec_helper"
 
-describe "When a user wants to display data from a single station," do
+describe "When a user wants to display data from a single condition," do
     
   before do  
-    City.create(name: "Denver")
-    @station1 = City.first.stations.create(name: "I Like Bike", dock_count: 27, installation_date: "2015/10/16", lat: 37.330698, long: -121.888979)
-    visit "/stations/#{Station.first.id}"
+    @day1 = WeatherCondition.create(date: "2013-07-30", max_temperature_f: 84, mean_temperature_f: 68, min_temperature_f: 61, mean_humidity: 75, mean_visibility_miles: 15, mean_wind_speed_mph: 3, precipitation_inches: 0.4, zip_code: 94107)
+    visit "/conditions/#{WeatherCondition.first.id}"
   end
 
-  it "they see the station's information," do
-    expect(page).to have_content("I Like Bike")
-    expect(page).to have_content("Denver")
-    expect(page).to have_content(27)
-    expect(page).to have_content(37.330698)
-    expect(page).to have_content(-121.888979)
-    # save_and_open_page
-    expect(page).to have_content("Established: 2015-10-16")
+  it "they see the condition's information," do
+    save_and_open_page
+    expect(page).to have_content("2013-07-30")
+    expect(page).to have_content(84)
+    expect(page).to have_content(68)
+    expect(page).to have_content(61)
+    expect(page).to have_content(75)
+    expect(page).to have_content(2)
+    expect(page).to have_content("Precipitation (Inches): 0.4")
   end
 
   describe 'when they click edit' do
     it 'they are taken to the edit page' do
       click_on "Edit"
-      expect(current_path).to eq("/stations/#{@station1.id}/edit")
+      expect(current_path).to eq("/conditions/#{@day1.id}/edit")
     end
   end
 
   describe 'when they click delete' do
     it 'they are taken to the index page' do
-      expect(page.body).to include("Denver")
+      expect(page.body).to include("2013-07-30")
       click_on "Delete"
-      expect(current_path).to eq("/stations")
-      expect(page.body).not_to include("Denver")
+      expect(current_path).to eq("/conditions")
+      expect(page.body).not_to include("2013-07-30")
     end
   end
 end
