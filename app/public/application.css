@@ -1,9 +1,10 @@
 body {
-  /*background: url("images/main_page_background.jpeg") no-repeat center center fixed; */
+  background: url("images/main_page_background.jpeg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -background-size: cover;
   background-size: cover;
+  e
 }
 
 .jumbotron {
@@ -84,7 +85,6 @@ a:hover {
   font-family: "Quicksand";
   color: #852B1F;
   margin-left: 320px;
-
 }
 
 .menu-icon {
@@ -96,16 +96,16 @@ a:hover {
   display: inline-block;
 }
 
-.navbar .nav > li > a {
+.navbar .nav>li>a {
   float: none;
   line-height: 19px;
   padding: 13px 12px 13px 10px;
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  color:  #DFA834;
+  color: #DFA834;
 }
 
-.navbar .nav > li > a:hover {
+.navbar .nav>li>a:hover {
   color: #AE232E;
 }
 

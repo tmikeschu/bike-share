@@ -35,8 +35,11 @@
   <% end %>
 </div>
 
-  <% unless @page < 1 %>
+  <% if @page >= 1 %>
     <a href="/conditions?page=<%= @page - 1 %>">Back</a>
   <% end %>
-  <a href="/conditions?page=<%= @page + 1 %>">Forward</a>
+  <% unless @end %>
+    <a href="/conditions?page=<%= @page + 1 %>">Forward</a>
+  <% end %>
+
 </div>
