@@ -36,5 +36,10 @@ describe 'Station' do
       invalid_station = Station.create(name: "I Like Bike", dock_count: 27, installation_date: "10/6/2015", lat: 37.329732)
       expect(invalid_station).to be_invalid
     end
+
+    it 'presence of an installaton date' do
+      invalid_station = Station.create(name: "I Like Bike", dock_count: 27, lat: 37.329732, long: -121.90178200000001)
+      expect(invalid_station).to be_invalid
+    end
   end
 end
