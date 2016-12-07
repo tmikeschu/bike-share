@@ -23,6 +23,7 @@ describe 'Weather Conditions' do
     WeatherCondition.create(date: "2014-08-09", max_temperature_f: 73, mean_temperature_f: 68, min_temperature_f: 61, mean_humidity: 75, mean_visibility_miles: 6, mean_wind_speed_mph: 8, precipitation_inches: 0.82, zip_code: 94107)
     WeatherCondition.create(date: "2013-01-02", max_temperature_f: 73, mean_temperature_f: 68, min_temperature_f: 61, mean_humidity: 75, mean_visibility_miles: 7, mean_wind_speed_mph: 8, precipitation_inches: 1.1, zip_code: 94107)
     WeatherCondition.create(date: "1992-02-11", max_temperature_f: 52, mean_temperature_f: 68, min_temperature_f: 61, mean_humidity: 75, mean_visibility_miles: 7, mean_wind_speed_mph: 12, precipitation_inches: 2.3, zip_code: 94107)
+    WeatherCondition.create(date: "1991-01-02", max_temperature_f: 52, mean_temperature_f: 68, min_temperature_f: 61, mean_humidity: 75, mean_visibility_miles: 7, mean_wind_speed_mph: 12, precipitation_inches: 2.3, zip_code: 94107)
   end
   
   describe "trip associations" do
@@ -147,6 +148,63 @@ describe 'Weather Conditions' do
       expect(visibility_metrics).to be_instance_of(Hash)
       expect(visibility_metrics.keys).to eq(%w(0 4 8 12))
       expect(values).to be true
+    end
+    
+    it ".master_metrics returns category keys pointint to metric hashes" do
+      master_metrics = WeatherCondition.master_metrics
+      values = master_metrics.values.all? {|val| val.class == Hash }
+      expect(master_metrics).to be_instance_of(Hash)
+      expect(master_metrics.keys).to eq([:temperature, :precipitation, :wind, :visibility])
+      expect(values).to be true
+    end
+    
+    it ".average_rides returns average of rides from day range" do
+      rides = WeatherCondition.trips_on_days(WeatherCondition.all).values
+      average = WeatherCondition.average_rides(rides)
+      expect(average).to be_instance_of(Float)
+      expect(average).to eq(1.2)
+    end
+    
+    it ".highest_rides returns ride count from day with highest rides" do
+      rides = WeatherCondition.trips_on_days(WeatherCondition.all).values
+      highest = WeatherCondition.highest_rides(rides)
+      expect(highest).to be_instance_of(Fixnum)
+      expect(highest).to eq(2)
+    end
+    
+    it ".lowest_rides returns ride count from day with lowest rides" do
+      rides = WeatherCondition.trips_on_days(WeatherCondition.all).values
+      lowest = WeatherCondition.lowest_rides(rides)
+      expect(lowest).to be_instance_of(Fixnum)
+      expect(lowest).to eq(1)
+    end
+    
+    it ".ride_metrics returns a hash of average, lowest, and highest keys pointing to values" do
+      rides = WeatherCondition.trips_on_days(WeatherCondition.all).values
+      metrics = WeatherCondition.ride_metrics(rides)
+      values = metrics.values.all? {|val| val.class == Float || val.class == Fixnum }
+      expect(values).to be true
+      expect(metrics.keys).to eq([:average_rides, :lowest_rides, :highest_rides])
+    end
+    
+    it ".metric_range_with_increments_of returns an array of temp values with range of condition min and max" do
+      temp = WeatherCondition.metric_range_with_increments_of(:max_temperature_f, 10)
+      expect(temp).to be_instance_of Array
+      expect(temp).to eq([50,60,70,80])
+    end
+    
+    it ".weather_on_day_with_highest_rides returns array of weather and ride count" do
+      highest = WeatherCondition.weather_on_day_with_highest_rides
+      expect(highest).to be_instance_of Array
+      expect(highest.first.class.to_s).to eq("WeatherCondition")
+      expect(highest.last).to be_instance_of Fixnum
+    end
+    
+    it ".weather_on_day_with_lowest_rides returns array of weather and ride count" do
+      lowest = WeatherCondition.weather_on_day_with_lowest_rides
+      expect(lowest).to be_instance_of Array
+      expect(lowest.first.class.to_s).to eq("WeatherCondition")
+      expect(lowest.last).to be_instance_of Fixnum
     end
 
   end

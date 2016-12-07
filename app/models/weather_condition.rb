@@ -17,7 +17,7 @@ class WeatherCondition < ActiveRecord::Base
   has_many :trips, :foreign_key => :start_date
 
   def self.trips_on_days(day_range)
-    day_range.joins(:trips).group(:date).order("count_id DESC").count("id")
+    day_range.joins(:trips).group(:date).count("id")
   end
 
   def self.days_with_high_temp(degrees)
@@ -78,25 +78,24 @@ class WeatherCondition < ActiveRecord::Base
 
   def self.master_metrics
     metrics = {}
-    metrics[:temperature]       = self.temperature_metrics
+    metrics[:temperature]    = self.temperature_metrics
     metrics[:precipitation]  = self.precipitation_metrics
-    metrics[:wind]   = self.wind_metrics
-    metrics[:visibility] = self.visibility_metrics
+    metrics[:wind]           = self.wind_metrics
+    metrics[:visibility]     = self.visibility_metrics
     metrics
   end
 
   def self.average_rides(rides)
     return 0 if rides.count.zero?
-    rides.reduce(:+).to_i / rides.count 
+    rides.reduce(:+).to_i / rides.count.to_f 
   end
 
   def self.highest_rides(rides)
-    rides.sort[-1].to_i
-    # rides.max
+    rides.max.to_i
   end
 
   def self.lowest_rides(rides)
-    rides.sort[0].to_i
+    rides.min.to_i
   end
 
   def self.ride_metrics(rides)
@@ -116,11 +115,17 @@ class WeatherCondition < ActiveRecord::Base
   end
 
   def self.weather_on_day_with_highest_rides
-    joins(:trips).group(:date).order("count_id DESC").count("id").max_by{|key, value| value}
+    day_rides = joins(:trips).group(:date).count("id").max_by{|key, value| value}
+    day = day_rides.first
+    rides = day_rides.last
+    [find_by(date: day), rides]
   end
 
   def self.weather_on_day_with_lowest_rides
-    joins(:trips).group(:date).order("count_id DESC").count("id").min_by{|key, value| value}
+    day_rides = joins(:trips).group(:date).count("id").min_by{|key, value| value}
+    day = day_rides.first
+    rides = day_rides.last
+    [find_by(date: day), rides]
   end
 
 end
