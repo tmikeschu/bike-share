@@ -17,26 +17,26 @@ class WeatherCondition < ActiveRecord::Base
   has_many :trips, :foreign_key => :start_date
 
   def self.trips_on_days(day_range)
-    day_range.joins(:trips).group(:date).order("count_id DESC").count("id")
+    day_range.joins(:trips).group(:date).count("id")
   end
 
-  def self.days_with_high_temp(lower)
-    WeatherCondition.where(max_temperature_f: [lower..lower+9])
+  def self.days_with_high_temp(degrees)
+    where(max_temperature_f: [degrees..degrees+9])
   end
 
   def self.days_with_precip_inches(inches)
-    WeatherCondition.where(precipitation_inches: [inches..inches + 0.49])
+    where(precipitation_inches: [inches..inches + 0.49])
   end
 
   def self.days_with_wind_speed(speed)
-    WeatherCondition.where(mean_wind_speed_mph: [speed..speed + 3])
+    where(mean_wind_speed_mph: [speed..speed + 3])
   end
 
   def self.days_with_visibility(miles)
-    WeatherCondition.where(mean_visibility_miles: [miles..miles + 3])
+    where(mean_visibility_miles: [miles..miles + 3])
   end
 
-  def self.temperature_metrics(degrees)
+  def self.temperature_metrics(degrees = 10)
     range = self.metric_range_with_increments_of(:max_temperature_f, degrees)
     range.reduce({}) do |result, degrees|
       days = self.days_with_high_temp(degrees)
@@ -46,7 +46,7 @@ class WeatherCondition < ActiveRecord::Base
     end
   end
 
-  def self.precipitation_metrics(inches)
+  def self.precipitation_metrics(inches = 0.5)
     range = self.metric_range_with_increments_of(:precipitation_inches, inches)
     range.reduce({}) do |result, inches|
       days = self.days_with_precip_inches(inches)
@@ -56,7 +56,7 @@ class WeatherCondition < ActiveRecord::Base
     end
   end
 
-  def self.wind_metrics(speed)
+  def self.wind_metrics(speed = 4)
     range = self.metric_range_with_increments_of(:mean_wind_speed_mph, speed)
     range.reduce({}) do |result, speed|
       days = self.days_with_wind_speed(speed)
@@ -66,7 +66,7 @@ class WeatherCondition < ActiveRecord::Base
     end
   end
 
-  def self.visibility_metrics(miles)
+  def self.visibility_metrics(miles = 4)
     range = self.metric_range_with_increments_of(:mean_visibility_miles, miles)
     range.reduce({}) do |result, miles|
       days = self.days_with_visibility(miles)
@@ -78,25 +78,24 @@ class WeatherCondition < ActiveRecord::Base
 
   def self.master_metrics
     metrics = {}
-    degrees, inches, speed, miles   = 10, 0.5, 4, 4
-    metrics[:temperature]       = self.temperature_metrics(degrees)
-    metrics[:precipitation]  = self.precipitation_metrics(inches)
-    metrics[:wind]   = self.wind_metrics(speed)
-    metrics[:visibility] = self.visibility_metrics(miles)
+    metrics[:temperature]    = self.temperature_metrics
+    metrics[:precipitation]  = self.precipitation_metrics
+    metrics[:wind]           = self.wind_metrics
+    metrics[:visibility]     = self.visibility_metrics
     metrics
   end
 
   def self.average_rides(rides)
     return 0 if rides.count.zero?
-    rides.reduce(:+).to_i / rides.count 
+    rides.reduce(:+).to_i / rides.count.to_f 
   end
 
   def self.highest_rides(rides)
-    rides.sort[-1].to_i
+    rides.max.to_i
   end
 
   def self.lowest_rides(rides)
-    rides.sort[0].to_i
+    rides.min.to_i
   end
 
   def self.ride_metrics(rides)
@@ -108,19 +107,25 @@ class WeatherCondition < ActiveRecord::Base
   end
 
   def self.metric_range_with_increments_of(method, incrementer)
-    lower = WeatherCondition.minimum(method.to_sym)
-    upper = WeatherCondition.maximum(method.to_sym)
+    lower = minimum(method.to_sym)
+    upper = maximum(method.to_sym)
     lower = lower / incrementer * incrementer
     upper = upper / incrementer * incrementer
     (lower..upper).step(incrementer).to_a
   end
 
   def self.weather_on_day_with_highest_rides
-    WeatherCondition.joins(:trips).group(:date).order("count_id DESC").count("id").max_by{|key, value| value}
+    day_rides = joins(:trips).group(:date).count("id").max_by{|key, value| value}
+    day = day_rides.first
+    rides = day_rides.last
+    [find_by(date: day), rides]
   end
 
   def self.weather_on_day_with_lowest_rides
-    WeatherCondition.joins(:trips).group(:date).order("count_id DESC").count("id").min_by{|key, value| value}
+    day_rides = joins(:trips).group(:date).count("id").min_by{|key, value| value}
+    day = day_rides.first
+    rides = day_rides.last
+    [find_by(date: day), rides]
   end
 
 end
