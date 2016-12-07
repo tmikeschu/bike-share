@@ -342,7 +342,6 @@ describe 'Weather Conditions Methods' do
     end
 
     it ".lowest_rides returns ride count from day with lowest rides" do
-      require 'pry'; binding.pry
       rides = WeatherCondition.trips_on_days(WeatherCondition.all).values
       lowest = WeatherCondition.lowest_rides(rides)
       expect(lowest).to be_instance_of(Fixnum)
