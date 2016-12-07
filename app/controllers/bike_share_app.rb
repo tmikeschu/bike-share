@@ -5,9 +5,9 @@ class BikeShareApp < Sinatra::Base
   set :root, File.expand_path("..", __dir__)
   set :method_override, true
 
-  get '/' do
-    erb :"dashboard"
-  end
+  # get '/' do
+  #   erb :"dashboard"
+  # end
 
   ### Start Stations Routes ###
   get '/station-dashboard' do
@@ -27,9 +27,7 @@ class BikeShareApp < Sinatra::Base
   post '/stations' do
     date = format_date(params[:station][:installation_date])
     params[:station][:installation_date] = date
-    # require 'pry'; binding.pry
     station = Station.create(params[:station])
-    # binding.pry
     redirect "/stations/#{station.id}"
   end
 
