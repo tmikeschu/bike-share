@@ -13,12 +13,12 @@ describe 'Trip' do
                                             installation_date: "10/6/2015",
                                             lat: 27.329732,
                                             long: -111.90178200000001)
-    subscription = SubscriptionType.create(name: "Subscriber")
+    subscription = SubscriptionType.create(subscription_type: "Subscriber")
   end
 
   describe 'validates' do
     it 'presence of duration' do
-      invalid_trip = subscription.Trip.create(
+      invalid_trip = SubscriptionType.first.trips.create(
                                   start_date: "2016/12/5",
                                   start_station_id: "1",
                                   end_date: "2016/12/6",
@@ -32,8 +32,8 @@ describe 'Trip' do
     end
 
     it 'presence of start_date' do
-      invalid_trip = subscription.Trip.create( duration: "1147",
-                                  start_date: "2016/12/5",
+      invalid_trip = SubscriptionType.first.trips.create( duration: "1147",
+                                  start_date: "",
                                   start_station_id: "1",
                                   end_date: "2016/12/6",
                                   end_station_id: "2",
@@ -46,7 +46,7 @@ describe 'Trip' do
     end
 
     it 'presence of start_station_id' do
-      invalid_trip = subscription.Trip.create( duration: "1147",
+      invalid_trip = SubscriptionType.first.trips.create( duration: "1147",
                                   start_date: "2016/12/5",
                                   end_date: "2016/12/6",
                                   end_station_id: "2",
@@ -59,7 +59,7 @@ describe 'Trip' do
     end
 
     it 'presence of end_date' do
-      invalid_trip = subscription.Trip.create( duration: "1147",
+      invalid_trip = SubscriptionType.first.trips.create( duration: "1147",
                                   start_date: "2016/12/5",
                                   start_station_id: "1",
                                   end_station_id: "2",
@@ -72,7 +72,7 @@ describe 'Trip' do
     end
 
     it 'presence of end_station_id' do
-      invalid_trip = subscription.Trip.create( duration: "1147",
+      invalid_trip = SubscriptionType.first.trips.create( duration: "1147",
                                   start_date: "2016/12/5",
                                   start_station_id: "1",
                                   end_date: "2016/12/6",
@@ -85,7 +85,7 @@ describe 'Trip' do
     end
 
     it 'presence of bike_id' do
-      invalid_trip = subscription.Trip.create( duration: "1147",
+      invalid_trip = SubscriptionType.first.trips.create( duration: "1147",
                                   start_date: "2016/12/5",
                                   start_station_id: "1",
                                   end_date: "2016/12/6",
@@ -97,7 +97,7 @@ describe 'Trip' do
       expect(invalid_trip).to be_invalid
     end
 
-    it 'presence of subscription_type_id' do
+    it 'presence of SubscriptionType.first_type_id' do
       invalid_trip = Trip.create( duration: "1147",
                                   start_date: "2016/12/5",
                                   start_station_id: "1",
@@ -112,7 +112,7 @@ describe 'Trip' do
     end
 
     it 'presence of user_zip_code' do
-      invalid_trip = subscription.Trip.create( duration: "1147",
+      invalid_trip = SubscriptionType.first.trips.create( duration: "1147",
                                   start_date: "2016/12/5",
                                   start_station_id: "1",
                                   end_date: "2016/12/6",
@@ -125,7 +125,7 @@ describe 'Trip' do
     end
 
     it 'presence of start_time' do
-      invalid_trip = subscription.Trip.create( duration: "1147",
+      invalid_trip = SubscriptionType.first.trips.create( duration: "1147",
                                   start_date: "2016/12/5",
                                   start_station_id: "1",
                                   end_date: "2016/12/6",
@@ -138,7 +138,7 @@ describe 'Trip' do
     end
 
     it 'presence of end_time' do
-      invalid_trip = subscription.Trip.create( duration: "1147",
+      invalid_trip = SubscriptionType.first.trips.create( duration: "1147",
                                   start_date: "2016/12/5",
                                   start_station_id: "1",
                                   end_date: "2016/12/6",

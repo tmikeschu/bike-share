@@ -23,7 +23,7 @@ describe 'Station' do
     end
 
     it 'presence of an installation_date' do
-      invalid_station = City.first.create(name: "I Like Bike", dock_count: 27, lat: 37.329732, long: -121.90178200000001)
+      invalid_station = City.first.stations.create(name: "I Like Bike", dock_count: 27, lat: 37.329732, long: -121.90178200000001)
       expect(invalid_station).to be_invalid
     end
 

@@ -4,8 +4,8 @@ describe 'City' do
 
   describe 'validates' do
     it 'presence of name' do
-      invalid_station = City.first.stations.create(name: "")
-      expect(invalid_station).to be_invalid
+      invalid_city = City.create(name: "")
+      expect(invalid_city).to be_invalid
     end
   end
 
