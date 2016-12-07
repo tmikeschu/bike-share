@@ -19,6 +19,7 @@ describe 'Trip' do
   describe 'validates' do
     it 'presence of duration' do
       invalid_trip = SubscriptionType.first.trips.create(
+                                  duration: "",
                                   start_date: "2016/12/5",
                                   start_station_id: "1",
                                   end_date: "2016/12/6",
@@ -146,6 +147,32 @@ describe 'Trip' do
                                   bike_id: "1",
                                   user_zip_code: "90210",
                                   start_time: "22:53:02"
+                                  )
+      expect(invalid_trip).to be_invalid
+    end
+
+    it 'uniqueness of bike_id and start_time' do
+      SubscriptionType.first.trips.create(
+                                  duration: "1147",
+                                  start_date: "2016/12/5",
+                                  start_station_id: "1",
+                                  end_date: "2016/12/6",
+                                  end_station_id: "2",
+                                  bike_id: "1",
+                                  user_zip_code: "90210",
+                                  start_time: "22:53:02",
+                                  end_time: "22:53:08"
+                                  )
+      invalid_trip = SubscriptionType.first.trips.create(
+                                  duration: "1147",
+                                  start_date: "2016/12/5",
+                                  start_station_id: "1",
+                                  end_date: "2016/12/6",
+                                  end_station_id: "2",
+                                  bike_id: "1",
+                                  user_zip_code: "90210",
+                                  start_time: "22:53:02",
+                                  end_time: "22:53:08"
                                   )
       expect(invalid_trip).to be_invalid
     end

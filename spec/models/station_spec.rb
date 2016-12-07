@@ -12,6 +12,12 @@ describe 'Station' do
       expect(invalid_station).to be_invalid
     end
 
+    it 'uniqueness of name' do
+      City.first.stations.create(name: "Union", dock_count: 27, installation_date: "10/6/2015", lat: 37.329732, long: -121.90178200000001)
+      invalid_station = City.first.stations.create(name: "Union", dock_count: 28, installation_date: "10/8/2015", lat: 39.329732, long: -123.90178200000001)
+      expect(invalid_station).to be_invalid
+    end
+
     it 'presence of the dock count' do
       invalid_station = City.first.stations.create(name: "I Like Bike", installation_date: "10/6/2015", lat: 37.329732, long: -121.90178200000001)
       expect(invalid_station).to be_invalid

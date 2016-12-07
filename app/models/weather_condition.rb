@@ -14,6 +14,8 @@ class WeatherCondition < ActiveRecord::Base
 
   validates :zip_code, inclusion: { in: [94107]}
 
+  validates :date, uniqueness: true
+
   has_many :trips, :foreign_key => :start_date
 
   def self.trips_on_days(day_range)
@@ -87,7 +89,7 @@ class WeatherCondition < ActiveRecord::Base
 
   def self.average_rides(rides)
     return 0 if rides.count.zero?
-    rides.reduce(:+).to_i / rides.count.to_f 
+    rides.reduce(:+).to_i / rides.count.to_f
   end
 
   def self.highest_rides(rides)
