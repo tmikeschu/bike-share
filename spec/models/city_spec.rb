@@ -7,6 +7,12 @@ describe 'City' do
       invalid_city = City.create(name: "")
       expect(invalid_city).to be_invalid
     end
+
+    it 'uniqueness of name' do
+      City.create(name: "Denver")
+      invalid_city = City.create(name: "Denver")
+      expect(invalid_city).to be_invalid
+    end
   end
 
 end

@@ -8,6 +8,8 @@ class Station < ActiveRecord::Base
             :long,
             presence: true
 
+  validates :name, uniqueness: true
+
   belongs_to :city
   has_many :departure_trips, class_name: 'Trip', :foreign_key => :start_station_id
   has_many :arrival_trips, class_name: 'Trip', :foreign_key => :end_station_id
@@ -37,11 +39,11 @@ class Station < ActiveRecord::Base
   end
 
   def self.newest_station
-    Station.order(:installation_date).first.name
+    Station.order(:installation_date).last.name
   end
 
   def self.oldest_station
-    Station.order(:installation_date).last.name
+    Station.order(:installation_date).first.name
   end
-  
+
 end
