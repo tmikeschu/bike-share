@@ -20,7 +20,6 @@ li {
 .form-id {
   color: #C67637;
   font-family: "Quicksand";
-  /*font-size: 1.25em;*/
 }
 
 #create {
@@ -109,16 +108,16 @@ a:hover {
   margin-top: -30px;
   margin-right: 60px;
 }
-/*
-.edit {
-  align-self: center;
-}*/
 
 #default-text {
   font-family: "Source Sans Pro";
 }
 
 .form-control {
+  font-family: "Source Sans Pro";
+}
+
+#drop-down-font {
   font-family: "Source Sans Pro";
 }
 
