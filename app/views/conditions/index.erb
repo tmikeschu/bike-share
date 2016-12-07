@@ -12,13 +12,13 @@
       <ul>
         <li class="station-name"><a href="/conditions/<%= condition.id %>"><%= condition.date %></a></li>
         </br>
-        <li>Max Temperature (F): <%= condition.max_temperature_f %></li>
-        <li>Min Temperature (F): <%= condition.min_temperature_f %></li>
-        <li>Mean Temperature (F): <%= condition.mean_temperature_f %></li>
+        <li>Maximum Temperature (&deg;F): <%= condition.max_temperature_f %></li>
+        <li>Minimum Temperature (&deg;F): <%= condition.min_temperature_f %></li>
+        <li>Mean Temperature (&deg;F): <%= condition.mean_temperature_f %></li>
         <li>Mean Humidity: <%= condition.mean_humidity %></li>
-        <li>Mean Visibility (miles): <%= condition.mean_visibility_miles %></li>
-        <li>Mean Wind Speed (mph): <%= condition.mean_wind_speed_mph %></li>
-        <li>Precipitation (inches): <%= condition.precipitation_inches %></li>
+        <li>Mean Visibility (Miles): <%= condition.mean_visibility_miles %></li>
+        <li>Mean Wind Speed (MPH): <%= condition.mean_wind_speed_mph %></li>
+        <li>Precipitation (Inches): <%= condition.precipitation_inches %></li>
         </br>
       </ul>
       <form class="format-button" action="/conditions/<%= condition.id %>/edit" method="GET">
