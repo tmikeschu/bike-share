@@ -89,10 +89,12 @@ class BikeShareApp < Sinatra::Base
   get '/trips/:id/edit' do
     @trip = Trip.find(params[:id])
     @trips  = Trip.all
+    @subscription_types = SubscriptionType.all
     erb :"trips/edit"
   end
 
   put '/trips/:id' do
+    # require 'pry'; binding.pry
     Trip.update(params[:id], params[:trip])
     redirect "/trips/#{params[:id]}"
   end
