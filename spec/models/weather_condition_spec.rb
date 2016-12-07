@@ -193,7 +193,6 @@ describe 'Weather Conditions Methods' do
     WeatherCondition.create(date: "2013-01-02", max_temperature_f: 73, mean_temperature_f: 68, min_temperature_f: 61, mean_humidity: 75, mean_visibility_miles: 7, mean_wind_speed_mph: 8, precipitation_inches: 1.1, zip_code: 94107)
     WeatherCondition.create(date: "1992-02-11", max_temperature_f: 52, mean_temperature_f: 68, min_temperature_f: 61, mean_humidity: 75, mean_visibility_miles: 7, mean_wind_speed_mph: 12, precipitation_inches: 2.3, zip_code: 94107)
     WeatherCondition.create(date: "1991-01-02", max_temperature_f: 52, mean_temperature_f: 68, min_temperature_f: 61, mean_humidity: 75, mean_visibility_miles: 7, mean_wind_speed_mph: 12, precipitation_inches: 2.3, zip_code: 94107)
-    require 'pry'; binding.pry
   end
 
   describe "trip associations" do
@@ -343,7 +342,6 @@ describe 'Weather Conditions Methods' do
     end
 
     it ".lowest_rides returns ride count from day with lowest rides" do
-      # require 'pry'; binding.pry
       rides = WeatherCondition.trips_on_days(WeatherCondition.all).values
       lowest = WeatherCondition.lowest_rides(rides)
       expect(lowest).to be_instance_of(Fixnum)
