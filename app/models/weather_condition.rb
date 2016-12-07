@@ -20,20 +20,20 @@ class WeatherCondition < ActiveRecord::Base
     day_range.joins(:trips).group(:date).order("count_id DESC").count("id")
   end
 
-  def self.days_with_high_temp(lower)
-    WeatherCondition.where(max_temperature_f: [lower..lower+9])
+  def self.days_with_high_temp(degrees)
+    where(max_temperature_f: [degrees..degrees+9])
   end
 
   def self.days_with_precip_inches(inches)
-    WeatherCondition.where(precipitation_inches: [inches..inches + 0.49])
+    where(precipitation_inches: [inches..inches + 0.49])
   end
 
   def self.days_with_wind_speed(speed)
-    WeatherCondition.where(mean_wind_speed_mph: [speed..speed + 3])
+    where(mean_wind_speed_mph: [speed..speed + 3])
   end
 
   def self.days_with_visibility(miles)
-    WeatherCondition.where(mean_visibility_miles: [miles..miles + 3])
+    where(mean_visibility_miles: [miles..miles + 3])
   end
 
   def self.temperature_metrics(degrees)
@@ -93,6 +93,7 @@ class WeatherCondition < ActiveRecord::Base
 
   def self.highest_rides(rides)
     rides.sort[-1].to_i
+    # rides.max
   end
 
   def self.lowest_rides(rides)
@@ -108,19 +109,19 @@ class WeatherCondition < ActiveRecord::Base
   end
 
   def self.metric_range_with_increments_of(method, incrementer)
-    lower = WeatherCondition.minimum(method.to_sym)
-    upper = WeatherCondition.maximum(method.to_sym)
+    lower = minimum(method.to_sym)
+    upper = maximum(method.to_sym)
     lower = lower / incrementer * incrementer
     upper = upper / incrementer * incrementer
     (lower..upper).step(incrementer).to_a
   end
 
   def self.weather_on_day_with_highest_rides
-    WeatherCondition.joins(:trips).group(:date).order("count_id DESC").count("id").max_by{|key, value| value}
+    joins(:trips).group(:date).order("count_id DESC").count("id").max_by{|key, value| value}
   end
 
   def self.weather_on_day_with_lowest_rides
-    WeatherCondition.joins(:trips).group(:date).order("count_id DESC").count("id").min_by{|key, value| value}
+    joins(:trips).group(:date).order("count_id DESC").count("id").min_by{|key, value| value}
   end
 
 end
