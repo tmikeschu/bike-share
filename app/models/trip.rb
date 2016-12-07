@@ -8,6 +8,8 @@ class Trip < ActiveRecord::Base
             :bike_id,
             :subscription_type_id,
             :user_zip_code,
+            :start_time,
+            :end_time,
             presence: true
 
   belongs_to :start_station, class_name: 'Station', :foreign_key => :start_station_id
