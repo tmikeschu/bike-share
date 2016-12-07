@@ -1,10 +1,20 @@
 <h1>Trips Dashboard</h1>
 
-<p>Average duration of a ride (in minutes): <%= Trip.average_trip_duration %></p>
-<p>Longest Ride (in minutes): <%= Trip.maximum_trip_duration %></p>
-<p>Shortest Ride (in minutes): <%= Trip.minimum_trip_duration %></p>
-<p>Station with the most rides as a starting place: <%= %></p>
-<p>Station with the most rides as an ending place: <%= %></p>
+<p>Average duration of a ride (in minutes):
+  <%= Trip.average_trip_duration %>
+</p>
+<p>Longest Ride (in minutes):
+  <%= Trip.maximum_trip_duration %>
+</p>
+<p>Shortest Ride (in minutes):
+  <%= Trip.minimum_trip_duration %>
+</p>
+<p>Station with the most rides as a starting place:
+  <%= Trip.station_with_most_rides_as_start_point.first %>
+</p>
+<p>Station with the most rides as an ending place:
+  <%= Trip.station_with_most_rides_as_end_point.first %>
+</p>
 
 <p>Month-by-month breakdown of number of rides with subtotals for each year: <%= %></p>
   <li>January: <%= %></li>
