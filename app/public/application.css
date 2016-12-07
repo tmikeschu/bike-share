@@ -7,7 +7,7 @@ body {
 }
 
 .jumbotron {
-  background: rgba(51, 26, 0, 0.45);
+  background: rgba(51, 26, 0, 0.5);
   position: relative;
 }
 
@@ -77,8 +77,8 @@ a:hover {
 #edit-large {
   font-family: "Quicksand";
   color: #852B1F;
-  position: absolute;
-  margin-bottom: -50px;
+  float: right;
+  margin-top: 15px;
 }
 
 .menu-icon {
