@@ -5,13 +5,12 @@
   <div class="container">
   <h1 class="page-header">Edit Station Information</h1>
 
-
+<form class="edit" action="/stations/<%= @station.id %>" method="POST">
+  
   <div class="form group-row">
   <div class="form-id">
   <label for="input" class="col-xs-2 col-form-label">Name:</label></div>
   <div class="col-xs-10">
-  <form class="edit" action="/stations/<%= @station.id %>" method="POST">
-    <input type="hidden" name="_method" value="PUT" />
     <input class="form-control" type="text" name="station[name]" value="<%= @station.name %>" onclick='this.value = "";'/><br/>
   </div>
   </div>
@@ -39,6 +38,7 @@
     <input class="form-control" type="integer" step="any" name="station[long]" value="<%= @station.long %>" onclick='this.value = "";'><br/>
     </div>
     </div>
+    </div>
 
     <select class="form_dropdown" name="station[city_id]">
       <option selected="selected" value="<%= @station.city_id %>"><%= @station.city.name.upcase %></option>
@@ -47,6 +47,9 @@
       <% end %>
     </select><br/>
 
+    <input type="hidden" name="_method" value="PUT" />
+    <input id="edit" class="btn btn-warning btn-xs" type="submit" value="Edit">
+</form>
 <div class="form group-row">
   <div class="form-id">
   <label for="input" class="col-xs-2 col-form-label">Established:</label></div>
@@ -54,11 +57,10 @@
   <input type="text" class="form-control" name="station[installation_date]" value="<%= @station.installation_date %>" /><br/>
   </div>
   </div>
+  </div>
+</div>
+</div>
 
-    <input id="edit-large" class="btn btn-warning btn-lg" type="submit" value="Edit">
-  </form>
-</div>
-</div>
 
 
     
