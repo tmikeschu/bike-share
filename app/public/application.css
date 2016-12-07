@@ -134,3 +134,8 @@ a:hover {
 .table-bordered {
   background-color: rgba(200, 200, 200, 0.75);
 }
+
+#back-and-forth {
+  font-family: "Quicksand";
+  color: #E09D44;
+}
