@@ -3,6 +3,7 @@
 <div class="add-new-station">
 <div class="jumbotron">
   <div class="container">
+  <form class="edit" method="POST" action="/conditions">
   <h1 class="page-header">Add Weather Information
     <input id="edit-large" class="btn btn-warning btn-small" type="submit" value="Create"></h1>
 
@@ -10,8 +11,6 @@
   <div class="form-id">
     <label for="input" class="col-xs-2 col-form-label">Date:</label></div>
     <div class="col-xs-10">
-  <form class="edit" method="POST" action="/stations">
-    <input type="hidden" name="_method" value="PUT" />
     <input class="form-control" type="date" name="condition[date]" value="Date" onclick='this.value = "";'/><br/>
   </div>
 </div>

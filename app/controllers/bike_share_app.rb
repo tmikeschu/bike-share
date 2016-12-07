@@ -25,10 +25,11 @@ class BikeShareApp < Sinatra::Base
   end
 
   post '/stations' do
+    # require 'pry'; binding.pry
     date = format_date(params[:station][:installation_date])
     params[:station][:installation_date] = date
     station = Station.create(params[:station])
-    redirect "/stations/#{station.id}"
+    redirect "/stations"
   end
 
   def format_date(date)
@@ -50,7 +51,6 @@ class BikeShareApp < Sinatra::Base
   end
 
   put '/stations/:id' do
-    # require 'pry'; binding.pry
     Station.update(params[:id], params[:station])
     redirect "/stations/#{params[:id]}"
   end
@@ -67,9 +67,7 @@ class BikeShareApp < Sinatra::Base
 
   get '/trips' do
     @page = params[:page].to_i
-    start = @page * 30 + 1
-    finish = start + 29
-    @trips = Trip.order(:id).reorder("start_date").where(id: [start..finish])
+    @trips = Trip.order(:start_date).offset(@page * 30).limit(30)
     erb :"trips/index"
   end
 
@@ -106,14 +104,13 @@ class BikeShareApp < Sinatra::Base
 
   ### Start Weather Conditions Routes ###
   get '/weather-dashboard' do
+    @metrics = WeatherCondition.master_metrics
     erb :"conditions/dashboard"
   end
 
   get '/conditions' do
-    @page  = params[:page].to_i
-    start  = "2013-08-29".to_date + @page * 30
-    finish = start + 29
-    @conditions = WeatherCondition.where(date: [start..finish])
+    @page = params[:page].to_i
+    @conditions = WeatherCondition.order(:date).offset(@page * 30).limit(30)
     erb :"conditions/index"
   end
 
@@ -123,7 +120,7 @@ class BikeShareApp < Sinatra::Base
 
   post '/conditions' do
     condition = WeatherCondition.create(params[:conditions])
-    redirect "/conditions/#{condition.id}"
+    redirect "/conditions"
   end
 
   get '/conditions/:id' do
