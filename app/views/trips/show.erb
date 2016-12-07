@@ -1,22 +1,28 @@
+<% @title = "Trip ##{@trip.id}" %>
 
 <div class="show-trip">
-  <ul>
-    <li>Duration: <%= @trip.duration %></li>
-    <li>Start Date: <%= @trip.start_date %></li>
-    <li>Start Station Name: <%= @trip.start_station.name%></li>
-    <li>Start Station ID: <%= @trip.start_station.id %></li>
-    <li>End Date: <%= @trip.end_date %></li>
-    <li>End Station Name: <%= @trip.end_station.name %></li>
-    <li>End Station ID: <%= @trip.end_station.id %></li>
-    <li>Bike ID: <%= @trip.bike_id %></li>
-    <li>Subscription Type: <%= @trip.subscription_type.id %></li>
-    <li>Rider Zip Code: <%= @trip.user_zip_code %></li>
+<div class="jumbotron">
+  <div class="container">
+  <h1 class="page-header">Trip #<%= @trip.id %></h1>
+  <ul class="list-group">
+    <li class="list-group-item">Duration: <%= @trip.duration %></li>
+    <li class="list-group-item">Start Date: <%= @trip.start_date %></li>
+    <li class="list-group-item">Departure Station: <%= @trip.start_station.name%></li>
+    <li class="list-group-item">Departure Station (ID): <%= @trip.start_station.id %></li>
+    <li class="list-group-item">End Date: <%= @trip.end_date %></li>
+    <li class="list-group-item">Arrival Station: <%= @trip.end_station.name %></li>
+    <li class="list-group-item">Arrival Station (ID): <%= @trip.end_station.id %></li>
+    <li class="list-group-item">Bike ID: <%= @trip.bike_id %></li>
+    <li class="list-group-item">Subscription Type: <%= @trip.subscription_type.id %></li>
+    <li class="list-group-item">Rider Zip Code: <%= @trip.user_zip_code %></li>
   </ul>
-  <form action="/trips/<%= @trip.id %>/edit" method="GET">
-    <input type="submit" value="Edit">
-  </form>
-  <form action="/trips/<%= @trip.id %>" method="POST">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="Delete">
-  </form>
+  </br>
+<form class="format-button" action="/trips/<%= @trip.id %>/edit" method="GET">
+        <input id="edit" class="btn btn-warning btn-xs" type="submit" value="Edit">
+      </form>
+      <form class="format-button" action="/trips/<%= @trip.id %>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input id="edit" class="btn btn-warning btn-xs" type="submit" value="Delete">
+</form>
+</div>
 </div>
