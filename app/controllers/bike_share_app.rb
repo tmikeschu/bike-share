@@ -50,6 +50,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   put '/stations/:id' do
+    # require 'pry'; binding.pry
     Station.update(params[:id], params[:station])
     redirect "/stations/#{params[:id]}"
   end
