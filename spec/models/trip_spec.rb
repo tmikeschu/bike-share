@@ -16,8 +16,6 @@ describe 'Trip' do
                                   end_station_id: "2",
                                   bike_id: "1",
                                   user_zip_code: "90210",
-                                  created_at: "2016-12-05 22:53:08",
-                                  updated_at: "2016-12-05 22:53:08",
                                   start_time: "22:53:02",
                                   end_time: "22:53:08"
                                   )
@@ -32,8 +30,6 @@ describe 'Trip' do
                                   end_station_id: "2",
                                   bike_id: "1",
                                   user_zip_code: "90210",
-                                  created_at: "2016-12-05 22:53:08",
-                                  updated_at: "2016-12-05 22:53:08",
                                   start_time: "22:53:02",
                                   end_time: "22:53:08"
                                   )
@@ -47,8 +43,6 @@ describe 'Trip' do
                                   end_station_id: "2",
                                   bike_id: "1",
                                   user_zip_code: "90210",
-                                  created_at: "2016-12-05 22:53:08",
-                                  updated_at: "2016-12-05 22:53:08",
                                   start_time: "22:53:02",
                                   end_time: "22:53:08"
                                   )
@@ -62,8 +56,6 @@ describe 'Trip' do
                                   end_station_id: "2",
                                   bike_id: "1",
                                   user_zip_code: "90210",
-                                  created_at: "2016-12-05 22:53:08",
-                                  updated_at: "2016-12-05 22:53:08",
                                   start_time: "22:53:02",
                                   end_time: "22:53:08"
                                   )
@@ -77,8 +69,6 @@ describe 'Trip' do
                                   end_date: "2016/12/6",
                                   bike_id: "1",
                                   user_zip_code: "90210",
-                                  created_at: "2016-12-05 22:53:08",
-                                  updated_at: "2016-12-05 22:53:08",
                                   start_time: "22:53:02",
                                   end_time: "22:53:08"
                                   )
@@ -92,8 +82,6 @@ describe 'Trip' do
                                   end_date: "2016/12/6",
                                   end_station_id: "2",
                                   user_zip_code: "90210",
-                                  created_at: "2016-12-05 22:53:08",
-                                  updated_at: "2016-12-05 22:53:08",
                                   start_time: "22:53:02",
                                   end_time: "22:53:08"
                                   )
@@ -108,8 +96,6 @@ describe 'Trip' do
                                   end_station_id: "2",
                                   bike_id: "1",
                                   user_zip_code: "90210",
-                                  created_at: "2016-12-05 22:53:08",
-                                  updated_at: "2016-12-05 22:53:08",
                                   start_time: "22:53:02",
                                   end_time: "22:53:08"
                                   )
@@ -123,8 +109,6 @@ describe 'Trip' do
                                   end_date: "2016/12/6",
                                   end_station_id: "2",
                                   bike_id: "1",
-                                  created_at: "2016-12-05 22:53:08",
-                                  updated_at: "2016-12-05 22:53:08",
                                   start_time: "22:53:02",
                                   end_time: "22:53:08"
                                   )
@@ -139,8 +123,6 @@ describe 'Trip' do
                                   end_station_id: "2",
                                   bike_id: "1",
                                   user_zip_code: "90210",
-                                  created_at: "2016-12-05 22:53:08",
-                                  updated_at: "2016-12-05 22:53:08",
                                   end_time: "22:53:08"
                                   )
       expect(invalid_trip).to be_invalid
@@ -154,8 +136,6 @@ describe 'Trip' do
                                   end_station_id: "2",
                                   bike_id: "1",
                                   user_zip_code: "90210",
-                                  created_at: "2016-12-05 22:53:08",
-                                  updated_at: "2016-12-05 22:53:08",
                                   start_time: "22:53:02"
                                   )
       expect(invalid_trip).to be_invalid
