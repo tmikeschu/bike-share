@@ -72,6 +72,7 @@ class BikeShareApp < Sinatra::Base
 
   get '/trips/new' do
     @trips = Trip.all
+    @subscription_types = SubscriptionType.all
     erb :"trips/new"
   end
 
