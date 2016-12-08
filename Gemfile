@@ -14,6 +14,7 @@ group :development, :test do
   gem 'launchy'
   gem 'rack-test'
   gem 'pry'
+  gem 'pry-byebug'
   gem 'smarter_csv'
   gem 'rb-readline'
 end

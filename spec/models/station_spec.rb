@@ -3,7 +3,21 @@ require_relative '../spec_helper'
 describe 'Station' do
 
   before do
-    City.create(name: "Denver")
+    %w(Denver Aurora Centennial).each {|city| City.create(name: city) }
+    %w(Subscriber Customer).each {|type| SubscriptionType.create(subscription_type: type) }
+    denver, aurora, centennial = City.find(1), City.find(2), City.find(3)
+    denver.stations.create(name: "San Jose Diridon Caltrain Station", dock_count: 27, installation_date: "2013-08-06 00:00:00", lat: 37.329732, long: -121.901782)
+    denver.stations.create(name: "San Jose Civic Center", dock_count: 15, installation_date: "2013-08-05 00:00:00", lat: 37.330698, long: -121.888979)
+    aurora.stations.create(name: "Jan Sose Diridon Caltrain Station", dock_count: 27, installation_date: "2013-08-06 00:00:00", lat: 37.329732, long: -121.901782)
+    aurora.stations.create(name: "Jan Sose Civic Center", dock_count: 15, installation_date: "2013-08-05 00:00:00", lat: 37.330698, long: -121.888979)
+    centennial.stations.create(name: "Naj Esos Diridon Caltrain Station", dock_count: 27, installation_date: "2013-08-06 00:00:00", lat: 37.329732, long: -121.901782)
+    centennial.stations.create(name: "Naj Esos Civic Center", dock_count: 15, installation_date: "2013-08-05 00:00:00", lat: 37.330698, long: -121.888979)
+    Trip.create(duration: 100, start_date: "2013-08-29", start_station_id: 1, end_date: "2013-08-29", end_station_id: 2, bike_id: 520, subscription_type_id: 1, user_zip_code: 94127, start_time: "2000-01-01 14:13:00", end_time: "2000-01-01 14:14:00")
+    Trip.create(duration: 100, start_date: "2013-08-29", start_station_id: 2, end_date: "2013-08-29", end_station_id: 4, bike_id: 501, subscription_type_id: 2, user_zip_code: 94127, start_time: "2000-01-01 14:13:00", end_time: "2000-01-01 14:14:00")
+    Trip.create(duration: 100, start_date: "2013-07-30", start_station_id: 6, end_date: "2013-07-30", end_station_id: 1, bike_id: 50, subscription_type_id: 2, user_zip_code: 94127, start_time: "2000-01-01 14:13:00", end_time: "2000-01-01 14:14:00")
+    Trip.create(duration: 100, start_date: "2014-08-09", start_station_id: 4, end_date: "2014-08-10", end_station_id: 3, bike_id: 52, subscription_type_id: 1, user_zip_code: 94127, start_time: "2000-01-01 14:13:00", end_time: "2000-01-01 14:14:00")
+    Trip.create(duration: 100, start_date: "2013-01-02", start_station_id: 6, end_date: "2013-01-10", end_station_id: 5, bike_id: 20, subscription_type_id: 1, user_zip_code: 94127, start_time: "2000-01-01 14:13:00", end_time: "2000-01-01 14:14:00")
+    Trip.create(duration: 100, start_date: "1992-02-11", start_station_id: 6, end_date: "1992-02-11", end_station_id: 6, bike_id: 131, subscription_type_id: 1, user_zip_code: 94127, start_time: "2000-01-01 14:13:00", end_time: "2000-01-01 14:14:00")
   end
 
   describe 'validates' do
@@ -42,6 +56,30 @@ describe 'Station' do
       invalid_station = Station.create(name: "I Like Bike", dock_count: 27, installation_date: "10/6/2015", lat: 37.329732)
       expect(invalid_station).to be_invalid
     end
+  end
+end
+
+describe "trip associations" do
+  it "#departure_trips returns expected trips for a station" do
+    station = Station.first
+    require 'pry'; binding.pry
+    station_trips = Trip.where(start_station: station)
+    expect(station.trips).to eq(station_trips)
+    expect(station.trips.all.all?{|trip| trip.class.to_s == "Trip"}).to be true
+  end
+
+  it "and :trips returns expected trips for a different station" do
+    station = Station.all[1]
+    station_trips = Trip.where(start_station: station)
+    expect(station.trips).to eq(station_trips)
+    expect(station.trips.all.all?{|trip| trip.class.to_s == "Trip"}).to be true
+  end
+
+  it "and one more different station" do
+    station = Station.first
+    station_trips = Trip.where(start_station: station)
+    expect(station.trips).to eq(station_trips)
+    expect(station.trips.all.all?{|trip| trip.class.to_s == "Trip"}).to be true
   end
 end
 
