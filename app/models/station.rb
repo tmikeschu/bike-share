@@ -39,11 +39,11 @@ class Station < ActiveRecord::Base
   end
 
   def self.newest_station
-    order(:installation_date).last.name
+    Station.find_by(installation_date: (Station.maximum(:installation_date)))
   end
 
   def self.oldest_station
-    order(:installation_date).first.name
+    Station.find_by(installation_date: (Station.minimum(:installation_date)))
   end
 
 end
