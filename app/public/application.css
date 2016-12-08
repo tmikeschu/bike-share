@@ -129,6 +129,10 @@ a:hover {
   color: #852B1F;
 }
 
+.table-bordered {
+  background-color: rgba(200, 200, 200, 0.75);
+}
+
 #back-and-forth {
   font-family: "Quicksand";
   color: #E09D44;
@@ -136,4 +140,13 @@ a:hover {
 
 #map {
   height: 500px;
+}
+
+.btn-default {
+  background-color: #E09D44;
+  color: #852B1F;
+}
+
+.btn-default a {
+  color: #852B1F;
 }
