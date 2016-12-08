@@ -147,6 +147,6 @@ a:hover {
   color: #852B1F;
 }
 
-.btn-default a {
+a .btn-default a {
   color: #852B1F;
 }
