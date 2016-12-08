@@ -25,7 +25,6 @@ class BikeShareApp < Sinatra::Base
   end
 
   post '/stations' do
-    # require 'pry'; binding.pry
     date = format_date(params[:station][:installation_date])
     params[:station][:installation_date] = date
     station = Station.create(params[:station])
@@ -67,18 +66,21 @@ class BikeShareApp < Sinatra::Base
 
   get '/trips' do
     @page = params[:page].to_i
+    @end = false    
     @trips = Trip.order(:start_date).offset(@page * 30).limit(30)
+    @end = true if Trip.order(:start_date).offset((@page + 1) * 30).empty?
     erb :"trips/index"
   end
 
   get '/trips/new' do
     @trips = Trip.all
+    @subscription_types = SubscriptionType.all
     erb :"trips/new"
   end
 
   post '/trips' do
     trip = Trip.create(params[:trip])
-    redirect "/trips/#{trip.id}"
+    redirect "/trips"
   end
 
   get '/trips/:id' do
@@ -89,10 +91,12 @@ class BikeShareApp < Sinatra::Base
   get '/trips/:id/edit' do
     @trip = Trip.find(params[:id])
     @trips  = Trip.all
+    @subscription_types = SubscriptionType.all
     erb :"trips/edit"
   end
 
   put '/trips/:id' do
+    # require 'pry'; binding.pry
     Trip.update(params[:id], params[:trip])
     redirect "/trips/#{params[:id]}"
   end
@@ -110,7 +114,9 @@ class BikeShareApp < Sinatra::Base
 
   get '/conditions' do
     @page = params[:page].to_i
+    @end = false
     @conditions = WeatherCondition.order(:date).offset(@page * 30).limit(30)
+    @end = true if WeatherCondition.order(:date).offset((@page + 1) * 30).empty?
     erb :"conditions/index"
   end
 
@@ -119,8 +125,8 @@ class BikeShareApp < Sinatra::Base
   end
 
   post '/conditions' do
-    params[:zip_code] = 94107
-    condition = WeatherCondition.create(params[:conditions])
+    params[:condition][:zip_code] = 94107
+    condition = WeatherCondition.create(params[:condition])
     redirect "/conditions"
   end
 
