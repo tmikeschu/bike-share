@@ -1,49 +1,50 @@
 require_relative '../../spec_helper'
 
-describe "when a user visits '/stations/1/edit'" do
+describe "when a user visits '/conditions/(date)/edit'" do
   before do
-    City.create(name: "Denver")
-    City.create(name: "Aurora")
-    City.first.stations.create(name: "I Like Bike", dock_count: 27, installation_date: "2015/10/6", lat: 37.330698, long: -121.888979)
+    WeatherCondition.create(date: "2013-09-30", max_temperature_f: 84, mean_temperature_f: 68, min_temperature_f: 61, mean_humidity: 75, mean_visibility_miles: 15, mean_wind_speed_mph: 3, precipitation_inches: 0.4, zip_code: 94107)
+    visit '/conditions/2013-09-30/edit'
   end
 
   it "they see a create form" do
-    visit '/stations/1/edit'
-    expect(page).to have_content("Edit Station Information")
-    expect(page).to have_field("station[name]")
-    expect(page).to have_field("station[dock_count]")
-    expect(page).to have_field("station[city_id]")
-    expect(page).to have_field("station[lat]")
-    expect(page).to have_field("station[long]")
-    expect(page).to have_field("station[installation_date]")
+    expect(page).to have_content("Edit Weather Information")
+    expect(page).to have_field("condition[date]")
+    expect(page).to have_field("condition[max_temperature_f]")
+    expect(page).to have_field("condition[min_temperature_f]")
+    expect(page).to have_field("condition[mean_temperature_f]")
+    expect(page).to have_field("condition[mean_humidity]")
+    expect(page).to have_field("condition[mean_visibility_miles]")
+    expect(page).to have_field("condition[mean_wind_speed_mph]")
+    expect(page).to have_field("condition[precipitation_inches]")
     expect(page).to have_button("Edit")
   end
 
-  it 'and they can see the existing station information in the form' do
-    expect(find_field('station[name]').value).to eq("I Like Bike")
-    expect(find_field('station[dock_count]').value).to eq("27")
-    expect(find_field('station[city_id]').value).to eq("1")
-    expect(find_field('station[lat]').value).to eq("37.330698")
-    expect(find_field('station[long]').value).to eq("-121.888979")
-    expect(find_field('station[installation_date]').value).to eq("2015-10-06 00:00:00 UTC")
+  it 'and they can see the existing condition information in the form' do
+    expect(find_field("condition[date]").value).to eq("2013-09-30")
+    expect(find_field("condition[max_temperature_f]").value).to eq("84")
+    expect(find_field("condition[min_temperature_f]").value).to eq("61")
+    expect(find_field("condition[mean_temperature_f]").value).to eq("68")
+    expect(find_field("condition[mean_humidity]").value).to eq("75")
+    expect(find_field("condition[mean_visibility_miles]").value).to eq("15")
+    expect(find_field("condition[mean_wind_speed_mph]").value).to eq("3")
+    expect(find_field("condition[precipitation_inches]").value).to eq("0.4")
   end
 
-  it "they can edit station information" do
-    station = Station.find_by(id: 1)
-    
-    visit '/stations/1/edit'
-    fill_in 'station[name]', with: "TestStationOne"
-    fill_in 'station[lat]', with: 36.330698
-    fill_in 'station[long]', with: -120.888979
-    find("option[value='2']").select_option
-    fill_in 'station[dock_count]', with: 15
-    fill_in 'station[installation_date]', with: "22/9/2016"
+  it "they can edit condition information" do
+    condition = WeatherCondition.first
+    # fill_in "condition[date]", with: "2016/12/07"
+    fill_in "condition[max_temperature_f]", with: 17
+    fill_in "condition[min_temperature_f]", with: 1
+    fill_in "condition[mean_temperature_f]", with: 1
+    fill_in "condition[mean_humidity]", with: -1
+    fill_in "condition[mean_visibility_miles]", with: 1
+    fill_in "condition[mean_wind_speed_mph]", with: 1
+    fill_in "condition[precipitation_inches]", with: 1
     click_on 'Edit'
-
-    expect(current_path).to eq("/stations/#{station.id}")
-    expect(page).to have_content("TestStationOne")
-    expect(page).to have_content("2016-09-22")
-    expect(page).to have_content(36.330698)
-    expect(page).to have_content(-120.888979)
+    condition = WeatherCondition.first
+    expect(current_path).to eq("/conditions/#{condition.date}")
+    expect(page).to have_content("17")
+    expect(page).to have_content("-1")
+    expect(page).to_not have_content("84")
   end
 end

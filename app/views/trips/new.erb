@@ -1,24 +1,97 @@
 <% @title = "Create New Trip" %>
 
 <div class="form">
-  <h1>Create a New Trip</h1>
+<div class="jumbotron">
+  <div class="container">
   <form method="POST" action="/trips">
-    <input type="integer" name="trip[duration]" value="Duration" onclick='this.value = "";'><br/>
-    <input type="integer" name="trip[start_date]" value="Start Date" onclick='this.value = "";'><br/>
-    <input type="integer" name="trip[start_station_name]" value="Start Station Name" onclick='this.value = "";'><br/>
-    <input type="integer" name="trip[start_station_id]" value="Start Station ID" onclick='this.value = "";'><br/>
-    <input type="integer" name="trip[end_date]" value="End Date" onclick='this.value = "";'><br/>
-    <input type="integer" name="trip[end_station_name]" value="End Station Name" onclick='this.value = "";'><br/>
-    <input type="integer" name="trip[end_station_id]" value="End Station ID" onclick='this.value = "";'><br/>
-    <input type="integer" name="trip[bike_id]" value="Bike ID" onclick='this.value = "";'><br/>
+  <h1 class="page-header">Create a New Trip
+    <input id="edit-large" class="btn btn-warning btn-small" type="submit" value="Create"></h1>
 
-    <select class="form_dropdown" name="trip[subscription_type_id]">
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Duration:</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="integer" name="trip[duration]" value="Duration" onclick='this.value = "";'><br/>
+  </div>
+</div>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Start Date:</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="integer" name="trip[start_date]" value="Start Date" onclick='this.value = "";'><br/>
+  </div>
+</div>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Start Time:</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="integer" name="trip[start_time]" value="Start Time" onclick='this.value = "";'><br/>
+  </div>
+</div>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Departure Station (ID):</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="integer" name="trip[start_station_id]" value="Start Station ID" onclick='this.value = "";'><br/>
+  </div>
+</div>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">End Date:</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="integer" name="trip[end_date]" value="End Date" onclick='this.value = "";'><br/>
+  </div>
+</div>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">End Time:</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="integer" name="trip[end_time]" value="End Time" onclick='this.value = "";'><br/>
+  </div>
+</div>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Arrival Station (ID):</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="integer" name="trip[end_station_id]" value="End Station ID" onclick='this.value = "";'><br/>
+  </div>
+</div>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Bike ID:</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="integer" name="trip[bike_id]" value="Bike ID" onclick='this.value = "";'><br/>
+  </div>
+</div>
+
+<div class="form group-row">
+  <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">User Zip Code:</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="date" name="trip[user_zip_code]" value="User Zip Code" onclick='this.value = "";'><br/>
+  </div>
+</div>
+
+<div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">City:</label></div>
+  <div class="col-xs-10">
+  <div class="dropdown">
+    <select id="drop-down-font" class="form_dropdown" name="trip[subscription_type_id]">
+      <ul>
       <option selected="selected" value="">-Select Subscription Type-</option>
-      <% @cities.sort_by(&:subscription_type).each do |subscription| %>
-        <option value="<%= trip.subscription_type_id %>"><%= trip.subscription.upcase %></option>
+      <% @subscription_types.sort_by(&:subscription_type).each do |subscription| %>
+        <li><option value="<%= subscription.id %>"><%= subscription.subscription_type.upcase %></option></li>
+      </ul>
       <% end %>
     </select><br/>
-    <input type="date" name="trip[user_zip_code]" value="User Zip Code" onclick='this.value = "";'><br/>
-    <input type="submit" value="Create Trip">
+    </div>
+  </div>
   </form>
 </div>

@@ -1,6 +1,11 @@
+<% @title = "Weather Dashboard" %>
+
 <h1>Weather Dashboard</h1>
-<table>
-  <caption>Ride Summary: Temperature Breakdown</caption>
+<div class="jumbotron">
+
+<div class="table-responsive">
+<table class="table table-bordered">
+  <caption class="page-header">Ride Summary: Temperature Breakdown</caption>
   <tr>
 	<th>High Temperature<br />(&degF)</th>
 	<th>Average Rides<br />per Day</th>
@@ -16,8 +21,11 @@
 	</tr>
   <% end %>
 </table>
-<table>
-  <caption>Ride Summary: Precipitation Breakdown</caption>
+</div>
+
+<div class="table-responsive">
+<table class="table table-bordered">
+  <caption class="page-header">Ride Summary: Precipitation Breakdown</caption>
   <tr>
 	<th>Precipitation<br />(inches)</th>
 	<th>Average Rides<br />per Day</th>
@@ -33,8 +41,11 @@
 	</tr>
   <% end %>
 </table>
-<table>
-  <caption>Ride Summary: Wind Speed Breakdown</caption>
+</div>
+
+<div class="table-responsive">
+<table class="table table-bordered">
+  <caption class="page-header">Ride Summary: Wind Speed Breakdown</caption>
   <tr>
 	<th>Mean Wind Speed<br />(mph)</th>
 	<th>Average Rides<br />per Day</th>
@@ -50,8 +61,11 @@
 	</tr>
   <% end %>
 </table>
-<table>
-  <caption>Ride Summary: Visibility Breakdown</caption>
+</div>
+
+<div class="table-responsive">
+<table class="table table-bordered">
+  <caption class="page-header">Ride Summary: Visibility Breakdown</caption>
   <tr>
 	<th>Mean Visibility<br />(miles)</th>
 	<th>Average Rides<br />per Day</th>
@@ -67,3 +81,7 @@
 	</tr>
   <% end %>
 </table>
+
+</div>
+
+</div>

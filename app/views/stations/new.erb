@@ -57,6 +57,7 @@
   <div class="dropdown">
     <select id="drop-down-font" class="form_dropdown" name="station[city_id]">
       <ul>
+            <option selected="selected" value="">-Select City-</option>
       <% @cities.sort_by(&:name).each do |city| %>
         <li><option value="<%= city.id %>"><%= city.name.upcase %></option></li>
       </ul>
