@@ -1,6 +1,6 @@
 require_relative '../../spec_helper'
 
-describe 'When a user visists /trips-dashboard' do
+describe 'When a user visists /trip-dashboard' do
 
   before do
     %w(Denver Centennial).each {|city| City.create(name: city) }
@@ -28,73 +28,18 @@ describe 'When a user visists /trips-dashboard' do
                                         user_zip_code: 90211,
                                         start_time: "14:13:01 UTC",
                                         end_time: "14:20:01 UTC")
-    visit('/trips')
+    visit('/trip-dashboard')
   end
 
   describe "they can see" do
     it "an all trips heading" do
       within '.all-trips' do
-        expect(page).to have_text "All Trips"
+        expect(page).to have_text "Trips Dashboard"
       end
     end
 
-    it "a trip's information" do
-      expect(page).to have_button "New"
-      within 'div.trips-summary:nth-of-type(1)' do
-        expect(page).to have_content "Denver Union Station"
-        expect(page).to have_content 7
-        expect(page).to have_content "Denver"
-        expect(page).to have_content 37.330698
-        expect(page).to have_content -121.888979
-        expect(page).to have_content "2013-12-02"
-      end
-    end
-
-    it "new, edit, and delete buttons" do
-      expect(page).to have_button "New"
-      within 'div.trips-summary:nth-of-type(1)' do
-        expect(page).to have_button "Edit"
-        expect(page).to have_button "Delete"
-      end
-    end
-
-    it "and a different trip's information" do
-      within 'div.trips-summary:nth-of-type(2)' do
-        expect(page).to have_content "Fort Collins Harmony"
-        expect(page).to have_content 9
-        expect(page).to have_content "Fort Collins"
-        expect(page).to have_content 39.330698
-        expect(page).to have_content -120.888979
-        expect(page).to have_content "2013-08-10"
-      end
-    end
   end
 
-  describe 'and when they click new' do
-    it 'they are taken to the new page' do
-      click_on "New"
-      expect(current_path).to eq("/trips/new")
-    end
-  end
 
-  describe 'and when they click edit' do
-    it 'they are taken to the edit page' do
-      within 'div.trips-summary:nth-of-type(1)' do
-        click_on "Edit"
-        expect(current_path).to eq("/trips/#{@trip1.id}/edit")
-      end
-    end
-  end
-
-  describe 'and when they click delete' do
-    it 'they are taken to the index page' do
-      within 'div.trips-summary:nth-of-type(2)' do
-        expect(page.body).to include("Fort Collins")
-        click_on "Delete"
-        expect(current_path).to eq("/stations")
-        expect(page.body).not_to include("Fort Collins")
-      end
-    end
-  end
 
 end
