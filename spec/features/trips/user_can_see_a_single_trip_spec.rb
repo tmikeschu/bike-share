@@ -21,7 +21,6 @@ describe "When a user wants to display data from a single trip," do
   end
 
   it "they see the trip's information," do
-    save_and_open_page
     expect(page).to have_content("1147")
     expect(page).to have_content("2016-12-07")
     expect(page).to have_content("San Jose Diridon Caltrain Station")
