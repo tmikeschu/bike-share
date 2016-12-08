@@ -38,7 +38,7 @@
   <div class="dropdown">
     <select id="drop-down-font" class="form_dropdown" name="trip[start_station_id]">
       <ul>
-      <option selected="selected" value=""><%= @trip.start_station.name %></option>
+      <option selected="selected" value="<%= @trip.start_station_id %>"><%= @trip.start_station.name %></option>
       <% @stations.each do |station| %>
         <li><option value="<%= station.id %>"><%= station.name.upcase %></option></li>
       </ul>
@@ -70,7 +70,7 @@
   <div class="dropdown">
     <select id="drop-down-font" class="form_dropdown" name="trip[end_station_id]">
       <ul>
-      <option selected="selected" value=""><%= @trip.end_station.name %></option>
+      <option selected="selected" value="<%= @trip.end_station_id %>"><%= @trip.end_station.name %></option>
       <% @stations.each do |station| %>
         <li><option value="<%= station.id %>"><%= station.name.upcase %></option></li>
       </ul>
