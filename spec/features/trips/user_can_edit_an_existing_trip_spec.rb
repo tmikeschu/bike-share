@@ -43,8 +43,8 @@ describe "when a user visits '/trips/1/edit'" do
     expect(find_field('trip[bike_id]').value).to eq("9090909090")
     expect(find_field('trip[subscription_type_id]').value).to eq("1")
     expect(find_field('trip[user_zip_code]').value).to eq("90210")
-    expect(find_field('trip[start_time]').value).to eq("14:13:00 UTC")
-    expect(find_field('trip[end_time]').value).to eq("14:20:00 UTC")
+    expect(find_field('trip[start_time]').value).to eq("2000-01-01 14:13:00 UTC")
+    expect(find_field('trip[end_time]').value).to eq("2000-01-01 14:20:00 UTC")
   end
 
   it "they can edit trip information" do
