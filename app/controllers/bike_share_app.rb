@@ -94,6 +94,7 @@ class BikeShareApp < Sinatra::Base
   get '/trips/:id/edit' do
     @trip = Trip.find(params[:id])
     @trips  = Trip.all
+    @stations = Station.select(:id, :name)
     @subscription_types = SubscriptionType.all
     erb :"trips/edit"
   end
