@@ -1,19 +1,20 @@
 <% @title = "Weather Dashboard" %>
 
-<h1>Weather Dashboard</h1>
 <div class="jumbotron">
+<h1 class="page-header">Weather Dashboard
+    <a id="edit-large" class="btn btn-warning btn-small" href="/conditions" role="button">Weather Index</a></h1>
 
 <div class="table-responsive">
 <table class="table table-bordered">
-  <caption class="page-header">Ride Summary: Temperature Breakdown</caption>
-  <tr>
+  <caption id="table-title" class="page-header">Ride Summary: Temperature Breakdown</caption>
+  <tr id="table-text">
 	<th>High Temperature<br />(&degF)</th>
 	<th>Average Rides<br />per Day</th>
 	<th>Highest Rides<br />per Day</th>
 	<th>Least Rides<br />per Day</th>
   </tr>
   <% @metrics[:temperature].each_pair do |temp_range,metrics_hash| %>
-	<tr>
+	<tr id="table-text">
 	  <td><%= temp_range %></td>
 	  <% metrics_hash.each_pair do |metric,value| %>
 		<td><%= value %></td>
@@ -24,8 +25,8 @@
 </div>
 
 <div class="table-responsive">
-<table class="table table-bordered">
-  <caption class="page-header">Ride Summary: Precipitation Breakdown</caption>
+<table id="table-text" class="table table-bordered">
+  <caption id="table-title" class="page-header">Ride Summary: Precipitation Breakdown</caption>
   <tr>
 	<th>Precipitation<br />(inches)</th>
 	<th>Average Rides<br />per Day</th>
@@ -44,8 +45,8 @@
 </div>
 
 <div class="table-responsive">
-<table class="table table-bordered">
-  <caption class="page-header">Ride Summary: Wind Speed Breakdown</caption>
+<table id="table-text" class="table table-bordered">
+  <caption id="table-title" class="page-header">Ride Summary: Wind Speed Breakdown</caption>
   <tr>
 	<th>Mean Wind Speed<br />(mph)</th>
 	<th>Average Rides<br />per Day</th>
@@ -65,15 +66,15 @@
 
 <div class="table-responsive">
 <table class="table table-bordered">
-  <caption class="page-header">Ride Summary: Visibility Breakdown</caption>
-  <tr>
+  <caption id="table-title" class="page-header">Ride Summary: Visibility Breakdown</caption>
+  <tr id="table-text">
 	<th>Mean Visibility<br />(miles)</th>
 	<th>Average Rides<br />per Day</th>
 	<th>Highest Rides<br />per Day</th>
 	<th>Least Rides<br />per Day</th>
   </tr>
   <% @metrics[:visibility].each_pair do |vis_range,metrics_hash| %>
-	<tr>
+	<tr id="table-text">
 	  <td><%= vis_range %></td>
 	  <% metrics_hash.each_pair do |metric,value| %>
 		<td><%= value %></td>

@@ -11,6 +11,10 @@ body {
   position: relative;
 }
 
+.column-background {
+  background: rgba(51, 26, 0, 0.5);
+}
+
 li {
   color: #C67637;
   font-family: "Source Sans Pro";
@@ -149,4 +153,47 @@ a:hover {
 
 a .btn-default a {
   color: #852B1F;
+}
+
+#dash-link {
+  font-family: "Quicksand";
+  font-size: 5em;
+}
+
+#landing-header {
+  font-size: 3em;
+  color: #DB2228;
+}
+
+#landing-text {
+  color: #E09D44;
+  font-family: "Quicksand";
+  background: rgba(51, 26, 0, 0.7);
+  padding: (-15px, -15px, -15px, -15px);
+  text-align: center;
+  border-radius: 20px;
+}
+
+#stations-text {
+  text-align: center;
+}
+
+#table-title {
+  color: #E09D44;
+  font-family: "Quicksand";
+  font-size: 1.5em;
+  text-align: right;
+}
+
+#table-text {
+  color: #852B1F;
+  font-family: "Source Sans Pro";
+  text-align: center;
+  font-weight: bold;
+}
+
+#stations-t {
+  font-family: "Source Sans Pro";
+  text-align: left;
+  font-weight: bold;
 }
