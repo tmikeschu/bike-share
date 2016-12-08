@@ -7,13 +7,15 @@
   <ul class="list-group">
     <li class="list-group-item">Duration: <%= @trip.duration %></li>
     <li class="list-group-item">Start Date: <%= @trip.start_date %></li>
+    <li class="list-group-item">Start Time: <%= @trip.start_time %></li>
     <li class="list-group-item">Departure Station: <%= @trip.start_station.name%></li>
     <li class="list-group-item">Departure Station (ID): <%= @trip.start_station.id %></li>
     <li class="list-group-item">End Date: <%= @trip.end_date %></li>
+    <li class="list-group-item">End Time: <%= @trip.end_time %></li>
     <li class="list-group-item">Arrival Station: <%= @trip.end_station.name %></li>
     <li class="list-group-item">Arrival Station (ID): <%= @trip.end_station.id %></li>
     <li class="list-group-item">Bike ID: <%= @trip.bike_id %></li>
-    <li class="list-group-item">Subscription Type: <%= @trip.subscription_type.id %></li>
+    <li class="list-group-item">Subscription Type: <%= @trip.subscription_type.subscription_type %></li>
     <li class="list-group-item">Rider Zip Code: <%= @trip.user_zip_code %></li>
   </ul>
   </br>
