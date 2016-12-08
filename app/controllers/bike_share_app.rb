@@ -1,6 +1,9 @@
 require_relative '../models/station'
+require_relative '../helpers/bike_share_app_helper'
 
 class BikeShareApp < Sinatra::Base
+
+  include BikeShareAppHelper
 
   set :root, File.expand_path("..", __dir__)
   set :method_override, true
@@ -26,17 +29,9 @@ class BikeShareApp < Sinatra::Base
   end
 
   post '/stations' do
-    date = format_date(params[:station][:installation_date])
-    params[:station][:installation_date] = date
-    station = Station.create(params[:station])
+    params[:station][:installation_date] = format_date(params[:station][:installation_date])
+    Station.create(params[:station])
     redirect "/stations"
-  end
-
-  def format_date(date)
-    date = date.split("/").reverse
-    date[1], date[2] = date[2], date[1]
-    date = date.join("/")
-    date
   end
 
   get '/stations/:id' do
@@ -51,6 +46,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   put '/stations/:id' do
+    params[:station][:installation_date] = format_date(params[:station][:installation_date])
     Station.update(params[:id], params[:station])
     redirect "/stations/#{params[:id]}"
   end
@@ -67,22 +63,24 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips' do
-    @page = params[:page].to_i
-    @end = false    
+    @page  = params[:page].to_i
+    @end   = false
     @trips = Trip.order(:start_date).offset(@page * 30).limit(30)
-    @end = true if Trip.order(:start_date).offset((@page + 1) * 30).empty?
+    @end   = true if Trip.order(:start_date).offset((@page + 1) * 30).empty?
     erb :"trips/index"
   end
 
   get '/trips/new' do
-    @trips = Trip.all
-    @stations = Station.select(:id, :name)
+    @trips              = Trip.all
+    @stations           = Station.select(:id, :name)
     @subscription_types = SubscriptionType.all
     erb :"trips/new"
   end
 
   post '/trips' do
-    trip = Trip.create(params[:trip])
+    params[:trip][:start_date] = format_date(params[:trip][:start_date])
+    params[:trip][:end_date] = format_date(params[:trip][:end_date])
+    Trip.create(params[:trip])
     redirect "/trips"
   end
 
@@ -92,15 +90,16 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips/:id/edit' do
-    @trip = Trip.find(params[:id])
-    @trips  = Trip.all
-    @stations = Station.select(:id, :name)
+    @trip               = Trip.find(params[:id])
+    @trips              = Trip.all
+    @stations           = Station.select(:id, :name)
     @subscription_types = SubscriptionType.all
     erb :"trips/edit"
   end
 
   put '/trips/:id' do
-    # require 'pry'; binding.pry
+    params[:trip][:start_date] = format_date(params[:trip][:start_date])
+    params[:trip][:end_date] = format_date(params[:trip][:end_date])
     Trip.update(params[:id], params[:trip])
     redirect "/trips/#{params[:id]}"
   end
@@ -117,10 +116,10 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/conditions' do
-    @page = params[:page].to_i
-    @end = false
+    @page       = params[:page].to_i
+    @end        = false
     @conditions = WeatherCondition.order(:date).offset(@page * 30).limit(30)
-    @end = true if WeatherCondition.order(:date).offset((@page + 1) * 30).empty?
+    @end        = true if WeatherCondition.order(:date).offset((@page + 1) * 30).empty?
     erb :"conditions/index"
   end
 
@@ -129,8 +128,9 @@ class BikeShareApp < Sinatra::Base
   end
 
   post '/conditions' do
+    params[:condition][:date] = format_date(params[:condition][:date])    
     params[:condition][:zip_code] = 94107
-    condition = WeatherCondition.create(params[:condition])
+    WeatherCondition.create(params[:condition])
     redirect "/conditions"
   end
 
@@ -140,12 +140,13 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/conditions/:id/edit' do
-    @condition = WeatherCondition.find(params[:id])
+    @condition   = WeatherCondition.find(params[:id])
     @conditions  = WeatherCondition.all
     erb :"conditions/edit"
   end
 
   put '/conditions/:id' do
+    params[:condition][:date] = format_date(params[:condition][:date])    
     WeatherCondition.update(params[:id], params[:condition])
     redirect "/conditions/#{params[:id]}"
   end
@@ -154,6 +155,5 @@ class BikeShareApp < Sinatra::Base
     WeatherCondition.destroy(params[:id])
     redirect '/conditions'
   end
-
 
 end
