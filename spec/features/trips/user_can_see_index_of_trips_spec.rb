@@ -41,7 +41,6 @@ describe 'When a user visits /trips' do
     it "a trip's information" do
       expect(page).to have_button "New"
       within 'div.trips-summary:nth-of-type(1)' do
-        save_and_open_page
         expect(page).to have_content("1148")
         expect(page).to have_content("2016-12-06")
         expect(page).to have_content("San Jose Diridon Caltrain Station")
