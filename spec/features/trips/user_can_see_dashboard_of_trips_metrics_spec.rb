@@ -7,6 +7,8 @@ describe 'When a user visists /trip-dashboard' do
     %w(Subscriber Customer).each {|type| SubscriptionType.create(subscription_type: type) }
     City.first.stations.create(name: "San Jose Diridon Caltrain Station", dock_count: 27, installation_date: "2013-08-06 00:00:00", lat: 37.329732, long: -121.901782)
     City.last.stations.create(name: "Naj Esos Civic Center", dock_count: 15, installation_date: "2013-08-05 00:00:00", lat: 37.330698, long: -121.888979)
+    WeatherCondition.create(date: "2016-12-07", max_temperature_f: 84, mean_temperature_f: 68, min_temperature_f: 61, mean_humidity: 75, mean_visibility_miles: 2, mean_wind_speed_mph: 0, precipitation_inches: 0.0, zip_code: 94107)
+    WeatherCondition.create(date: "2016-12-06", max_temperature_f: 84, mean_temperature_f: 68, min_temperature_f: 61, mean_humidity: 75, mean_visibility_miles: 2, mean_wind_speed_mph: 0, precipitation_inches: 0.0, zip_code: 94107)
     SubscriptionType.first.trips.create(duration: 1147,
                                         start_date: "2016/12/7",
                                         start_station_id: 1,
@@ -33,9 +35,7 @@ describe 'When a user visists /trip-dashboard' do
 
   describe "they can see" do
     it "an all trips heading" do
-      within '.all-trips' do
-        expect(page).to have_text "Trips Dashboard"
-      end
+      expect(page).to have_text "Trips Dashboard"
     end
 
   end
