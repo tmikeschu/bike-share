@@ -66,19 +66,11 @@ class Trip < ActiveRecord::Base
   end
 
   def self.station_with_most_rides_as_start_point
-    starts = Trip.joins(:start_station)
-    ids = starts.pluck(:start_station_id)
-    ids_hash = ids.each_with_object(Hash.new(0)) { |id,counts| counts[id] += 1 }
-    most_common_start_station_id = ids_hash.key(ids_hash.values.max)
-    Station.where(id: most_common_start_station_id).pluck(:name)
+    Trip.group(:start_station).count("id").max_by{|station, count| count }    
   end
 
   def self.station_with_most_rides_as_end_point
-    ends = Trip.joins(:end_station)
-    ids = ends.pluck(:end_station_id)
-    ids_hash = ids.each_with_object(Hash.new(0)) { |id,counts| counts[id] += 1 }
-    most_common_end_station_id = ids_hash.key(ids_hash.values.min)
-    Station.where(id: most_common_end_station_id).pluck(:name)
+    Trip.group(:end_station).count("id").max_by{|station, count| count }    
   end
 
   def self.most_ridden_bike_and_ride_count
@@ -90,23 +82,44 @@ class Trip < ActiveRecord::Base
   end
 
   def self.subscription_breakdown
-    Trip.group(:subscription_type_id).count("id").values
+    Trip.group(:subscription_type_id).count("id")
   end
 
   def self.subscriber_breakdown
-    Trip.subscription_breakdown[0]
-  end
-
-  def self.subscriber_percentage
-    (Trip.subscriber_breakdown / Trip.all.count) * 100
-  end
-
-  def self.customer_breakdown
     Trip.subscription_breakdown[1]
   end
 
+  def self.subscriber_percentage
+    (Trip.subscriber_breakdown / Trip.count) * 100
+  end
+
+  def self.subscriber_metrics
+    subscriber = {}
+    subscriber[:count]      = subscriber_breakdown
+    subscriber[:percentage] = subscriber_percentage
+    subscriber
+  end
+
+  def self.customer_breakdown
+    Trip.subscription_breakdown[2]
+  end
+
   def self.customer_percentage
-    (Trip.customer_breakdown / Trip.all.count) * 100
+    (Trip.customer_breakdown / Trip.count) * 100
+  end
+
+  def self.customer_metrics
+    customer = {}
+    customer[:count]      = customer_breakdown
+    customer[:percentage] = customer_percentage
+    customer
+  end
+
+  def self.subscription_metrics
+    subscriptions = {}
+    subscriptions[:subscriber] = subscriber_metrics
+    subscriptions[:customer] = customer_metrics
+    subscriptions
   end
 
   def self.date_with_highest_number_trips_total
@@ -117,18 +130,25 @@ class Trip < ActiveRecord::Base
     Trip.group(:start_date).count("id").min_by{|date, count| count }
   end
 
-  def self.monthly_ride_breakdown(years)
-    years.each do |year|
-      trips_by_year[year] = Trip.where("extract(year from start_date) = ?", year)
-      trips_by_year
-    end
 
-    trips_by_year.each_pair do |year,trips_for_each_year|
-      monthly_rides[year] = trips_for_each_year.group("extract(month from start_date)").count("id")
-      monthly_rides
-    end
+  def self.month_by_month_breakdown_for_year(year)
+    trips = Trip.where("extract(year from start_date) = ?", year)
+    breakdown = trips.group("DATE_TRUNC('month', start_date)").count
+    self.add_total(breakdown)
   end
 
+  def self.add_total(hash)
+    hash[:total] = hash.values.reduce(:+)
+    hash
+  end
+
+  def self.monthly_breakdown_master
+    years = (Trip.minimum("extract(year FROM start_date)").round..Trip.maximum("extract(year FROM start_date)").round).to_a
+    years.reduce({}) do |result, year|
+      result[year] = self.month_by_month_breakdown_for_year(year)
+      result
+    end
+  end
 
 
 
