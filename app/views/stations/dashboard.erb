@@ -1,12 +1,51 @@
 <% @title = "Station Dashboard" %>
 
-<h1>Station Dashboard</h2>
+<div class="jumbotron">
+<h1 class="page-header">Station Dashboard
+    <a id="edit-large" class="btn btn-warning btn-small" href="/stations" role="button">Station Index</a></h1>
 
-<p>Total count of stations: <%= Station.total_station_count %></p>
-<p>Average bikes available per station: <%= Station.average_bikes_per_station %></p>
-<p>Most bikes available at a station: <%= Station.maximum_bikes_per_station %></p>
-<p>Station(s) where the most bikes are available: <%= Station.stations_with_maximum_bikes_available %></p>
-<p>Fewest bikes available at a station: <%= Station.minimum_bikes_per_station %></p>
-<p>Station(s) where the fewest bikes are available: <%= Station.stations_with_minimum_bikes_available %></p>
-<p>Most recently installed station: <%= Station.newest_station %></p>
-<p>Oldest station: <%= Station.oldest_station %></p
+<ul>
+<li id="stations-t">Total count of stations: <%= Station.total_station_count %></li>
+<li id="stations-t">Average bikes available per station: <%= Station.average_bikes_per_station %></li>
+<li id="stations-t">Most bikes available at a station: <%= Station.maximum_bikes_per_station %></li>
+<li id="stations-t">Station(s) where the most bikes are available: <%= Station.stations_with_maximum_bikes_available[0..-1] %></li>
+<li id="stations-t">Fewest bikes available at a station: <%= Station.minimum_bikes_per_station %></li>
+<li id="stations-t">Station(s) where the fewest bikes are available: <%= Station.stations_with_minimum_bikes_available[0..-1] %></li>
+<li id="stations-t">Most recently installed station: <%= Station.newest_station %></li>
+<li id="stations-t">Oldest station: <%= Station.oldest_station %></li>
+</br></br></ul>
+
+<div id="map"></div></br></br>
+</div>
+<script type="text/javascript">
+
+ var map;
+ var markers = [];
+
+ function initMap() {
+   map = new google.maps.Map(document.getElementById('map'), {
+     center: {lat: 37.329732, lng: -121.90178200000001},
+     zoom: 13
+   });
+
+   var largeInfoWindow = new google.maps.InfoWindow();
+   var bounds = new google.maps.LatLngBounds();
+
+   function addMarker(lat, lng) {
+     var marker = new google.maps.Marker({
+       position: new google.maps.LatLng(lat, lng),
+       map: map,
+       name: name,
+       animation: google.maps.Animation.DROP
+     });
+   }
+
+   <% @stations.each do |station| %>
+     addMarker(<%= station.lat %>, <%= station.long %>);
+   <% end %>
+
+ }
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY5e6y9BV-anVv_aKGrlgMd_uxwi71PSQ&v=3&callback=initMap"></script>
