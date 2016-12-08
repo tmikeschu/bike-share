@@ -6,7 +6,7 @@ describe 'Station' do
     %w(Denver Aurora Centennial).each {|city| City.create(name: city) }
     %w(Subscriber Customer).each {|type| SubscriptionType.create(subscription_type: type) }
     denver, aurora, centennial = City.find(1), City.find(2), City.find(3)
-    denver.stations.create(name: "San Jose Diridon Caltrain Station", dock_count: 27, installation_date: "2013-08-06 00:00:00", lat: 37.329732, long: -121.901782)
+    denver.stations.create(name: "San Jose Diridon Caltrain Station", dock_count: 27, installation_date: "2013-08-06 00:01:00", lat: 37.329732, long: -121.901782)
     denver.stations.create(name: "San Jose Civic Center", dock_count: 15, installation_date: "2013-08-05 00:00:00", lat: 37.330698, long: -121.888979)
     aurora.stations.create(name: "Jan Sose Diridon Caltrain Station", dock_count: 27, installation_date: "2013-08-06 00:00:00", lat: 37.329732, long: -121.901782)
     aurora.stations.create(name: "Jan Sose Civic Center", dock_count: 15, installation_date: "2013-08-05 00:00:00", lat: 37.330698, long: -121.888979)
@@ -57,29 +57,64 @@ describe 'Station' do
       expect(invalid_station).to be_invalid
     end
   end
-end
 
-describe "trip associations" do
-  it "#departure_trips returns expected trips for a station" do
-    station = Station.first
-    require 'pry'; binding.pry
-    station_trips = Trip.where(start_station: station)
-    expect(station.trips).to eq(station_trips)
-    expect(station.trips.all.all?{|trip| trip.class.to_s == "Trip"}).to be true
-  end
+  describe "associations" do
+    it "#departure_trips returns expected trips for a station" do
+      station = Station.first
+      station_trips = Trip.where(start_station: station)
+      expect(station.departure_trips).to eq(station_trips)
+      expect(station.departure_trips.all.all?{|trip| trip.class.to_s == "Trip"}).to be true
+    end
 
-  it "and :trips returns expected trips for a different station" do
-    station = Station.all[1]
-    station_trips = Trip.where(start_station: station)
-    expect(station.trips).to eq(station_trips)
-    expect(station.trips.all.all?{|trip| trip.class.to_s == "Trip"}).to be true
-  end
+    it "and #departure_trips returns expected trips for a different station" do
+      station = Station.all[1]
+      station_trips = Trip.where(start_station: station)
+      expect(station.departure_trips).to eq(station_trips)
+      expect(station.departure_trips.all.all?{|trip| trip.class.to_s == "Trip"}).to be true
+    end
 
-  it "and one more different station" do
-    station = Station.first
-    station_trips = Trip.where(start_station: station)
-    expect(station.trips).to eq(station_trips)
-    expect(station.trips.all.all?{|trip| trip.class.to_s == "Trip"}).to be true
+    it "and one more different station" do
+      station = Station.all[3]
+      station_trips = Trip.where(start_station: station)
+      expect(station.departure_trips).to eq(station_trips)
+      expect(station.departure_trips.all.all?{|trip| trip.class.to_s == "Trip"}).to be true
+    end
+
+    it "#arrival_trips returns expected trips for a station" do
+      station = Station.first
+      station_trips = Trip.where(end_station: station)
+      expect(station.arrival_trips).to eq(station_trips)
+      expect(station.arrival_trips.all.all?{|trip| trip.class.to_s == "Trip"}).to be true
+    end
+
+    it "and #arrival_trips returns expected trips for a different station" do
+      station = Station.all[1]
+      station_trips = Trip.where(end_station: station)
+      expect(station.arrival_trips).to eq(station_trips)
+      expect(station.arrival_trips.all.all?{|trip| trip.class.to_s == "Trip"}).to be true
+    end
+
+    it "and one more different station" do
+      station = Station.all[3]
+      station_trips = Trip.where(end_station: station)
+      expect(station.arrival_trips).to eq(station_trips)
+      expect(station.arrival_trips.all.all?{|trip| trip.class.to_s == "Trip"}).to be true
+    end
+
+    it "#city returns city" do
+      city = City.first
+      city_stations = Station.where(city: city)
+      expect(city.stations).to eq(city_stations)
+      expect(city.stations.all.all?{|station| station.class.to_s == "Station"}).to be true
+    end
+
+    it "and #city returns city for a different station" do
+      city = City.all[2]
+      city_stations = Station.where(city: city)
+      expect(city.stations).to eq(city_stations)
+      expect(city.stations.all.all?{|station| station.class.to_s == "Station"}).to be true
+    end
+
   end
 end
 
