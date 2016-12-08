@@ -48,8 +48,8 @@ describe 'When a user visits /trips' do
         expect(page).to have_content("Naj Esos Civic Center")
         expect(page).to have_content("9090909089")
         expect(page).to have_content("Customer")
-        expect(page).to have_content("14:13:01 UTC")
-        expect(page).to have_content("14:20:01 UTC")
+        expect(page).to have_content("2000-01-01 14:13:01 UTC")
+        expect(page).to have_content("2000-01-01 14:20:01 UTC")
       end
     end
 
@@ -70,8 +70,8 @@ describe 'When a user visits /trips' do
         expect(page).to have_content("Naj Esos Civic Center")
         expect(page).to have_content("9090909090")
         expect(page).to have_content("Subscriber")
-        expect(page).to have_content("14:13:00 UTC")
-        expect(page).to have_content("14:20:00 UTC")
+        expect(page).to have_content("2000-01-01 14:13:00 UTC")
+        expect(page).to have_content("2000-01-01 14:20:00 UTC")
       end
     end
   end
