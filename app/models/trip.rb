@@ -44,19 +44,19 @@ class Trip < ActiveRecord::Base
 
   def self.date_with_highest_number_trips(id)
     date_counts = where(start_station_id: id).group(:start_date).count("id")
-    date = date_counts.max_by { |date, count| count }
+    date        = date_counts.max_by { |date, count| count }
     "#{date.first} (#{date.last} rides)"
   end
 
   def self.most_frequent_user_zip_code(id)
     zipcode_counts = where(start_station_id: id).group(:user_zip_code).count("id")
-    zipcode = zipcode_counts.max_by{|zip_code, count| count }
+    zipcode        = zipcode_counts.max_by{|zip_code, count| count }
     "#{zipcode.first} (#{zipcode.last} rides)"
   end
 
   def self.most_frequent_bike_id(id)
     bike_counts = where(start_station_id: id).group(:bike_id).count("id")
-    bike = bike_counts.max_by{|bike, count| count }
+    bike        = bike_counts.max_by{|bike, count| count }
     "#{bike.first} (#{bike.last} rides)"
   end
 
@@ -126,7 +126,7 @@ class Trip < ActiveRecord::Base
   def self.subscription_metrics
     subscriptions = {}
     subscriptions[:subscriber] = subscriber_metrics
-    subscriptions[:customer] = customer_metrics
+    subscriptions[:customer]   = customer_metrics
     subscriptions
   end
 
