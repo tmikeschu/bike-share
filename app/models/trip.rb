@@ -1,5 +1,3 @@
-require 'pry'
-
 class Trip < ActiveRecord::Base
 
   validates :duration,
