@@ -62,23 +62,23 @@ class Trip < ActiveRecord::Base
 
   ### Trips Dashboard methods ###
   def self.average_trip_duration
-    average(:duration).to_i/60
+    average(:duration).to_i / 60
   end
 
   def self.maximum_trip_duration
-    maximum(:duration).to_i/60
+    maximum(:duration).to_i / 60
   end
 
   def self.minimum_trip_duration
-    minimum(:duration).to_i/60
+    minimum(:duration).to_i / 60
   end
 
   def self.station_with_most_rides_as_start_point
-    group(:start_station).count("id").max_by{|station, count| count }    
+    group(:start_station).count("id").max_by{|station, count| count }
   end
 
   def self.station_with_most_rides_as_end_point
-    group(:end_station).count("id").max_by{|station, count| count }    
+    group(:end_station).count("id").max_by{|station, count| count }
   end
 
   def self.most_ridden_bike_and_ride_count
