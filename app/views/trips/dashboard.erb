@@ -1,26 +1,12 @@
 <% @title = "Trips Dashboard" %>
 
-<h1>Trips Dashboard</h1>
+<div class="jumbotron">
+<h1 class="page-header">Trips Dashboard
+    <a id="edit-large" class="btn btn-warning btn-small" href="/trips" role="button">Trips Index</a></h1>
 
-<p>Average duration of a ride (in minutes):
-  <%= Trip.average_trip_duration %>
-</p>
-<p>Longest Ride (in minutes):
-  <%= Trip.maximum_trip_duration %>
-</p>
-<p>Shortest Ride (in minutes):
-  <%= Trip.minimum_trip_duration %>
-</p>
-<p>Station with the most rides as a starting place:
-  <%= Trip.station_with_most_rides_as_start_point.first %>
-</p>
-<p>Station with the most rides as an ending place:
-  <%= Trip.station_with_most_rides_as_end_point.first %>
-</p>
-</br>
-
-<table>
-  <caption>Trip Summary: Monthly Breakdown</caption>
+<div class="table-responsive">
+<table id="table-text" class="table table-bordered">
+  <caption id="table-title" class="page-header">Trip Summary: Monthly Breakdown</caption>
   <tr>
     <th>Year<br /> </th>
   	<th>Jan<br /> </th>
@@ -49,17 +35,11 @@
 </table>
 
 </br>
-
-<p>Most ridden bike with total number of rides for that bike:
-  <%= Trip.most_ridden_bike_and_ride_count %>
-</p>
-<p>Least ridden bike with total number of rides for that bike:
-  <%= Trip.least_ridden_bike_and_ride_count %>
-</p>
 </br>
 
-<table>
-  <caption>User Subscription Summary</caption>
+<div class="table-responsive">
+<table id="table-text" class="table table-bordered">
+  <caption id="table-title" class="page-header">User Subscription Summary</caption>
   <tr>
     <th>Subscription Type<br /> </th>
     <th>Count<br /> </th>
@@ -77,15 +57,37 @@
   </tr>
 </table>
 </br>
-
-<p>Single date with the highest number of trips with a count of those trips:
-  <%= Trip.date_with_highest_number_trips_total %>
-</p>
-<p>Single date with the lowest number of trips with a count of those trips:
-  <%= Trip.date_with_lowest_number_trips_total %>
-</p>
 </br>
 
-<h2>Trip-Weather Data</h2>
-<p>Weather on the day with the highest number of rides: <%= WeatherCondition.weather_on_day_with_highest_rides %></p>
-<p>Weather on the day with the lowest number of rides: <%= WeatherCondition.weather_on_day_with_lowest_rides %></p>
+<ul id="stations-t">
+  <li>Average duration of a ride (in minutes):
+  <%= Trip.average_trip_duration %>
+  </li>
+<li>Longest Ride (in minutes):
+  <%= Trip.maximum_trip_duration %>
+</li>
+<li>Shortest Ride (in minutes):
+  <%= Trip.minimum_trip_duration %>
+</li>
+<li>Station with the most rides as a starting place:
+  <%= Trip.station_with_most_rides_as_start_point.first.name %>
+</li>
+<li>Station with the most rides as an ending place:
+  <%= Trip.station_with_most_rides_as_end_point.first.name %>
+</li>
+<li>Most ridden bike with total number of rides for that bike:
+  <%= Trip.most_ridden_bike_and_ride_count %>
+</li>
+<li>Least ridden bike with total number of rides for that bike:
+  <%= Trip.least_ridden_bike_and_ride_count %>
+</li>
+<li>Single date with the highest number of trips with a count of those trips:
+  <%= Trip.date_with_highest_number_trips_total %>
+</li>
+<li>Single date with the lowest number of trips with a count of those trips:
+  <%= Trip.date_with_lowest_number_trips_total %>
+</li>
+<li>Weather on the day with the highest number of rides (mean temperature): <%= WeatherCondition.weather_on_day_with_highest_rides.first.mean_temperature_f %></li>
+<li>Weather on the day with the lowest number of rides(mean temperature): <%= WeatherCondition.weather_on_day_with_lowest_rides.first.mean_temperature_f %></li>
+</ul>
+</br>
