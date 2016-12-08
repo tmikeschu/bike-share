@@ -7,7 +7,7 @@ body {
 }
 
 .jumbotron {
-  background: rgba(51, 26, 0, 0.5);
+  background: rgba(51, 26, 0, 0.65);
   position: relative;
 }
 
@@ -17,7 +17,6 @@ body {
 
 li {
   color: #C67637;
-  -webkit-text-stroke: 0.1px white;
   font-family: "Source Sans Pro";
 }
 
@@ -44,7 +43,6 @@ h1.page-header {
 
 a {
   color: #E95100;
-  -webkit-text-stroke: 0.1px white;
 }
 
 a:visited {
@@ -144,6 +142,10 @@ a:hover {
   color: #E09D44;
 }
 
+#map {
+  height: 500px;
+}
+
 .btn-default {
   background-color: #E09D44;
   color: #852B1F;
@@ -152,6 +154,7 @@ a:hover {
 .btn-default a {
   color: #852B1F;
 }
+
 
 #dash-link {
   font-family: "Quicksand";
@@ -171,3 +174,4 @@ a:hover {
   text-align: center;
   border-radius: 20px;
 }
+
