@@ -7,9 +7,10 @@
   <form action="/stations/new" method="GET">
     <input id="create" class="btn btn-warning btn-small" type="submit" value="Create New"/>
   </form></h1>
+  <div id="map"></div></br></br>
   <% @stations.each do |station| %>
     <div class="station-summary">
-      <ul>
+      <ul id="stations-text">
         <li class="station-name"><a href="/stations/<%= station.id %>"><%= station.name %></a></li>
         </br>
         <li>Number of bike docks: <%= station.dock_count %></li>
@@ -18,20 +19,19 @@
         <li>Longitude: <%= station.long %></li>
         <li>Established: <%= station.installation_date %></li>
         </br>
-      </ul>
-      <form class="format-button" action="/stations/<%= station.id %>/edit" method="GET">
+        <form class="format-button" action="/stations/<%= station.id %>/edit" method="GET">
         <input id="edit" class="btn btn-warning btn-xs" type="submit" value="Edit">
       </form>
       <form class="format-button" action="/stations/<%= station.id %>" method="POST">
         <input type="hidden" name="_method" value="DELETE">
         <input id="edit" class="btn btn-warning btn-xs" type="submit" value="Delete">
       </form>
+      </ul>
     </div>
       </br>
       </br>
       </br>
   <% end %>
-  <div id="map"></div>
 </div>
 </div>
 </div>
