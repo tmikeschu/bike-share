@@ -29,15 +29,15 @@ describe "When a user visits the new trip path" do
     visit '/trips/new'
     fill_in 'trip[duration]', with: "1147"
     fill_in 'trip[start_date]', with: "2016/12/7"
-    within '.dropdownclass:nth-of-type(1)' do
+    within '.dropdown:nth-of-type(1)' do
       find("option[value='1']").select_option
     end
     fill_in 'trip[end_date]', with: "2016/12/7"
-    within '.dropdownclass:nth-of-type(2)' do
-      find("option[value='2']").select_option
+    within '.dropdown:nth-of-type(1)' do
+      find("option[value='1']").select_option
     end
     fill_in 'trip[bike_id]', with: "9090909090"
-    within '.dropdownclass:nth-of-type(1)' do
+    within '.dropdown:nth-of-type(1)' do
       find("option[value='1']").select_option
     end
     fill_in 'trip[start_time]', with: "14:13:00 UTC"
@@ -47,10 +47,10 @@ describe "When a user visits the new trip path" do
 
     expect(current_path).to eq("/trips")
     expect(page).to have_content("1147")
-    expect(page).to have_content("2016-12-7")
+    expect(page).to have_content("2016-12-07")
+    expect(page).to have_content("Naj Esos Civic Center")
     expect(page).to have_content("San Jose Diridon Caltrain Station")
     expect(page).to have_content("2016/12/7")
-    expect(page).to have_content("Naj Esos Civic Center")
     expect(page).to have_content("9090909090")
     expect(page).to have_content("Subscriber")
     expect(page).to have_content("14:13:00 UTC")

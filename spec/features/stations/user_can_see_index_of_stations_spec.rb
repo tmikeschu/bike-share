@@ -10,11 +10,6 @@ describe 'When a user visits /stations' do
     visit('/stations')
   end
 
-  it 'there are map markers on the page' do
-    expect(page).to have_content "addMarker"
-  end
-
-
   describe "they can see" do
     it "an all stations heading" do
       within '.all-stations' do
