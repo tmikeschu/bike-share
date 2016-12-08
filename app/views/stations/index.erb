@@ -57,6 +57,11 @@
        name: name,
        animation: google.maps.Animation.DROP
      });
+
+     markers.push(marker);
+     bounds.extend(marker.position);
+     map.fitBounds(bounds);
+
    }
 
    <% @stations.each do |station| %>
@@ -64,6 +69,7 @@
    <% end %>
 
  }
+
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
