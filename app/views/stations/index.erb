@@ -25,22 +25,53 @@
       <form class="format-button" action="/stations/<%= station.id %>" method="POST">
         <input type="hidden" name="_method" value="DELETE">
         <input id="edit" class="btn btn-warning btn-xs" type="submit" value="Delete">
-</form>
+      </form>
     </div>
       </br>
       </br>
       </br>
   <% end %>
+  <div id="map"></div>
 </div>
 </div>
 </div>
 
 <div id="map" style="height:100%";></div>
+<script type="text/javascript">
 
-<% @stations.each do |station| %>
-  addMarker(<%= station.lat %>, <%= station.long %>);
-<% end %>
+ var map;
+ var markers = [];
+
+ function initMap() {
+   map = new google.maps.Map(document.getElementById('map'), {
+     center: {lat: 37.329732, lng: -121.90178200000001},
+     zoom: 13
+   });
+
+   var largeInfoWindow = new google.maps.InfoWindow();
+   var bounds = new google.maps.LatLngBounds();
+
+   function addMarker(lat, lng) {
+     var marker = new google.maps.Marker({
+       position: new google.maps.LatLng(lat, lng),
+       map: map,
+       name: name,
+       animation: google.maps.Animation.DROP
+     });
+
+     markers.push(marker);
+     bounds.extend(marker.position);
+     map.fitBounds(bounds);
+
+   }
+
+   <% @stations.each do |station| %>
+     addMarker(<%= station.lat %>, <%= station.long %>);
+   <% end %>
+
+ }
+
+</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="station_map.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY5e6y9BV-anVv_aKGrlgMd_uxwi71PSQ&v=3&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY5e6y9BV-anVv_aKGrlgMd_uxwi71PSQ&v=3&callback=initMap"></script>
