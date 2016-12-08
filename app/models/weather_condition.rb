@@ -80,10 +80,10 @@ class WeatherCondition < ActiveRecord::Base
 
   def self.master_metrics
     metrics = {}
-    metrics[:temperature]   = self.temperature_metrics
-    metrics[:precipitation] = self.precipitation_metrics
-    metrics[:wind]          = self.wind_metrics
-    metrics[:visibility]    = self.visibility_metrics
+    metrics[:temperature]   = temperature_metrics
+    metrics[:precipitation] = precipitation_metrics
+    metrics[:wind]          = wind_metrics
+    metrics[:visibility]    = visibility_metrics
     metrics
   end
 
@@ -102,9 +102,9 @@ class WeatherCondition < ActiveRecord::Base
 
   def self.ride_metrics(rides)
     metrics = {}
-    metrics[:average_rides] = self.average_rides(rides)
-    metrics[:lowest_rides]  = self.lowest_rides(rides)
-    metrics[:highest_rides] = self.highest_rides(rides)
+    metrics[:average_rides] = average_rides(rides)
+    metrics[:lowest_rides]  = lowest_rides(rides)
+    metrics[:highest_rides] = highest_rides(rides)
     metrics
   end
 
@@ -117,14 +117,14 @@ class WeatherCondition < ActiveRecord::Base
   end
 
   def self.weather_on_day_with_highest_rides
-    max       = trips_on_days(self.all).max_by {|day, rides| rides}
+    max       = trips_on_days(all).max_by { |day, rides| rides }
     day       = max.first
     rides     = max.last
     [find_by(date: day), rides]
   end
 
   def self.weather_on_day_with_lowest_rides
-    min       = trips_on_days(self.all).min_by { |key, value| value }
+    min       = trips_on_days(all).min_by { |day, rides| rides }
     day       = min.first
     rides     = min.last
     [find_by(date: day), rides]
