@@ -38,12 +38,12 @@ describe "when a user visits '/stations/1/edit'" do
   end
 
   it 'and they can see the existing station information in the form' do
-    expect(find_field('station[name]').value).to eq("I Like Bike")
+    expect(find_field('station[name]').value).to eq("San Jose Diridon Caltrain Station")
     expect(find_field('station[dock_count]').value).to eq("27")
     expect(find_field('station[city_id]').value).to eq("1")
-    expect(find_field('station[lat]').value).to eq("37.330698")
-    expect(find_field('station[long]').value).to eq("-121.888979")
-    expect(find_field('station[installation_date]').value).to eq("2015-10-06 00:00:00 UTC")
+    expect(find_field('station[lat]').value).to eq("37.329732")
+    expect(find_field('station[long]').value).to eq("-121.901782")
+    expect(find_field('station[installation_date]').value).to eq("2013-08-06 00:00:00 UTC")
   end
 
   it "they can edit station information" do
@@ -51,8 +51,8 @@ describe "when a user visits '/stations/1/edit'" do
     
     visit '/stations/1/edit'
     fill_in 'station[name]', with: "TestStationOne"
-    fill_in 'station[lat]', with: 36.330698
-    fill_in 'station[long]', with: -120.888979
+    fill_in 'station[lat]', with: 37.329732
+    fill_in 'station[long]', with: -121.901782
     find("option[value='2']").select_option
     fill_in 'station[dock_count]', with: 15
     fill_in 'station[installation_date]', with: "22/9/2016"
@@ -61,7 +61,7 @@ describe "when a user visits '/stations/1/edit'" do
     expect(current_path).to eq("/stations/#{station.id}")
     expect(page).to have_content("TestStationOne")
     expect(page).to have_content("2016-09-22")
-    expect(page).to have_content(36.330698)
-    expect(page).to have_content(-120.888979)
+    expect(page).to have_content(37.329732)
+    expect(page).to have_content(-121.901782)
   end
 end
