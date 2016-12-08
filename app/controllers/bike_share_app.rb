@@ -62,6 +62,7 @@ class BikeShareApp < Sinatra::Base
 
   ### Start Trips Routes ###
   get '/trip-dashboard' do
+    @monthly_rides = Trip.monthly_breakdown_master
     erb :"trips/dashboard"
   end
 

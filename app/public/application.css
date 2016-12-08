@@ -144,7 +144,6 @@ a:hover {
 
 #map {
   height: 500px;
-
 }
 
 .btn-default {
@@ -152,10 +151,9 @@ a:hover {
   color: #852B1F;
 }
 
-.btn-default a {
+a .btn-default a {
   color: #852B1F;
 }
-
 
 #dash-link {
   font-family: "Quicksand";
@@ -199,4 +197,3 @@ a:hover {
   text-align: left;
   font-weight: bold;
 }
-
