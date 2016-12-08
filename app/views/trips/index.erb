@@ -39,8 +39,8 @@
 </div>
 
 <% if @page >= 1%>
-  <a id="back-and-forth" href="/trips?page=<%= @page - 1 %>">Back</a>
+  <a id="back-and-forth" href="/trips?page=<%= @page - 1 %>"> &larr; Back &#x7C;&#x7C;</a>
 <% end %>
 <% unless @end %>
-  <a id="back-and-forth" href="/trips?page=<%= @page + 1 %>">Forward</a>
+  <a id="back-and-forth" href="/trips?page=<%= @page + 1 %>">Forward &rarr;</a>
 <% end %>
