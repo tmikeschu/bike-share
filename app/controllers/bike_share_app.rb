@@ -5,12 +5,13 @@ class BikeShareApp < Sinatra::Base
   set :root, File.expand_path("..", __dir__)
   set :method_override, true
 
-  # get '/' do
-  #   erb :"dashboard"
-  # end
+  get '/' do
+    erb :landing_page
+  end
 
   ### Start Stations Routes ###
   get '/station-dashboard' do
+    @stations = Station.all
     erb :"stations/dashboard"
   end
 
