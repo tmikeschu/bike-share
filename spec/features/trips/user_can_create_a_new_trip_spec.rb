@@ -29,15 +29,15 @@ describe "When a user visits the new trip path" do
     visit '/trips/new'
     fill_in 'trip[duration]', with: "1147"
     fill_in 'trip[start_date]', with: "2016/12/7"
-    within '.dropdown:nth-of-type(1)' do
+    within 'trip[start_station_id]' do
       find("option[value='1']").select_option
     end
     fill_in 'trip[end_date]', with: "2016/12/7"
-    within '.dropdown:nth-of-type(1)' do
+    within '#drop-down-font:nth-of-type(1)' do
       find("option[value='1']").select_option
     end
     fill_in 'trip[bike_id]', with: "9090909090"
-    within '.dropdown:nth-of-type(1)' do
+    within '#drop-down-font:nth-of-type(1)' do
       find("option[value='1']").select_option
     end
     fill_in 'trip[start_time]', with: "14:13:00 UTC"
