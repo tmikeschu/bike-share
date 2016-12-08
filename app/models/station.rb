@@ -27,7 +27,7 @@ class Station < ActiveRecord::Base
   end
 
   def self.stations_with_maximum_bikes_available
-    where(dock_count:(maximum(:dock_count))).pluck(:name)
+    where(dock_count:(maximum(:dock_count))).pluck(:name).join(", ")
   end
 
   def self.minimum_bikes_per_station
@@ -35,7 +35,7 @@ class Station < ActiveRecord::Base
   end
 
   def self.stations_with_minimum_bikes_available
-    where(dock_count:(minimum(:dock_count))).pluck(:name)
+    where(dock_count:(minimum(:dock_count))).pluck(:name).join(", ")
   end
 
   def self.newest_station
