@@ -14,12 +14,10 @@
         <li>Trip Duration: <%= trip.duration %></li>
         <li>Start Date: <%= trip.start_date %></li>
         <li>Start Station name: <%= trip.start_station.name if trip.start_station  %></li>
-        <li>Start Station ID: <%= trip.start_station.id if trip.start_station  %></li>
         <li>End Date: <%= trip.end_date %></li>
         <li>End Station Name: <%= trip.end_station.name if trip.end_station %></li>
-        <li>End Station ID: <%= trip.end_station.id if trip.end_station  %></li>
         <li>Bike ID: <%= trip.bike_id %></li>
-        <li>Subscription Type ID: <%= trip.subscription_type_id%></li>
+        <li>Subscription Type: <%= trip.subscription_type.subscription_type%></li>
         <li>User Zip Code: <%= trip.user_zip_code%></li>
         </br>
         </br>
