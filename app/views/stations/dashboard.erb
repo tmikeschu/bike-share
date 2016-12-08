@@ -11,7 +11,7 @@
 <li id="stations-t">Station(s) where the most bikes are available: <%= Station.stations_with_maximum_bikes_available[0..-1] %></li>
 <li id="stations-t">Fewest bikes available at a station: <%= Station.minimum_bikes_per_station %></li>
 <li id="stations-t">Station(s) where the fewest bikes are available: <%= Station.stations_with_minimum_bikes_available[0..-1] %></li>
-<li id="stations-t">Most recently installed station: <%= Station.newest_station.name %></li>
+<li id="stations-t">Most recently installed station: <%= Station.newest_station %></li>
 <li id="stations-t">Oldest station: <%= Station.oldest_station %></li>
 </br></br></ul>
 
