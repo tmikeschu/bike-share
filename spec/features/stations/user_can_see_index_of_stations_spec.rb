@@ -1,6 +1,6 @@
 require_relative '../../spec_helper'
 
-describe 'When a user visists /stations' do
+describe 'When a user visits /stations' do
 
   before do
     City.create(name: "Denver")
@@ -13,7 +13,7 @@ describe 'When a user visists /stations' do
   it 'there are map markers on the page' do
     expect(page).to have_content "addMarker"
   end
-    
+
 
   describe "they can see" do
     it "an all stations heading" do
@@ -34,12 +34,12 @@ describe 'When a user visists /stations' do
       end
     end
 
-    it "new, edit, and delete buttons" do 
+    it "new, edit, and delete buttons" do
       expect(page).to have_button "New"
       within 'div.station-summary:nth-of-type(1)' do
         expect(page).to have_button "Edit"
         expect(page).to have_button "Delete"
-      end        
+      end
     end
 
     it "and a different station's information" do

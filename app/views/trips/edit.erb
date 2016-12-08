@@ -26,6 +26,14 @@
 
 <div class="form group-row">
   <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">Start Time:</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="time" name="trip[start_time]" value="<%= @trip.start_time %>" onclick='this.value = "";'/><br/>
+  </div>
+</div>
+
+<div class="form group-row">
+  <div class="form-id">
   <label for="input" class="col-xs-2 col-form-label">Departure Station (ID):</label></div>
   <div class="col-xs-10">
     <input class="form-control" type="integer" name="trip[start_station_id]" value="<%= @trip.start_station.id %>" onclick='this.value = "";'/><br/>
@@ -42,6 +50,14 @@
 
 <div class="form group-row">
   <div class="form-id">
+  <label for="input" class="col-xs-2 col-form-label">End Time:</label></div>
+  <div class="col-xs-10">
+    <input class="form-control" type="time" name="trip[end_time]" value="<%= @trip.end_time %>" onclick='this.value = "";'/><br/>
+  </div>
+</div>
+
+<div class="form group-row">
+  <div class="form-id">
   <label for="input" class="col-xs-2 col-form-label">Arrival Station (ID):</label></div>
   <div class="col-xs-10">
     <input class="form-control" type="integer" name="trip[end_station_id]" value="<%= @trip.end_station.id %>" onclick='this.value = "";'/><br/>
@@ -52,7 +68,7 @@
   <div class="form-id">
   <label for="input" class="col-xs-2 col-form-label">Bike ID:</label></div>
   <div class="col-xs-10">
-    <input class="form-control" type="integer" name="station[bike_id]" value="<%= @trip.bike_id %>" onclick='this.value = "";'/><br/>
+    <input class="form-control" type="integer" name="trip[bike_id]" value="<%= @trip.bike_id %>" onclick='this.value = "";'/><br/>
   </div>
 </div>
 
@@ -68,7 +84,7 @@
   <label for="input" class="col-xs-2 col-form-label">Subscription Type:</label></div>
   <div class="col-xs-10">
   <div class="dropdown">
-    <select id="drop-down-font" class="form_dropdown" name="station[subscription_type_id]">
+    <select id="drop-down-font" class="form_dropdown" name="trip[subscription_type_id]">
       <option selected="selected" value="<%= @trip.subscription_type_id %>"><%= @trip.subscription_type.subscription_type.upcase %></option>
       <ul>
       <% @subscription_types.sort_by(&:subscription_type).each do |subscription| %>
