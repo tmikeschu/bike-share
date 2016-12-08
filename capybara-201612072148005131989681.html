@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/reset.css" type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Source+Sans+Pro" rel="stylesheet"> 
+    <link rel="stylesheet" href="/application.css" type='text/css'>
+    <title>All Trips</title>
+    <link rel="shortcut icon" type="image/png" href="/bike_favicon.ico"/>
+
+  </head>
+  <body>
+    <header>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img src="/bike_favicon.ico" height="70"/></a></h1>
+      <nav>
+        <ul>
+          <a href=""><li></li></a>
+        </ul>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+            <li id="navbar-links"><a href="/station-dashboard">Stations</a></li>
+            <li id="navbar-links"><a href="/trip-dashboard">Trips</a></li>
+            <li id="navbar-links"><a href="/weather-dashboard">Weather Conditions</a></li>
+          </ul>
+          </div>
+        </li>
+      </ul>
+      </nav>
+    </header>
+    <div class="container">
+      
+<div class="all-trips">
+<div class="jumbotron">
+  <div class="container">
+  <h1 class="page-header">All Trips
+    <form action="/trips/new" method="GET">
+    <input id="create" class="btn btn-warning btn-small" type="submit" value="Create New">
+  </form></h1>
+  
+    <div class="trips-summary">
+      <ul>
+        <li><a href="/trips/2">Trip #2</a></li></br>
+        <li>Trip Duration: 1148</li>
+        <li>Start Date: 2016-12-06</li>
+        <li>Start Time: 2000-01-01 14:13:01 UTC</li>
+        <li>Start Station name: San Jose Diridon Caltrain Station</li>
+        <li>End Date: 2016-12-06</li>
+        <li>End Time: 2000-01-01 14:20:01 UTC</li>
+        <li>End Station Name: Naj Esos Civic Center</li>
+        <li>Bike ID: 9090909089</li>
+        <li>Subscription Type: Customer</li>
+        <li>User Zip Code: 90211</li>
+        </br>
+        </br>
+      </ul>
+      <form class="format-button" action="/trips/2/edit" method="GET">
+        <input id="edit" class="btn btn-warning btn-xs" type="submit" value="Edit">
+      </form>
+      <form class="format-button" action="/trips/2" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input id="edit" class="btn btn-warning btn-xs" type="submit" value="Delete">
+      </form>
+    </div>
+      </br>
+      </br>
+      </br>
+  
+    <div class="trips-summary">
+      <ul>
+        <li><a href="/trips/1">Trip #1</a></li></br>
+        <li>Trip Duration: 1147</li>
+        <li>Start Date: 2016-12-07</li>
+        <li>Start Time: 2000-01-01 14:13:00 UTC</li>
+        <li>Start Station name: San Jose Diridon Caltrain Station</li>
+        <li>End Date: 2016-12-07</li>
+        <li>End Time: 2000-01-01 14:20:00 UTC</li>
+        <li>End Station Name: Naj Esos Civic Center</li>
+        <li>Bike ID: 9090909090</li>
+        <li>Subscription Type: Subscriber</li>
+        <li>User Zip Code: 90210</li>
+        </br>
+        </br>
+      </ul>
+      <form class="format-button" action="/trips/1/edit" method="GET">
+        <input id="edit" class="btn btn-warning btn-xs" type="submit" value="Edit">
+      </form>
+      <form class="format-button" action="/trips/1" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input id="edit" class="btn btn-warning btn-xs" type="submit" value="Delete">
+      </form>
+    </div>
+      </br>
+      </br>
+      </br>
+  
+</div>
+
+
+    </div>
+    <footer></footer>
+  </body>
+</html>
