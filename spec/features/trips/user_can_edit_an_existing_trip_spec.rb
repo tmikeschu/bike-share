@@ -70,9 +70,9 @@ describe "when a user visits '/trips/1/edit'" do
 
     expect(current_path).to eq("/trips/#{trip.id}")
     expect(page).to have_content("1146")
-    expect(page).to have_content("2016-12-6")
+    expect(page).to have_content("2016-12-06")
     expect(page).to have_content("San Jose Diridon Caltrain Station")
-    expect(page).to have_content("2016-12-6")
+    expect(page).to have_content("2016-12-06")
     expect(page).to_not have_content("Naj Esos Civic Center")
     expect(page).to have_content("9090909089")
     expect(page).to have_content("Customer")
