@@ -197,3 +197,7 @@ a .btn-default a {
   text-align: left;
   font-weight: bold;
 }
+
+th {
+  text-align: center;
+}
