@@ -134,34 +134,21 @@ def create_trips
     row[:end_time]   = time(row[:end_date])
     row[:end_date]   = date(row[:end_date])
     row[:subscription_type] = SubscriptionType.find_by(subscription_type: row[:subscription_type])
-
-    row[:start_station_id] = nil                                if row[:start_station_id] == "Broadway at Main"
-    row[:start_station_id] = "Santa Clara County Civic Center"  if row[:start_station_id] == "San Jose Government Center"
-    row[:start_station_id] = "Washington at Kearney"            if row[:start_station_id] == "Washington at Kearny"
-    row[:start_station_id] = "Post at Kearney"                  if row[:start_station_id] == "Post at Kearny"
-
-    row[:end_station_id] = nil                                  if row[:end_station_id] == "Broadway at Main"
-    row[:end_station_id] = "Santa Clara County Civic Center"    if row[:end_station_id] == "San Jose Government Center"
-    row[:end_station_id] = "Washington at Kearney"              if row[:end_station_id] == "Washington at Kearny"
-    row[:end_station_id] = "Post at Kearney"                    if row[:end_station_id] == "Post at Kearny"
-
     ss = Station.find_by(name: row[:start_station_id])
-    row[:start_station_id] = ss.id
-
+    row[:start_station_id] = ss.id if ss
     es = Station.find_by(name: row[:end_station_id])
-    row[:end_station_id] = es.id
-
-    Trip.create(row) if row[:start_station_id] && row[:end_station_id]
+    row[:end_station_id] = es.id if es
+    Trip.create(row)
   end
 
   puts "Imported Trips to Table."
 end
 
 namespace :database do
-  desc "Correction of sequences id"
-  task :correction_seq_id do
-      ActiveRecord::Base.connection.tables.each do |t|
-          ActiveRecord::Base.connection.reset_pk_sequence!(t)
-      end
-  end
+    desc "Correction of sequences id"
+    task :correction_seq_id do
+        ActiveRecord::Base.connection.tables.each do |t|
+            ActiveRecord::Base.connection.reset_pk_sequence!(t)
+        end
+    end
 end
