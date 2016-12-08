@@ -37,12 +37,12 @@
   <div class="dropdown">
     <select id="drop-down-font" class="form_dropdown" name="trip[start_station_id]">
       <ul>
-      <option selected="selected" value="">-Select Subscription Type-</option>
+      <option selected="selected" value="">-Start Station-</option>
       <% @stations.each do |station| %>
         <li><option value="<%= station.id %>"><%= station.name.upcase %></option></li>
       </ul>
       <% end %>
-    </select><br/>
+    </select></br></br>
     </div>
   </div>
 
@@ -63,17 +63,17 @@
 </div>
 
 <div class="form-id">
-  <label for="input" class="col-xs-2 col-form-label">Start Station:</label></div>
+  <label for="input" class="col-xs-2 col-form-label">End Station:</label></div>
   <div class="col-xs-10">
   <div class="dropdown">
     <select id="drop-down-font" class="form_dropdown" name="trip[end_station_id]">
       <ul>
-      <option selected="selected" value="">-Select Subscription Type-</option>
+      <option selected="selected" value="">-Select Station-</option>
       <% @stations.each do |station| %>
         <li><option value="<%= station.id %>"><%= station.name.upcase %></option></li>
       </ul>
       <% end %>
-    </select><br/>
+    </select></br></br>
     </div>
   </div>
 
@@ -102,21 +102,6 @@
       <option selected="selected" value="">-Select Subscription Type-</option>
       <% @subscription_types.sort_by(&:subscription_type).each do |subscription| %>
         <li><option value="<%= subscription.id %>"><%= subscription.subscription_type.upcase %></option></li>
-      </ul>
-      <% end %>
-    </select><br/>
-    </div>
-  </div>
-
-  <div class="form-id">
-  <label for="input" class="col-xs-2 col-form-label">Start Station:</label></div>
-  <div class="col-xs-10">
-  <div class="dropdown">
-    <select id="drop-down-font" class="form_dropdown" name="trip[start_station_id]">
-      <ul>
-      <option selected="selected" value="">-Select Subscription Type-</option>
-      <% @stations.each do |station| %>
-        <li><option value="<%= station.id %>"><%= station.name.upcase %></option></li>
       </ul>
       <% end %>
     </select><br/>
