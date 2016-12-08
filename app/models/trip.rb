@@ -22,34 +22,42 @@ class Trip < ActiveRecord::Base
   belongs_to :weather_condition, :foreign_key => :start_date
 
   ### Show Station methods ###
-  def self.number_rides_started_at_station(station)
-    where(start_station_id: station).count
+  def self.number_rides_started_at_station(id)
+    where(start_station_id: id).count
   end
 
-  def self.number_rides_ended_at_station(station)
-    where(end_station_id: station).count
+  def self.number_rides_ended_at_station(id)
+    where(end_station_id: id).count
   end
 
-  def self.station_with_maximum_rides_as_start_location(station)
-    most_frequent_destination_station_id = where(start_station_id: station).group(:end_station_id).count("id").max_by{|bike, count| count }
-    Station.where(id: most_frequent_destination_station_id).pluck(:name)
+  def self.station_with_maximum_rides_as_start_location
+    station_counts = group(:start_station).count
+    station        = station_counts.max_by { |station, count| count }
+    "#{station.first.name} (#{station.last} rides)"
   end
 
-  def self.station_with_maximum_rides_as_end_location(station)
-    most_frequent_origin_station_id = where(start_station_id: station).group(:start_station_id).count("id").max_by{|bike, count| count }
-    Station.where(id: most_frequent_origin_station_id).pluck(:name)
+  def self.station_with_maximum_rides_as_end_location
+    station_counts = group(:end_station).count
+    station        = station_counts.max_by { |station, count| count }
+    "#{station.first.name} (#{station.last} rides)"
   end
 
-  def self.date_with_highest_number_trips(station)
-    where(start_station_id: station).group(:start_date).count("id").max_by{|date, count| count }
+  def self.date_with_highest_number_trips(id)
+    date_counts = where(start_station_id: id).group(:start_date).count("id")
+    date = date_counts.max_by { |date, count| count }
+    "#{date.first} (#{date.last} rides)"
   end
 
-  def self.most_frequent_user_zip_code(station)
-    where(start_station_id: station).group(:user_zip_code).count("id").max_by{|zip_code, count| count }
+  def self.most_frequent_user_zip_code(id)
+    zipcode_counts = where(start_station_id: id).group(:user_zip_code).count("id")
+    zipcode = zipcode_counts.max_by{|zip_code, count| count }
+    "#{zipcode.first} (#{zipcode.last} rides)"
   end
 
-  def self.most_frequent_bike_id(station)
-    where(start_station_id: station).group(:bike_id).count("id").max_by{|bike, count| count }
+  def self.most_frequent_bike_id(id)
+    bike_counts = where(start_station_id: id).group(:bike_id).count("id")
+    bike = bike_counts.max_by{|bike, count| count }
+    "#{bike.first} (#{bike.last} rides)"
   end
 
   ### Trips Dashboard methods ###
