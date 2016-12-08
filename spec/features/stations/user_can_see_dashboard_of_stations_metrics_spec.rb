@@ -16,9 +16,7 @@ describe 'When a user visists /stations-dashboard' do
 
   describe "they can see" do
     it "an all stations heading" do
-      within '.all-stations' do
-        expect(page).to have_text "Station Dashboard"
-      end
+      expect(page).to have_text "Station Dashboard"
     end
   end
 
