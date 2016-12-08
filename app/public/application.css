@@ -180,3 +180,17 @@ a:hover {
   text-align: center;
 }
 
+#table-title {
+  color: #E09D44;
+  font-family: "Quicksand";
+  font-size: 1.5em;
+  text-align: right;
+}
+
+#table-text {
+  color: #852B1F;
+  font-family: "Source Sans Pro";
+  text-align: center;
+  font-weight: bold;
+}
+
