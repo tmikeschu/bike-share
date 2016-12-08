@@ -117,8 +117,8 @@ class Trip < ActiveRecord::Base
     Trip.group(:start_date).count("id").min_by{|date, count| count }
   end
 
-  def self.monthly_ride_breakdown(year_array, month_array)
-    year_array.each do |year|
+  def self.monthly_ride_breakdown(years)
+    years.each do |year|
       trips_by_year[year] = Trip.where("extract(year from start_date) = ?", year)
       trips_by_year
     end
