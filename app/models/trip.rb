@@ -96,7 +96,7 @@ class Trip < ActiveRecord::Base
   end
 
   def self.subscriber_percentage
-    (subscriber_breakdown / count) * 100
+    ((subscriber_breakdown / count.to_f) * 100).round(2)
   end
 
   def self.subscriber_metrics
@@ -111,7 +111,7 @@ class Trip < ActiveRecord::Base
   end
 
   def self.customer_percentage
-    (customer_breakdown / count) * 100
+    ((customer_breakdown / count.to_f) * 100).round(2)
   end
 
   def self.customer_metrics
